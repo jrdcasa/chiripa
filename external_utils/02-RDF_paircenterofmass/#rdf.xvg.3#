@@ -1,0 +1,55 @@
+# This file was created Mon May 24 22:46:00 2021
+# Created by:
+#                       :-) GROMACS - gmx rdf, 2020.2 (-:
+# 
+# Executable:   /opt/gromacs-2020.2/bin/gmx_mpi
+# Data prefix:  /opt/gromacs-2020.2
+# Working dir:  /home/jramos/PycharmProjects/chiripa/external_utils/02-RDF_paircenterofmass
+# Command line:
+#   gmx_mpi rdf -f gaussian_inputs_1_1.gro -s gaussian_inputs_1_1.gro -selrpos whole_res_com -nopbc -seltype whole_res_com -bin 0.05 -rmax 1.5
+# gmx rdf is part of G R O M A C S:
+#
+# Gravel Rubs Often Many Awfully Cauterized Sores
+#
+@    title "Radial distribution"
+@    xaxis  label "r (nm)"
+@    yaxis  label "g(r)"
+@TYPE xy
+@ subtitle "reference R000"
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "R001"
+      0.000    0.000
+      0.050    0.000
+      0.100    0.000
+      0.150    0.000
+      0.200    0.000
+      0.250    0.000
+      0.300    0.000
+      0.350    0.000
+      0.400    0.161
+      0.450    6.699
+      0.500   19.167
+      0.550   20.130
+      0.600   17.274
+      0.650   13.948
+      0.700   12.623
+      0.750    9.042
+      0.800    4.913
+      0.850    2.699
+      0.900    1.517
+      0.950    0.743
+      1.000    0.301
+      1.050    0.008
+      1.100    0.000
+      1.150    0.000
+      1.200    0.000
+      1.250    0.000
+      1.300    0.000
+      1.350    0.000
+      1.400    0.000
+      1.450    0.000

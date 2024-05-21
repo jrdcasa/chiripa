@@ -1,0 +1,514 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chiripa.internal_coordinates &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/api-docs.html">Python API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>chiripa.internal_coordinates</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for chiripa.internal_coordinates</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+
+<span class="c1"># #############################################################################</span>
+<div class="viewcode-block" id="distance_array"><a class="viewcode-back" href="../../source/internal_coordinates.html#chiripa.internal_coordinates.distance_array">[docs]</a><span class="k">def</span> <span class="nf">distance_array</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">openmp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the distances among the points in two arrays using C and Cython</span>
+
+<span class="sd">    ``Parameters``:</span>
+<span class="sd">        * **ref**: (type: ndarray): Reference array containing a number of points with shape [npoints1, dim], where dim is the dimension in 2-D or 3-D points</span>
+<span class="sd">        * **conf**: (type: ndarray): Reference array containing a number of points with shape [npoints2, dim], where dim is the dimension in 2-D or 3-D points</span>
+<span class="sd">        * **openmp**: (type: boolean) Parallel or not</span>
+
+<span class="sd">    ``Returns``:</span>
+<span class="sd">        * **dist**: (type: 2D-ndarray). Distances in Angstroms between the ith atom (row) and the jth atoms</span>
+<span class="sd">        * **rijx**: (type: 2D-ndarray). Component-x of the vector i,j</span>
+<span class="sd">        * **rijy**: (type: 2D-ndarray). Component-y of the vector i,j</span>
+<span class="sd">        * **rijz**: (type: 2D-ndarray). Component-z of the vector i,j</span>
+
+<span class="sd">    ``Examples``:</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">openmp</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">ext_libc.c_distances_openmp</span> <span class="kn">import</span> <span class="n">calc_distance_array_openmp</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">ext_libc.c_distances</span> <span class="kn">import</span> <span class="n">calc_distance_array</span>
+
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">])</span>
+    <span class="n">rijx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">])</span>
+    <span class="n">rijy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">])</span>
+    <span class="n">rijz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">openmp</span><span class="p">:</span>
+        <span class="n">calc_distance_array_openmp</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">rijx</span><span class="p">,</span> <span class="n">rijy</span><span class="p">,</span> <span class="n">rijz</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">calc_distance_array</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">rijx</span><span class="p">,</span> <span class="n">rijy</span><span class="p">,</span> <span class="n">rijz</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dist</span><span class="p">,</span> <span class="n">rijx</span><span class="p">,</span> <span class="n">rijy</span><span class="p">,</span> <span class="n">rijz</span></div>
+
+<span class="c1"># #############################################################################</span>
+<div class="viewcode-block" id="distance_array_numpypython"><a class="viewcode-back" href="../../source/internal_coordinates.html#chiripa.internal_coordinates.distance_array_numpypython">[docs]</a><span class="k">def</span> <span class="nf">distance_array_numpypython</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">conf</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Calculate the distances among the points in two arrays unsing pure pyhton and numpy</span>
+
+<span class="sd">    ``Parameters``:</span>
+<span class="sd">        * **ref**: (type: ndarray): Reference array containing a number of points with shape [npoints1, dim], where dim is the dimension in 2-D or 3-D points</span>
+<span class="sd">        * **conf**: (type: ndarray): Reference array containing a number of points with shape [npoints2, dim], where dim is the dimension in 2-D or 3-D points</span>
+<span class="sd">        * **openmp**: (type: boolean) Parallel or not</span>
+
+<span class="sd">    ``Returns``:</span>
+<span class="sd">        * **dist**: (type: 2D-ndarray). Distances in Angstroms between the ith atom (row) and the jth atoms</span>
+<span class="sd">        * **rijx**: (type: 2D-ndarray). Component-x of the vector i,j</span>
+<span class="sd">        * **rijy**: (type: 2D-ndarray). Component-y of the vector i,j</span>
+<span class="sd">        * **rijz**: (type: 2D-ndarray). Component-z of the vector i,j</span>
+
+<span class="sd">    ``Examples``:</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">])</span>
+    <span class="n">rijx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">])</span>
+    <span class="n">rijy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">])</span>
+    <span class="n">rijz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">])</span>
+    <span class="n">irow</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">ipoint</span> <span class="ow">in</span> <span class="n">ref</span><span class="p">:</span>
+        <span class="n">icol</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">jpoint</span> <span class="ow">in</span> <span class="n">conf</span><span class="p">:</span>
+            <span class="n">rijx</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span> <span class="n">icol</span><span class="p">],</span> <span class="n">rijy</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span> <span class="n">icol</span><span class="p">],</span> <span class="n">rijz</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span> <span class="n">icol</span><span class="p">]</span> <span class="o">=</span> <span class="n">jpoint</span><span class="o">-</span><span class="n">ipoint</span>
+            <span class="n">dist</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span> <span class="n">icol</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">ipoint</span><span class="o">-</span><span class="n">jpoint</span><span class="p">)</span>
+            <span class="n">icol</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">irow</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">dist</span><span class="p">,</span> <span class="n">rijx</span><span class="p">,</span> <span class="n">rijy</span><span class="p">,</span> <span class="n">rijz</span></div>
+
+<span class="c1"># #############################################################################</span>
+<div class="viewcode-block" id="distance_array_purepython"><a class="viewcode-back" href="../../source/internal_coordinates.html#chiripa.internal_coordinates.distance_array_purepython">[docs]</a><span class="k">def</span> <span class="nf">distance_array_purepython</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">conf</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Calculate the distances among the points in two arrays unsing pure pyhton</span>
+
+<span class="sd">    ``Parameters``:</span>
+<span class="sd">        * **ref**: (type: ndarray): Reference array containing a number of points with shape [npoints1, dim], where dim is the dimension in 2-D or 3-D points</span>
+<span class="sd">        * **conf**: (type: ndarray): Reference array containing a number of points with shape [npoints2, dim], where dim is the dimension in 2-D or 3-D points</span>
+<span class="sd">        * **openmp**: (type: boolean) Parallel or not</span>
+
+<span class="sd">    ``Returns``:</span>
+<span class="sd">        * **dist**: (type: 2D-ndarray). Distances in Angstroms between the ith atom (row) and the jth atoms</span>
+
+<span class="sd">    ``Examples``:</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">])</span>
+    <span class="n">rijx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">])</span>
+    <span class="n">rijy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">])</span>
+    <span class="n">rijz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">])</span>
+    <span class="n">irow</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">ipoint</span> <span class="ow">in</span> <span class="n">ref</span><span class="p">:</span>
+        <span class="n">icol</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">jpoint</span> <span class="ow">in</span> <span class="n">conf</span><span class="p">:</span>
+            <span class="n">rijx</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span><span class="n">icol</span><span class="p">]</span> <span class="o">=</span> <span class="n">jpoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">ipoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">rijy</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span><span class="n">icol</span><span class="p">]</span> <span class="o">=</span> <span class="n">jpoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">ipoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">rijz</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span><span class="n">icol</span><span class="p">]</span> <span class="o">=</span> <span class="n">jpoint</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">ipoint</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">dist</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span> <span class="n">icol</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">rijx</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span><span class="n">icol</span><span class="p">]</span><span class="o">*</span><span class="n">rijx</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span><span class="n">icol</span><span class="p">]</span><span class="o">+</span>
+
+                                         <span class="n">rijy</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span><span class="n">icol</span><span class="p">]</span><span class="o">*</span><span class="n">rijy</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span><span class="n">icol</span><span class="p">]</span><span class="o">+</span>
+                                         <span class="n">rijz</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span><span class="n">icol</span><span class="p">]</span><span class="o">*</span><span class="n">rijz</span><span class="p">[</span><span class="n">irow</span><span class="p">,</span><span class="n">icol</span><span class="p">])</span>
+            <span class="n">icol</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">irow</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">dist</span><span class="p">,</span> <span class="n">rijx</span><span class="p">,</span> <span class="n">rijy</span><span class="p">,</span> <span class="n">rijz</span></div>
+
+<span class="c1"># #############################################################################</span>
+<div class="viewcode-block" id="bend_angle_purepython"><a class="viewcode-back" href="../../source/internal_coordinates.html#chiripa.internal_coordinates.bend_angle_purepython">[docs]</a><span class="k">def</span> <span class="nf">bend_angle_purepython</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+
+    <span class="sd">&quot;&quot;&quot;Bend angle</span>
+
+<span class="sd">    Finds angle between three atomic positions. Does not consider periodic boundary conditions.</span>
+
+<span class="sd">        (1) --- (2) --- (3) (Bend angle 1-2-3)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        c1: Coordinate of the point 1</span>
+<span class="sd">        c2: Coordinate of the point 2</span>
+<span class="sd">        c3: Coordinate of the point 3</span>
+<span class="sd">        radians: returns value in radians if True (False)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        angle between particles in radians or degrees</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">p12</span> <span class="o">=</span> <span class="n">distance_array</span><span class="p">(</span><span class="n">c1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">c2</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+    <span class="n">p23</span> <span class="o">=</span> <span class="n">distance_array</span><span class="p">(</span><span class="n">c2</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">c3</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+    <span class="n">p13</span> <span class="o">=</span> <span class="n">distance_array</span><span class="p">(</span><span class="n">c1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">c3</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">((</span><span class="nb">pow</span><span class="p">(</span><span class="n">p12</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span><span class="o">+</span><span class="nb">pow</span><span class="p">(</span><span class="n">p23</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span><span class="o">-</span><span class="nb">pow</span><span class="p">(</span><span class="n">p13</span><span class="p">,</span> <span class="mf">2.</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">p12</span><span class="o">*</span><span class="n">p23</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">radians</span><span class="p">:</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">*</span> <span class="mf">180.</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">return</span> <span class="n">theta</span></div>
+
+<span class="c1"># #############################################################################</span>
+<div class="viewcode-block" id="dihedral_angle_purepython"><a class="viewcode-back" href="../../source/internal_coordinates.html#chiripa.internal_coordinates.dihedral_angle_purepython">[docs]</a><span class="k">def</span> <span class="nf">dihedral_angle_purepython</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">cj</span><span class="p">,</span> <span class="n">ck</span><span class="p">,</span> <span class="n">cl</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Calculate the dihedral angle</span>
+
+<span class="sd">    | Dihedral : ci -- cj -- ck -- cl</span>
+<span class="sd">    |</span>
+<span class="sd">    | Improper :         cl</span>
+<span class="sd">    |                     \</span>
+<span class="sd">    |              cj -- ci -- ck</span>
+
+
+<span class="sd">    ``Parameters``:</span>
+<span class="sd">        * **ci**</span>
+<span class="sd">        * **cj**</span>
+<span class="sd">        * **ck**</span>
+<span class="sd">        * **cl**</span>
+<span class="sd">        * **radians**</span>
+
+<span class="sd">    ``Returns``:</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rij</span> <span class="o">=</span> <span class="n">ci</span> <span class="o">-</span> <span class="n">cj</span>
+    <span class="n">rjk</span> <span class="o">=</span> <span class="n">cj</span> <span class="o">-</span> <span class="n">ck</span>
+    <span class="n">rlk</span> <span class="o">=</span> <span class="n">cl</span> <span class="o">-</span> <span class="n">ck</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">rij</span><span class="p">,</span> <span class="n">rjk</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">rlk</span><span class="p">,</span> <span class="n">rjk</span><span class="p">)</span>
+    <span class="n">m_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">n_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">cos_ijkl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">m_norm</span><span class="o">*</span><span class="n">n_norm</span><span class="p">)</span>
+    <span class="n">sin_ijkl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">rij</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">rjk</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">m_norm</span><span class="o">*</span><span class="n">n_norm</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">sin_ijkl</span><span class="o">/</span><span class="n">cos_ijkl</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">radians</span><span class="p">:</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">phi</span> <span class="o">*</span> <span class="mf">180.</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">return</span> <span class="n">phi</span></div>
+
+<span class="c1"># #############################################################################</span>
+<div class="viewcode-block" id="cos_angle_purepython"><a class="viewcode-back" href="../../source/internal_coordinates.html#chiripa.internal_coordinates.cos_angle_purepython">[docs]</a><span class="k">def</span> <span class="nf">cos_angle_purepython</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">cj</span><span class="p">,</span> <span class="n">ck</span><span class="p">,</span> <span class="n">cl</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    |                   cl                            c(i+2)</span>
+<span class="sd">    |                   |            &lt;===&gt;             |</span>
+<span class="sd">    |            cj -- ci -- ck             c(i-1) -- ci -- c(i+1)</span>
+<span class="sd">    |</span>
+<span class="sd">    |             i is i in the paper</span>
+<span class="sd">    |             j is i-1 in the paper</span>
+<span class="sd">    |             k is i+1 in the paper</span>
+<span class="sd">    |             l is i+2 in the paper</span>
+
+<span class="sd">    Zhang et al. Journal of Cheminformatics 2012, 4:26 (Figure 4)</span>
+
+<span class="sd">    ``Parameters``:</span>
+<span class="sd">        * **ci**</span>
+<span class="sd">        * **cj**</span>
+<span class="sd">        * **ck**</span>
+<span class="sd">        * **cl**</span>
+<span class="sd">        * **radians**</span>
+
+<span class="sd">    ``Returns``:</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rji</span> <span class="o">=</span> <span class="n">cj</span> <span class="o">-</span> <span class="n">ci</span>
+    <span class="n">rki</span> <span class="o">=</span> <span class="n">ck</span> <span class="o">-</span> <span class="n">ci</span>
+    <span class="n">rli</span> <span class="o">=</span> <span class="n">cl</span> <span class="o">-</span> <span class="n">ci</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">rji</span><span class="p">,</span> <span class="n">rki</span><span class="p">)</span>
+
+    <span class="n">m_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">rli_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">rli</span><span class="p">)</span>
+
+    <span class="n">cos_ijkl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">rli</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">m_norm</span><span class="o">*</span><span class="n">rli_norm</span><span class="p">)</span>
+
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">cos_ijkl</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">radians</span><span class="p">:</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">phi</span> <span class="o">*</span> <span class="mf">180.</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">return</span> <span class="n">phi</span></div>
+
+<span class="c1"># #############################################################################</span>
+<div class="viewcode-block" id="generate_random_euler_angles"><a class="viewcode-back" href="../../source/internal_coordinates.html#chiripa.internal_coordinates.generate_random_euler_angles">[docs]</a><span class="k">def</span> <span class="nf">generate_random_euler_angles</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Generate Euler angles.</span>
+
+<span class="sd">    To generate an uniform sampling of the three Euler angles:</span>
+
+<span class="sd">    .. image:: ../imgs/euler_angles_random.png</span>
+
+<span class="sd">    There are many definitions of the Euler angles</span>
+<span class="sd">    (see: https://en.wikipedia.org/wiki/Euler_angles)</span>
+
+<span class="sd">    ``Parameters``:</span>
+<span class="sd">        * **iseed**  (type: int): Seed for the random number generator</span>
+
+<span class="sd">    ``Return``:</span>
+<span class="sd">        * **A vector** containg the three Euler angles in radians</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="n">alpha</span>  <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>  <span class="c1">#Radians</span>
+    <span class="n">c_beta</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+    <span class="n">beta</span>   <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">c_beta</span><span class="p">)</span>                  <span class="c1">#Radians</span>
+    <span class="n">gamma</span>  <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>  <span class="c1">#Radians</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">]</span></div>
+
+<span class="c1"># #############################################################################</span>
+<div class="viewcode-block" id="euler_rotation_matrix"><a class="viewcode-back" href="../../source/internal_coordinates.html#chiripa.internal_coordinates.euler_rotation_matrix">[docs]</a><span class="k">def</span> <span class="nf">euler_rotation_matrix</span><span class="p">(</span><span class="n">euler</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Create a rotation matrix for a given set of Euler angles</span>
+<span class="sd">        There are many definitions of the Euler angles</span>
+<span class="sd">        (see: https://en.wikipedia.org/wiki/Euler_angles)</span>
+
+<span class="sd">        The definition here used is that given in:</span>
+
+<span class="sd">        .. code-block::</span>
+
+<span class="sd">            MATHEMATICAL METHODS FOR PHYSICISTS</span>
+<span class="sd">            SEVENTH EDITION</span>
+<span class="sd">            George B. Arfken, Hans J. Weber, Frank E. Harris</span>
+<span class="sd">            pag: 140-142</span>
+
+<span class="sd">        .. image:: ../imgs/euler_book.png</span>
+
+<span class="sd">        ``Parameters``:</span>
+<span class="sd">            * **euler** (list) : Euler angles in radians</span>
+
+<span class="sd">        ``Returns``:</span>
+<span class="sd">            * **None**</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">a</span> <span class="o">=</span> <span class="n">euler</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">euler</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">euler</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">ca</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">cb</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">cg</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+        <span class="n">sa</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">sb</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">sg</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+        <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="p">[(</span> <span class="n">cg</span><span class="o">*</span><span class="n">cb</span><span class="o">*</span><span class="n">ca</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">sg</span><span class="o">*</span><span class="n">sa</span><span class="p">),</span> <span class="p">(</span> <span class="n">cg</span><span class="o">*</span><span class="n">cb</span><span class="o">*</span><span class="n">sa</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">sg</span><span class="o">*</span><span class="n">ca</span><span class="p">),</span> <span class="o">-</span><span class="n">cg</span><span class="o">*</span><span class="n">sb</span><span class="p">],</span>
+                       <span class="p">[(</span><span class="o">-</span><span class="n">sg</span><span class="o">*</span><span class="n">cb</span><span class="o">*</span><span class="n">ca</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">cg</span><span class="o">*</span><span class="n">sa</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="n">sg</span><span class="o">*</span><span class="n">cb</span><span class="o">*</span><span class="n">sa</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cg</span><span class="o">*</span><span class="n">ca</span><span class="p">),</span>  <span class="n">sg</span><span class="o">*</span><span class="n">sb</span><span class="p">],</span>
+                       <span class="p">[</span>          <span class="n">sb</span><span class="o">*</span><span class="n">ca</span>      <span class="p">,</span>            <span class="n">sb</span><span class="o">*</span><span class="n">sa</span>     <span class="p">,</span>    <span class="n">cb</span><span class="p">]])</span>
+
+        <span class="k">return</span> <span class="n">S</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

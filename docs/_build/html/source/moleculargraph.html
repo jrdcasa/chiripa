@@ -1,0 +1,1017 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Molecular Graph &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="NwChem Interface" href="nwchem_interface.html" />
+    <link rel="prev" title="Metropolis MC" href="metropolisMC.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="chiripa.html">Chiripa package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="atomic_data.html">Atomic_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chi_universe.html">Chi_Universe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cubicbox.html">Cubic Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dbjobs.html">DBJobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus_interface.html">DFTBPLUS INTERFACE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian_interface.html">Gaussian Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate_pair_conformations.html">Generate Pair Conformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internal_coordinates.html">Internal Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metropolisMC.html">Metropolis MC</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Molecular Graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview"><strong>Overview</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example"><strong>Example</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attributes"><strong>Attributes</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#methods"><strong>Methods</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api"><strong>API</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nwchem_interface.html">NwChem Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="points_inside_pyramid.html">Points Inside Pyramid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="segment.html">Segment Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverlocal.html">Server Local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverslurm.html">Server Slurm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup_logger.html">Setup Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulator.html">Simulator Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">Utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">Python API Reference</a> &raquo;</li>
+        
+          <li><a href="chiripa.html">Chiripa package</a> &raquo;</li>
+        
+      <li>Molecular Graph</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/moleculargraph.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="molecular-graph">
+<h1>Molecular Graph<a class="headerlink" href="#molecular-graph" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Molecular Graph object is used to represent a molecular structure</p>
+</div>
+<div class="section" id="example">
+<h2><strong>Example</strong><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="attributes">
+<h2><strong>Attributes</strong><a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>_natoms: int</dt><dd><p>Number of atoms (= number of nodes in the graph).</p>
+</dd>
+<dt>_nmols: int</dt><dd><p>Number of molecules (= number of non-conected graphs).</p>
+</dd>
+<dt>_bonds: list of sets</dt><dd><p>Bonds of the molecule (edges of the graph) [{0,1},…{10,11}]</p>
+</dd>
+<dt>_cycles: list</dt><dd><p>XXXXXX</p>
+</dd>
+<dt>_graphdict: dict</dt><dd><p>Dictionary to represent the graph. Example: 0:[1,2] means that node 0 is linked to 1 and 2.</p>
+</dd>
+<dt>_iatch: ndarray, np.shape(natoms,), type=int</dt><dd><p>Molecule (or chain) for each atom.</p>
+</dd>
+<dt>_undirected: bool</dt><dd><p>Graph undirected or not.</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="methods">
+<h2><strong>Methods</strong><a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="api">
+<h2><strong>API</strong><a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="chiripa.MolecularGraph.MolecularGraph">
+<em class="property">class </em><code class="sig-prename descclassname">chiripa.MolecularGraph.</code><code class="sig-name descname">MolecularGraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nvert</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">listbonds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">undirected</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nvert</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">listbonds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">undirected</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>MolecularGraph</cite> implements objects that describe the connectivity of the atoms in a molecule or polymer chain.
+Each atom is a vertex and the edges of the graph represents a bond. The vertice numbering starts at zero</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nvert</strong> (<em>*</em>) – Number of nodes (atoms) of the graph.</p></li>
+<li><p><strong>listbonds</strong> (<em>*</em>) – A list containing the edges (bonds) of the graph. The None value is used for a graph without edges.</p></li>
+<li><p><strong>undirected</strong> (<em>*</em>) – False for directed graph or True for undirected graph. (see warning above)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">\* ``self._graphdict``</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">\* ``self._nmols``</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of lists</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">\* ``self._bonds``</code></dt>
+<dd><p>[{0,1},{1,2},{1,3}]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of tuples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">\* ``self._cycles``</code></dt>
+<dd><p>[[5, 2, 7, 8, 9, 12, 6, 5]]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of lists)–&gt;  A list of list. Each list is a ring (or cycle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">\* ``self._undirected``</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">\* ``self._natoms``</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>)–&gt; Number of atoms aka number of get_vertices (nodes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">\* ``self._iatch``</code></dt>
+<dd><p>self._iatch[iat] = ich Atom <strong>iat</strong> is in the <strong>ich</strong> chain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray[natoms], integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">An</span> <span class="n">empty</span> <span class="n">graph</span><span class="p">:</span>
+
+    <span class="o">&gt;&gt;&gt;</span> <span class="n">MolecularGraph</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>A graph without get_edges, only nodes (10)</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MolecularGraph</span><span class="p">(</span><span class="n">nvert</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A graph with nodes and egdes</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MolecularGraph</span><span class="p">(</span><span class="n">nvert</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">listbonds</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>A system with two molecules, with 13 and 5 atoms, respectively. The molecule #1 contains a cycle</p>
+<img alt="../_images/graph07_nx.png" src="../_images/graph07_nx.png" />
+<p>Data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+<span class="mi">5</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="mi">6</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="mi">7</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="mi">8</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="mi">9</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="mi">10</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="mi">11</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+<span class="mi">12</span><span class="p">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="mi">13</span><span class="p">:</span> <span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="mi">14</span><span class="p">:</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="mi">15</span><span class="p">:</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="mi">16</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="mi">17</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">]}</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">_bonds</span> <span class="o">=</span> <span class="p">[{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">},</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">},</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">},</span>
+<span class="p">{</span><span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">},</span> <span class="p">{</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">},</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">},</span> <span class="p">{</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">},</span> <span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">},</span>
+<span class="p">{</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">},</span> <span class="p">{</span><span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">},</span> <span class="p">{</span><span class="mi">17</span><span class="p">,</span> <span class="mi">15</span><span class="p">},</span> <span class="p">{</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">}]</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">_natoms</span> <span class="o">=</span> <span class="mi">18</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">_undirected</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">_cycles</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>Difference between undirected (undirected = True) and directed (undirected = False)</p>
+<img alt="../_images/g2dvsg2u.png" src="../_images/g2dvsg2u.png" />
+<p>Data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">TEST</span> <span class="mi">05</span> <span class="n">Undirected</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="mi">6</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="mi">7</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="mi">8</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="mi">9</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="mi">10</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="mi">11</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">]}</span>
+<span class="n">TEST</span> <span class="mi">05</span>   <span class="n">Directed</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="mi">4</span><span class="p">:</span> <span class="p">[],</span> <span class="mi">5</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="mi">6</span><span class="p">:</span> <span class="p">[],</span> <span class="mi">7</span><span class="p">:</span> <span class="p">[],</span> <span class="mi">8</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="mi">9</span><span class="p">:</span> <span class="p">[],</span> <span class="mi">10</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="mi">11</span><span class="p">:</span> <span class="p">[]}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Directed graphs should not work properly. The most methods work well with undirected graphs</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.add_edge">
+<code class="sig-name descname">add_edge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge</span></em>, <em class="sig-param"><span class="n">setforest</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.add_edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.add_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>It creates a new edge in the graph between two existing nodes.
+The type of parameter <strong>edge</strong> can be a set, a tuple or a list of two nodes;
+Multiple edges can exist between two vertices
+Both vertex must exist in the molecular graph. If any vertex is not in the
+molecular graph nothing is done.</p>
+<img alt="../_images/then_and_now_edges.png" src="../_images/then_and_now_edges.png" />
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.9)"><em>set</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><em>tuple</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – The vertice numbers to create an edge (aka bond)</p></li>
+<li><p><strong>setforest</strong> (<em>boolean</em><em>, </em><em>default=True</em>) – If True the <cite>_set_forest</cite> method is called.
+This is useful when multiple edges are added to a graph,
+in this case only in the last addition the parameter <cite>setforest</cite> should be true in order to
+update the <cite>self._nmols</cite> attribute (see the example)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>None</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Adding an edge between the vertex 12 and 13 in a molecular graph called <cite>a</cite>
+&gt;&gt;&gt;  g.add_edge([12,13])</p>
+<p>Adding multiple edges
+&gt;&gt;&gt;  g.add_edge((1,7), setforest=False)
+…  g.add_edge((2, 8), setforest=False)
+…  g.add_edge((9, 8), setforest=True)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.add_vertex">
+<code class="sig-name descname">add_vertex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vertex</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.add_vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.add_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function add a vertex to the molecular graph. The new vertex is not bonded to any other in the graph.
+If the vertex exists in the <cite>self._graphdict</cite> attribute nothing has to be done.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vertex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Index of the vertex.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>None</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Add a vertex to a graph</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/then_and_now.png" src="../_images/then_and_now.png" />
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.bfs_iterative">
+<code class="sig-name descname">bfs_iterative</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.bfs_iterative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.bfs_iterative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Breath-First Search. Iterative version (BFS: <a class="reference external" href="https://en.wikipedia.org/wiki/Breath-first_search">https://en.wikipedia.org/wiki/Breath-first_search</a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>start</strong> (<em>integer</em>) – Node to start the search</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>Return a list with the BFS path</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>BFS in a graph</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">bfs_iterative</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/graph06_test12.png" src="../_images/graph06_test12.png" />
+<p>Data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.dfs_iterative">
+<code class="sig-name descname">dfs_iterative</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.dfs_iterative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.dfs_iterative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Depth-First Search. Iterative version (DFS: <a class="reference external" href="https://en.wikipedia.org/wiki/Depth-first_search">https://en.wikipedia.org/wiki/Depth-first_search</a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>start</strong> (<em>integer</em>) – Node to start the search</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>Return a list with the DFS path</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>DFS in a graph</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">dfs_iterative</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/graph06_test12.png" src="../_images/graph06_test12.png" />
+<p>Data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.draw_graph_forest_networkx">
+<code class="sig-name descname">draw_graph_forest_networkx</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">'simple'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.draw_graph_forest_networkx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.draw_graph_forest_networkx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an image for each tree of the graph using networkx library. It can be useful to create a file for each molecule
+in the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>title</strong> (<em>string</em>) – The patter to be used in the name of the file containing the image</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>None</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Draw the each subgraph of the graph <cite>g4</cite> in a file with the pattern <cite>graphs/graph04_f???.png</cite></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g4</span><span class="o">.</span><span class="n">draw_graph_forest_networkx</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;graphs/graph04_f&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.draw_graph_forest_pygraphviz">
+<code class="sig-name descname">draw_graph_forest_pygraphviz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">'simple'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.draw_graph_forest_pygraphviz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.draw_graph_forest_pygraphviz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an image for each tree of the graph using pygraphviz library. It can be useful to create a file for each molecule
+in the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>title</strong> (<em>string</em>) – The patter to be used in the name of the file containing the image</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>None</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Draw the each subgraph of the graph <cite>g4</cite> in a file with the pattern <cite>graphs/graph04_f???.png</cite></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g4</span><span class="o">.</span><span class="n">draw_graph_forest_pygraphviz</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;graphs/graph04_f&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.draw_graph_networkx">
+<code class="sig-name descname">draw_graph_networkx</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">'simple'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.draw_graph_networkx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.draw_graph_networkx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an image of the graph using networkx library</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>title</strong> (<em>string</em>) – The name of the file containing the image</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>None</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Draw the graph <cite>g4</cite> in a file named <cite>graphs/graph04_f.png</cite></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g4</span><span class="o">.</span><span class="n">draw_graph_networkx</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;graphs/graph04&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.draw_graph_pygraphviz">
+<code class="sig-name descname">draw_graph_pygraphviz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">'simple'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.draw_graph_pygraphviz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.draw_graph_pygraphviz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an image of the graph using pygraphviz library</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>title</strong> (<em>string</em>) – The name of the file containing the image</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>None</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Draw the graph <cite>g4</cite> in a file named <cite>graphs/graph04.png</cite></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g4</span><span class="o">.</span><span class="n">draw_graph_pygraphviz</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;graphs/graph04&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.find_all_paths">
+<code class="sig-name descname">find_all_paths</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start_vertex</span></em>, <em class="sig-param"><span class="n">end_vertex</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.find_all_paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.find_all_paths" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>It finds all paths from start_vertex to</dt><dd><p>end_vertex in graph, This is a recursive function.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_vertex</strong> (<em>integer</em>) – Starting vertex of the path</p></li>
+<li><p><strong>end_vertex</strong> (<em>integer</em>) – Finish vertex of the path</p></li>
+<li><p><strong>path</strong> (<em>list of lists</em>) – Paths between start_vertex and end_vertex</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Return a list of paths. If there is not path between start_vertex and end_vertex returns an empty list. The</em></p></li>
+<li><p><em>starting and ending node are included in the path</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Find all paths between the node 2 and 12 of the following graph:</p>
+<img alt="../_images/g3_03_nx.png" src="../_images/g3_03_nx.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g3</span><span class="o">.</span><span class="n">find_all_paths</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a recursive function</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.find_all_paths_length">
+<code class="sig-name descname">find_all_paths_length</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start_vertex</span></em>, <em class="sig-param"><span class="n">length</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.find_all_paths_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.find_all_paths_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>It finds all paths of length <code class="docutils literal notranslate"><span class="pre">length</span></code> in graph from start_vertex. This is a recursive function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_vertex</strong> (<em>integer</em>) – Starting vertex of the path</p></li>
+<li><p><strong>length</strong> (<em>integer</em>) – Length of the paths to find. This is defined as the number of edges between the start_vertex and the end_vertex</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – Path between start_vertex and end_vertex</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>Return a list of paths of length <strong>``length``</strong>. If length is greater than the max. length in the graph returns</p></li>
+<li><p><em>an empty list. If length is zero returns a list only containing  the start_vertex node.</em></p></li>
+<li><p><em>If there is not path between start_vertex and end_vertex returns an empty list. The</em></p></li>
+<li><p><em>starting node is included in the path</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Find all paths between the starting in the node 2 with length 4 of the following graph:</p>
+<img alt="../_images/g3_03_nx.png" src="../_images/g3_03_nx.png" />
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a recursive function</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.find_isolated_vertices">
+<code class="sig-name descname">find_isolated_vertices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.find_isolated_vertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.find_isolated_vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns a list of isolated vertices. A isolated vertex is defined as a vertex without edges</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>Return a list of isolated nodes</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<img alt="../_images/graph04.png" src="../_images/graph04.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">g4</span><span class="o">.</span><span class="n">find_isolated_vertices</span><span class="p">()</span>
+<span class="gp">... </span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.find_path">
+<code class="sig-name descname">find_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start_vertex</span></em>, <em class="sig-param"><span class="n">end_vertex</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.find_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.find_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a path from start_vertex to end_vertex in graph</p>
+<p>A path is returned.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Parameters</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>start_vertex</strong> (type: integer) –&gt;</p></li>
+<li><p><strong>end_vertex</strong> (type: integer) –&gt;</p></li>
+<li><p><strong>path</strong> (type: list) –&gt;   Path between start_vertex and end_vertex</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Return</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>A list of edges</strong>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not use this function, instead of use find_all_paths</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a recursive function</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.get_allbends">
+<code class="sig-name descname">get_allbends</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.get_allbends"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.get_allbends" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns all angle bends in the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>A list containing all bend angles</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>All bend angles in the system</p>
+<img alt="../_images/graph07_nx.png" src="../_images/graph07_nx.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">al1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g7</span><span class="o">.</span><span class="n">get_allbends</span><span class="p">()</span>
+<span class="gp">... </span><span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">al1</span><span class="p">,[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">17</span><span class="p">]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.get_allbonds">
+<code class="sig-name descname">get_allbonds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.get_allbonds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.get_allbonds" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns all bonds in the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>A list containing all bond angles</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>All bond angles in the system. The order is [min, max]</p>
+<img alt="../_images/graph07_nx.png" src="../_images/graph07_nx.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bl1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g7</span><span class="o">.</span><span class="n">get_allbonds</span><span class="p">()</span>
+<span class="gp">... </span><span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">bl1</span><span class="p">,[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+<span class="gp">... </span>                  <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">],</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.get_alldihedrals">
+<code class="sig-name descname">get_alldihedrals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.get_alldihedrals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.get_alldihedrals" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns all dihedral angles in the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>A list containing all dihedral angles. In this implementation, the greater atom number is the first atom in the list</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>All dihedral angles in the system</p>
+<img alt="../_images/graph07_nx.png" src="../_images/graph07_nx.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d1</span> <span class="o">=</span> <span class="n">g7</span><span class="o">.</span><span class="n">get_alldihedrals</span><span class="p">()</span>
+<span class="gp">... </span><span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">d1</span><span class="p">,[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">17</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">13</span><span class="p">]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.get_allimpropers">
+<code class="sig-name descname">get_allimpropers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">isbackbone_dict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.get_allimpropers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.get_allimpropers" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns all improper angles in the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>isbackbone_dict</strong> (<em>Dictionary</em>) – The key is the number of the atom and the value True (backbone atom) or False (not backbone atom)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>A list containing all improper angles. In this implementation, the greater atom number is the first atom in the list</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>All improper angles in the system</p>
+<img alt="../_images/graph07_nx.png" src="../_images/graph07_nx.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">isbackbone_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">... </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">g7</span><span class="o">.</span><span class="n">_natoms</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">isbackbone_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">... </span><span class="n">isbackbone_dict</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="n">isbackbone_dict</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="n">isbackbone_dict</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="n">isbackbone_dict</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="n">isbackbone_dict</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="n">isbackbone_dict</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="n">isbackbone_dict</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="n">isbackbone_dict</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="n">isbackbone_dict</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="n">isbackbone_dict</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="n">d1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g7</span><span class="o">.</span><span class="n">get_allimpropers</span><span class="p">(</span><span class="n">isbackbone_dict</span><span class="o">=</span><span class="n">isbackbone_dict</span><span class="p">)</span>
+<span class="gp">... </span><span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">d1</span><span class="p">,[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">16</span><span class="p">]])</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A criteria about the order of atoms need to be implemented and checked</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.get_edges">
+<code class="sig-name descname">get_edges</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.get_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.get_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns a list of all edges in the graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>A list containing all edges</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>All edges in the system. The order is [min, max]</p>
+<img alt="../_images/graph11_nx.png" src="../_images/graph11_nx.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g11</span><span class="o">.</span><span class="n">get_edges</span><span class="p">()</span>
+<span class="gp">... </span><span class="n">el</span> <span class="o">=</span> <span class="p">[{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">},</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}]</span>
+<span class="gp">... </span><span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">el</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.get_forest">
+<code class="sig-name descname">get_forest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.get_forest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.get_forest" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns a list of lists. Each sublist is a molecule (chain) of the system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>A list of lists</strong> (<em>forest =&gt; [[ichain1], [ichain2], …]</em>)</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<img alt="../_images/graph04.png" src="../_images/graph04.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">l2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g4</span><span class="o">.</span><span class="n">get_forest</span><span class="p">()</span>
+<span class="gp">... </span><span class="n">lr</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">]]</span> <span class="c1">#= self._nmols</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.get_graph">
+<code class="sig-name descname">get_graph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.get_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.get_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns the attribute self._graphdict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>It returns the attribute self._graphdict</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<img alt="../_images/graph11_nx.png" src="../_images/graph11_nx.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g11</span><span class="o">.</span><span class="n">get_graph</span><span class="p">()</span>
+<span class="gp">... </span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="mi">4</span><span class="p">:</span> <span class="p">[],</span> <span class="mi">5</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="mi">6</span><span class="p">:</span> <span class="p">[]}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.get_neighbours">
+<code class="sig-name descname">get_neighbours</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inode</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.get_neighbours"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.get_neighbours" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns all neighbours</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>:</strong> (<em>inode</em>) – integer: Number of the parent node</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>It returns a list with all neighbors to the inode.</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<img alt="../_images/g3_03_nx.png" src="../_images/g3_03_nx.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ln</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g3</span><span class="o">.</span><span class="n">get_neighbours</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span><span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">ln</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.get_vertices">
+<code class="sig-name descname">get_vertices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.get_vertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.get_vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all vertices in the graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>A list of vertices</em></p></li>
+<li><p><em>Example</em></p></li>
+<li><p><em>——-</em> – &gt;&gt;&gt; v = self.g11.get_vertices()
+… [0, 1, 2, 3, 4, 5, 6]</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.is_connected">
+<code class="sig-name descname">is_connected</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vertices_encountered</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">start_vertex</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.is_connected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.is_connected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines if the graph is connected. This is a recursive function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vertices_encountered</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.9)"><em>set</em></a>) – Returns a set of vertices connected</p></li>
+<li><p><strong>integer</strong> (<em>start_vertex</em>) – Startting point</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Return a boolean. True if the graph is connected</em></p></li>
+<li><p><em>.. warning:: This is a recursive function</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span><span class="o">.</span><span class="n">is_connected</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.iscyclic">
+<code class="sig-name descname">iscyclic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.iscyclic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.iscyclic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a boolean list. Each item of the list corresponds to a graph (molecule)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>A boolean list</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<img alt="../_images/graph07_nx.png" src="../_images/graph07_nx.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iscyclic2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g7</span><span class="o">.</span><span class="n">iscyclic</span><span class="p">()</span>
+<span class="gp">... </span><span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">iscyclic2</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.perception_rings">
+<code class="sig-name descname">perception_rings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.perception_rings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.perception_rings" title="Permalink to this definition">¶</a></dt>
+<dd><p>“A New Algorithm for Exhaustive Ring Perception in a Molecular Graph”
+Th. Hanser, Ph. Jauffret, and G. Kaufmann
+J. Chem. Inf. Comput. Sci. 1996, 36, 1146-1152
+<a class="reference external" href="https://doi.org/10.1021/ci960322f">https://doi.org/10.1021/ci960322f</a></p>
+<p>Abstract:
+A new fast and easy to implement algorithm for exhaustive ring perception is presented. This algorithm is
+based upon a progressive reduction (collapsing) of the path graph associated with the molecular graph studied.
+The path graph is an image of the molecular graph in which each vertex corresponds to a vertex of the
+molecular graph and each edge a-b describes an existing path between a and b in the molecular graph.
+During the reduction, nodes of the path graph are removed, and the information related to cycle occurrence
+is concentrated in the label of new get_edges between the remaining get_vertices. Each loop formed in the path
+graph during this collapsing process corresponds to a cycle in the molecular graph. Once the path graph
+has totally collapsed, all the rings in the molecular graph have been perceived.</p>
+<p>Returns</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.MolecularGraph.MolecularGraph.remove_edge">
+<code class="sig-name descname">remove_edge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/MolecularGraph.html#MolecularGraph.remove_edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.MolecularGraph.MolecularGraph.remove_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>It deletes an edge in the graph between two existing nodes.
+The parameter <strong>edge</strong> can be a set, a tuple or a list of two nodes;
+Between two vertices can be multiple edges.</p>
+<p>Both vertex must exist in the molecular graph. If any vertex is not in the
+molecular graph nothing is done</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>edge</strong> (<em>Set</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><em>tuple</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – Vertices to create an edges (aka bond)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>None</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>&gt;&gt;&gt;g4.remove_edge([2,3])</p>
+<img alt="../_images/then_and_now_removeedges.png" src="../_images/then_and_now_removeedges.png" />
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nwchem_interface.html" class="btn btn-neutral float-right" title="NwChem Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="metropolisMC.html" class="btn btn-neutral float-left" title="Metropolis MC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

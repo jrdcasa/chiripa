@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Chi_Universe &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cubic Box" href="cubicbox.html" />
+    <link rel="prev" title="Box" href="box.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="chiripa.html">Chiripa package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="atomic_data.html">Atomic_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Chi_Universe</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview"><strong>Overview</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example"><strong>Example</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-chiripa.Chi_Universe"><strong>API</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cubicbox.html">Cubic Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dbjobs.html">DBJobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus_interface.html">DFTBPLUS INTERFACE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian_interface.html">Gaussian Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate_pair_conformations.html">Generate Pair Conformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internal_coordinates.html">Internal Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metropolisMC.html">Metropolis MC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moleculargraph.html">Molecular Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nwchem_interface.html">NwChem Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="points_inside_pyramid.html">Points Inside Pyramid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="segment.html">Segment Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverlocal.html">Server Local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverslurm.html">Server Slurm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup_logger.html">Setup Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulator.html">Simulator Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">Utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">Python API Reference</a> &raquo;</li>
+        
+          <li><a href="chiripa.html">Chiripa package</a> &raquo;</li>
+        
+      <li>Chi_Universe</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/chi_universe.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="chi-universe">
+<h1>Chi_Universe<a class="headerlink" href="#chi-universe" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="example">
+<h2><strong>Example</strong><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-chiripa.Chi_Universe">
+<span id="api"></span><h2><strong>API</strong><a class="headerlink" href="#module-chiripa.Chi_Universe" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="chiripa.Chi_Universe.Chi_Universe">
+<em class="property">class </em><code class="sig-prename descclassname">chiripa.Chi_Universe.</code><code class="sig-name descname">Chi_Universe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dict</span></em>, <em class="sig-param"><span class="n">header</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">logname</span><span class="o">=</span><span class="default_value">'output.log'</span></em>, <em class="sig-param"><span class="n">output_screen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">clean</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Chi_Universe.html#Chi_Universe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Chi_Universe.Chi_Universe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Create an universe to perform the calculations to get the <span class="math notranslate nohighlight">\({\chi}\)</span> parameter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dict</strong> (<em>*</em>) – A dictionary of the required keywords to perform the calculation.</p></li>
+<li><p><strong>header</strong> (<em>*</em>) – If True then prints the program header on the log file.</p></li>
+<li><p><strong>output_screen</strong> (<em>*</em>) – If True then prints the log file on screen.</p></li>
+</ul>
+</dd>
+</dl>
+<p>The chi_universe creates the environment to calculate the <span class="math notranslate nohighlight">\({\chi}\)</span> parameter
+from the structure of the segments. A <strong>input_dict</strong> must be given in the signature.
+This dictionary codifies all information needed to perform calculations
+The allowed <strong>key:values</strong> pairs in this dictionary
+are the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>‘names’</strong> (required): A list of strings for the molecule names.</p></li>
+<li><p><strong>‘filecoords’</strong> (required): A list of strings for filenames to read coordinates.</p></li>
+<li><p><strong>‘filetop’</strong> (required): A list of strings for filenames to read topology.</p></li>
+<li><p><strong>‘coordination_numbers_Z’</strong> (boolean, optional): If not present the coordination numbers (Z<sub>ij</sub>) are not calculated.</p></li>
+<li><p><strong>‘Z-parameters’</strong> (dictionary, optional) : A dictionary defining the features of the Z-calculation.</p></li>
+<li><p><strong>‘calculate_volume’</strong> (boolean, optional) : If True it calculates the monomer volume.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The lists <strong>‘names’</strong>, <strong>‘filecoords’</strong>, <strong>‘filetop’</strong> in the dictionary must have the same length. The order is also important,
+for example, the position 0 must correspond to the info of the Segment 1 and the position
+1 to the Segment 2.</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Not all keys are defined.</p>
+</div>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p>self._names (list of string): Name of the segments</p></li>
+<li><p>self._segments (list of segments): List of the two segments.</p></li>
+<li><p>self._logger (Logger): Log to output the files.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Not all properties are defined.</p>
+</div>
+<dl class="py method">
+<dt id="chiripa.Chi_Universe.Chi_Universe.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dict</span></em>, <em class="sig-param"><span class="n">header</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">logname</span><span class="o">=</span><span class="default_value">'output.log'</span></em>, <em class="sig-param"><span class="n">output_screen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">clean</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Chi_Universe.html#Chi_Universe.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Chi_Universe.Chi_Universe.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Chi_Universe.Chi_Universe._check_state_interaction_energy_evaluation">
+<code class="sig-name descname">_check_state_interaction_energy_evaluation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">databasename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Chi_Universe.html#Chi_Universe._check_state_interaction_energy_evaluation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Chi_Universe.Chi_Universe._check_state_interaction_energy_evaluation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Chi_Universe.Chi_Universe._clean_files">
+<code class="sig-name descname">_clean_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Chi_Universe.html#Chi_Universe._clean_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Chi_Universe.Chi_Universe._clean_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Chi_Universe.Chi_Universe._interaction_energy_evaluation">
+<code class="sig-name descname">_interaction_energy_evaluation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">listnames</span></em>, <em class="sig-param"><span class="n">listfilecoords</span></em>, <em class="sig-param"><span class="n">listfiletop</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Chi_Universe.html#Chi_Universe._interaction_energy_evaluation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Chi_Universe.Chi_Universe._interaction_energy_evaluation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Chi_Universe.Chi_Universe._parse">
+<code class="sig-name descname">_parse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dict_input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Chi_Universe.html#Chi_Universe._parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Chi_Universe.Chi_Universe._parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parser for the input dictionary.</p>
+<p>The format of the input has been defined in <a class="reference internal" href="#chiripa.Chi_Universe.Chi_Universe" title="chiripa.Chi_Universe.Chi_Universe"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chi_Universe</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dict_input</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – Input dictionary.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True when the input is well-formed. Otherwise, return False.</p>
+</dd>
+</dl>
+<p>All list must have the same length</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Chi_Universe.Chi_Universe._setupSegments">
+<code class="sig-name descname">_setupSegments</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">listnames</span></em>, <em class="sig-param"><span class="n">listfilecoords</span></em>, <em class="sig-param"><span class="n">listfiletop</span></em>, <em class="sig-param"><span class="n">calculate_volume</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Chi_Universe.html#Chi_Universe._setupSegments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Chi_Universe.Chi_Universe._setupSegments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Segments to perform the calculations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>listnames</strong> (<em>list of strings</em>) – List of names for the segments</p></li>
+<li><p><strong>listfilecoords</strong> (<em>list of strings</em>) – List of the paths for the coordinates files</p></li>
+<li><p><strong>listfiletop</strong> (<em>list of strings</em>) – List of the paths for the topology files</p></li>
+<li><p><strong>calculate_volume</strong> (<em>boolean</em><em>, </em><em>default=False</em>) – Calculate the volume
+using <a class="reference internal" href="segment.html#chiripa.Segment.Segment.calc_vdw_volume_VABC" title="chiripa.Segment.Segment.calc_vdw_volume_VABC"><code class="xref py py-meth docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.calc_vdw_volume_VABC()</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<p>This method setup the <strong>self._segments</strong> property</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cubicbox.html" class="btn btn-neutral float-right" title="Cubic Box" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="box.html" class="btn btn-neutral float-left" title="Box" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

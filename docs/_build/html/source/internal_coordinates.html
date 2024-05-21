@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Internal Coordinates &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Metropolis MC" href="metropolisMC.html" />
+    <link rel="prev" title="Generate Pair Conformations" href="generate_pair_conformations.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="chiripa.html">Chiripa package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="atomic_data.html">Atomic_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chi_universe.html">Chi_Universe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cubicbox.html">Cubic Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dbjobs.html">DBJobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus_interface.html">DFTBPLUS INTERFACE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian_interface.html">Gaussian Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate_pair_conformations.html">Generate Pair Conformations</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Internal Coordinates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview"><strong>Overview</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example"><strong>Example</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-chiripa.internal_coordinates"><strong>API</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="metropolisMC.html">Metropolis MC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moleculargraph.html">Molecular Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nwchem_interface.html">NwChem Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="points_inside_pyramid.html">Points Inside Pyramid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="segment.html">Segment Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverlocal.html">Server Local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverslurm.html">Server Slurm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup_logger.html">Setup Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulator.html">Simulator Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">Utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">Python API Reference</a> &raquo;</li>
+        
+          <li><a href="chiripa.html">Chiripa package</a> &raquo;</li>
+        
+      <li>Internal Coordinates</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/internal_coordinates.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="internal-coordinates">
+<h1>Internal Coordinates<a class="headerlink" href="#internal-coordinates" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="example">
+<h2><strong>Example</strong><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-chiripa.internal_coordinates">
+<span id="api"></span><h2><strong>API</strong><a class="headerlink" href="#module-chiripa.internal_coordinates" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="chiripa.internal_coordinates.bend_angle_purepython">
+<code class="sig-prename descclassname">chiripa.internal_coordinates.</code><code class="sig-name descname">bend_angle_purepython</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c1</span></em>, <em class="sig-param"><span class="n">c2</span></em>, <em class="sig-param"><span class="n">c3</span></em>, <em class="sig-param"><span class="n">radians</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/internal_coordinates.html#bend_angle_purepython"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.internal_coordinates.bend_angle_purepython" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bend angle</p>
+<p>Finds angle between three atomic positions. Does not consider periodic boundary conditions.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>— (2) — (3) (Bend angle 1-2-3)</p></li>
+</ol>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c1</strong> – Coordinate of the point 1</p></li>
+<li><p><strong>c2</strong> – Coordinate of the point 2</p></li>
+<li><p><strong>c3</strong> – Coordinate of the point 3</p></li>
+<li><p><strong>radians</strong> – returns value in radians if True (False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>angle between particles in radians or degrees</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.internal_coordinates.cos_angle_purepython">
+<code class="sig-prename descclassname">chiripa.internal_coordinates.</code><code class="sig-name descname">cos_angle_purepython</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ci</span></em>, <em class="sig-param"><span class="n">cj</span></em>, <em class="sig-param"><span class="n">ck</span></em>, <em class="sig-param"><span class="n">cl</span></em>, <em class="sig-param"><span class="n">radians</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/internal_coordinates.html#cos_angle_purepython"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.internal_coordinates.cos_angle_purepython" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line-block">
+<div class="line">cl                            c(i+2)</div>
+<div class="line">|            &lt;===&gt;             |</div>
+</div>
+<div class="line">cj – ci – ck             c(i-1) – ci – c(i+1)</div>
+<div class="line"><br /></div>
+<div class="line-block">
+<div class="line">i is i in the paper</div>
+<div class="line">j is i-1 in the paper</div>
+<div class="line">k is i+1 in the paper</div>
+<div class="line">l is i+2 in the paper</div>
+</div>
+</div>
+<p>Zhang et al. Journal of Cheminformatics 2012, 4:26 (Figure 4)</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Parameters</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>ci</strong></p></li>
+<li><p><strong>cj</strong></p></li>
+<li><p><strong>ck</strong></p></li>
+<li><p><strong>cl</strong></p></li>
+<li><p><strong>radians</strong></p></li>
+</ul>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">Returns</span></code>:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.internal_coordinates.dihedral_angle_purepython">
+<code class="sig-prename descclassname">chiripa.internal_coordinates.</code><code class="sig-name descname">dihedral_angle_purepython</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ci</span></em>, <em class="sig-param"><span class="n">cj</span></em>, <em class="sig-param"><span class="n">ck</span></em>, <em class="sig-param"><span class="n">cl</span></em>, <em class="sig-param"><span class="n">radians</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/internal_coordinates.html#dihedral_angle_purepython"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.internal_coordinates.dihedral_angle_purepython" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the dihedral angle</p>
+<div class="line-block">
+<div class="line">Dihedral : ci – cj – ck – cl</div>
+<div class="line"><br /></div>
+<div class="line">Improper :         cl</div>
+<div class="line-block">
+<div class="line">|              cj – ci – ck</div>
+</div>
+</div>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Parameters</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>ci</strong></p></li>
+<li><p><strong>cj</strong></p></li>
+<li><p><strong>ck</strong></p></li>
+<li><p><strong>cl</strong></p></li>
+<li><p><strong>radians</strong></p></li>
+</ul>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">Returns</span></code>:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.internal_coordinates.distance_array">
+<code class="sig-prename descclassname">chiripa.internal_coordinates.</code><code class="sig-name descname">distance_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ref</span></em>, <em class="sig-param"><span class="n">conf</span></em>, <em class="sig-param"><span class="n">openmp</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/internal_coordinates.html#distance_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.internal_coordinates.distance_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the distances among the points in two arrays using C and Cython</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Parameters</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>ref</strong>: (type: ndarray): Reference array containing a number of points with shape [npoints1, dim], where dim is the dimension in 2-D or 3-D points</p></li>
+<li><p><strong>conf</strong>: (type: ndarray): Reference array containing a number of points with shape [npoints2, dim], where dim is the dimension in 2-D or 3-D points</p></li>
+<li><p><strong>openmp</strong>: (type: boolean) Parallel or not</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Returns</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>dist</strong>: (type: 2D-ndarray). Distances in Angstroms between the ith atom (row) and the jth atoms</p></li>
+<li><p><strong>rijx</strong>: (type: 2D-ndarray). Component-x of the vector i,j</p></li>
+<li><p><strong>rijy</strong>: (type: 2D-ndarray). Component-y of the vector i,j</p></li>
+<li><p><strong>rijz</strong>: (type: 2D-ndarray). Component-z of the vector i,j</p></li>
+</ul>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">Examples</span></code>:
+&gt;&gt;&gt;
+&gt;&gt;&gt;</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.internal_coordinates.distance_array_numpypython">
+<code class="sig-prename descclassname">chiripa.internal_coordinates.</code><code class="sig-name descname">distance_array_numpypython</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ref</span></em>, <em class="sig-param"><span class="n">conf</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/internal_coordinates.html#distance_array_numpypython"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.internal_coordinates.distance_array_numpypython" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the distances among the points in two arrays unsing pure pyhton and numpy</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Parameters</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>ref</strong>: (type: ndarray): Reference array containing a number of points with shape [npoints1, dim], where dim is the dimension in 2-D or 3-D points</p></li>
+<li><p><strong>conf</strong>: (type: ndarray): Reference array containing a number of points with shape [npoints2, dim], where dim is the dimension in 2-D or 3-D points</p></li>
+<li><p><strong>openmp</strong>: (type: boolean) Parallel or not</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Returns</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>dist</strong>: (type: 2D-ndarray). Distances in Angstroms between the ith atom (row) and the jth atoms</p></li>
+<li><p><strong>rijx</strong>: (type: 2D-ndarray). Component-x of the vector i,j</p></li>
+<li><p><strong>rijy</strong>: (type: 2D-ndarray). Component-y of the vector i,j</p></li>
+<li><p><strong>rijz</strong>: (type: 2D-ndarray). Component-z of the vector i,j</p></li>
+</ul>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">Examples</span></code>:
+&gt;&gt;&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt;</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.internal_coordinates.distance_array_purepython">
+<code class="sig-prename descclassname">chiripa.internal_coordinates.</code><code class="sig-name descname">distance_array_purepython</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ref</span></em>, <em class="sig-param"><span class="n">conf</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/internal_coordinates.html#distance_array_purepython"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.internal_coordinates.distance_array_purepython" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the distances among the points in two arrays unsing pure pyhton</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Parameters</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>ref</strong>: (type: ndarray): Reference array containing a number of points with shape [npoints1, dim], where dim is the dimension in 2-D or 3-D points</p></li>
+<li><p><strong>conf</strong>: (type: ndarray): Reference array containing a number of points with shape [npoints2, dim], where dim is the dimension in 2-D or 3-D points</p></li>
+<li><p><strong>openmp</strong>: (type: boolean) Parallel or not</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Returns</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>dist</strong>: (type: 2D-ndarray). Distances in Angstroms between the ith atom (row) and the jth atoms</p></li>
+</ul>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">Examples</span></code>:
+&gt;&gt;&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt;</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.internal_coordinates.euler_rotation_matrix">
+<code class="sig-prename descclassname">chiripa.internal_coordinates.</code><code class="sig-name descname">euler_rotation_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">euler</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/internal_coordinates.html#euler_rotation_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.internal_coordinates.euler_rotation_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a rotation matrix for a given set of Euler angles
+There are many definitions of the Euler angles
+(see: <a class="reference external" href="https://en.wikipedia.org/wiki/Euler_angles">https://en.wikipedia.org/wiki/Euler_angles</a>)</p>
+<p>The definition here used is that given in:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MATHEMATICAL</span> <span class="n">METHODS</span> <span class="n">FOR</span> <span class="n">PHYSICISTS</span>
+<span class="n">SEVENTH</span> <span class="n">EDITION</span>
+<span class="n">George</span> <span class="n">B</span><span class="o">.</span> <span class="n">Arfken</span><span class="p">,</span> <span class="n">Hans</span> <span class="n">J</span><span class="o">.</span> <span class="n">Weber</span><span class="p">,</span> <span class="n">Frank</span> <span class="n">E</span><span class="o">.</span> <span class="n">Harris</span>
+<span class="n">pag</span><span class="p">:</span> <span class="mi">140</span><span class="o">-</span><span class="mi">142</span>
+</pre></div>
+</div>
+<img alt="../_images/euler_book.png" src="../_images/euler_book.png" />
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Parameters</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>euler</strong> (list) : Euler angles in radians</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Returns</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>None</strong></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.internal_coordinates.generate_random_euler_angles">
+<code class="sig-prename descclassname">chiripa.internal_coordinates.</code><code class="sig-name descname">generate_random_euler_angles</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/internal_coordinates.html#generate_random_euler_angles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.internal_coordinates.generate_random_euler_angles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate Euler angles.</p>
+<p>To generate an uniform sampling of the three Euler angles:</p>
+<img alt="../_images/euler_angles_random.png" src="../_images/euler_angles_random.png" />
+<p>There are many definitions of the Euler angles
+(see: <a class="reference external" href="https://en.wikipedia.org/wiki/Euler_angles">https://en.wikipedia.org/wiki/Euler_angles</a>)</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Parameters</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>iseed</strong>  (type: int): Seed for the random number generator</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Return</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>A vector</strong> containg the three Euler angles in radians</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="metropolisMC.html" class="btn btn-neutral float-right" title="Metropolis MC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="generate_pair_conformations.html" class="btn btn-neutral float-left" title="Generate Pair Conformations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

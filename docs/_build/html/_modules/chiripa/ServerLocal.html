@@ -1,0 +1,649 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chiripa.ServerLocal &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/api-docs.html">Python API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>chiripa.ServerLocal</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for chiripa.ServerLocal</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">paramiko</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">socket</span> <span class="kn">import</span> <span class="n">gaierror</span>
+<span class="kn">import</span> <span class="nn">chiripa</span> <span class="k">as</span> <span class="nn">chi</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Some functions are inspired or directly copy from slurmqueen project</span>
+
+<span class="sd">(https://github.com/Kasekopf/SlurmQueen)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ServerLocal"><a class="viewcode-back" href="../../source/serverlocal.html#chiripa.ServerLocal.ServerLocal">[docs]</a><span class="k">class</span> <span class="nc">ServerLocal</span><span class="p">(</span><span class="n">chi</span><span class="o">.</span><span class="n">Server</span><span class="p">):</span>
+
+    <span class="c1"># ===========================================================================================</span>
+<div class="viewcode-block" id="ServerLocal.__init__"><a class="viewcode-back" href="../../source/serverlocal.html#chiripa.ServerLocal.ServerLocal.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nameserver</span><span class="p">,</span> <span class="n">databasename</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a local server without queue system</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nameserver (str): The name of the server (i.e: trueno.csic.es or localhost).</span>
+<span class="sd">            databasename (str) :  File name of the database.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">nameserver</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keyfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">dbname</span><span class="o">=</span><span class="n">databasename</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span><span class="o">.</span><span class="n">create_table_qmjobs</span><span class="p">()</span></div>
+
+    <span class="c1"># ===========================================================================================</span>
+<div class="viewcode-block" id="ServerLocal.execute_cmd"><a class="viewcode-back" href="../../source/serverlocal.html#chiripa.ServerLocal.ServerLocal.execute_cmd">[docs]</a>    <span class="k">def</span> <span class="nf">execute_cmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">other_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute a command (from the WORKING directory) on this server.</span>
+<span class="sd">        Throws an exception if the connection fails.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            command (str): The name to execute.</span>
+<span class="sd">            other_input (str): Text to be written to stdin.</span>
+<span class="sd">            timeout (int): A timeout to use when executing the command, in seconds.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: All text written to stdout by the command</span>
+<span class="sd">            as a tuple of strings (stdout, stderr).</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            A typical use of the method.</span>
+
+<span class="sd">            &gt;&gt;&gt; remote_dir = &quot;./&quot;</span>
+<span class="sd">            &gt;&gt;&gt; zipfilename = &quot;file.zip&quot;</span>
+<span class="sd">            &gt;&gt;&gt; cmd2 = &#39;cd %s; rm -f %s&#39;%(remote_dir,zipfilename)</span>
+<span class="sd">            &gt;&gt;&gt; stdout, stderr = self.execute_cmd(cmd2)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+        <span class="n">exit_status</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">exit_status</span> <span class="o">=</span> <span class="mi">2</span>
+
+        <span class="k">if</span> <span class="n">exit_status</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Warning!!! Command </span><span class="si">{}</span><span class="s2"> cannot be run in server localhost&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">command</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">),</span> <span class="n">err</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># ===========================================================================================</span>
+<div class="viewcode-block" id="ServerLocal.qm_calc"><a class="viewcode-back" href="../../source/serverlocal.html#chiripa.ServerLocal.ServerLocal.qm_calc">[docs]</a>    <span class="k">def</span> <span class="nf">qm_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iseg</span><span class="p">,</span> <span class="n">jseg</span><span class="p">,</span> <span class="n">ncalc</span><span class="p">,</span>
+                <span class="n">qm_keywords</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span>
+                <span class="n">localdir</span><span class="p">,</span> <span class="n">remotedir</span><span class="p">,</span>
+                <span class="n">cpuspertask</span><span class="p">,</span>
+                <span class="n">nodelist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nodelistmaster</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">partition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partitionmaster</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">localzipfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prepare the data to send Gaussian16 jobs on a localserver</span>
+
+<span class="sd">        #. Create the database if it does not exist</span>
+<span class="sd">        #. Define the number of nodes used in the calculations</span>
+<span class="sd">        #. For each pair segement replica:</span>
+
+<span class="sd">            a. Write gaussian input</span>
+<span class="sd">            b. Write script to send the calculation</span>
+<span class="sd">            c. Insert data in the gaussian database</span>
+
+<span class="sd">        #.  Send gaussian jobs to localhost</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            iseg (int): Index for the Base Segment</span>
+<span class="sd">            jseg (int): Index for the Screening Segment</span>
+<span class="sd">            ncalc (int): Number of replicas for the pair iseg-jseg.</span>
+<span class="sd">            gaussian_keywords (str): Route section (# lines) for `gaussian 16 &lt;https://gaussian.com/input/&gt;`_</span>
+<span class="sd">                (Specify desired calculation type, model chemistry, and other options)</span>
+<span class="sd">            simulator (Simulator): A :doc:`Simulator &lt;./simulator&gt;` instance.</span>
+<span class="sd">            localdir (str): Path to store files in the local server.</span>
+<span class="sd">            remotedir (str): Path to store files in the remote server.</span>
+<span class="sd">            g16path (str): Path the to the gaussian executable.</span>
+<span class="sd">            scratch_dir (str): Path to the scratch dir used for gaussian</span>
+<span class="sd">            cpuspertask (int): Number of cpus to use in the gaussian calculation</span>
+<span class="sd">            nodelist (list): List of nodes. For localhost should be ``None`` **(default=None)**.</span>
+<span class="sd">            localzipfile (str): Path for a zip file of the inputs **(default=&quot;gaussian_inputs.zip&quot;)**</span>
+<span class="sd">            memory (str): Memory (example: 500Mb)</span>
+<span class="sd">            logger (Logger): A :doc:`Logger &lt;./setup_logger&gt;` instance</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            Use example</span>
+
+<span class="sd">            &gt;&gt;&gt; gaussian_keywords = &#39;#p 3-21g hf int=grid=ultrafine scf=(maxcycle=5000)&#39;</span>
+<span class="sd">            &gt;&gt;&gt; self._local_dir = &#39;/tutorials/tutorial01 gauss local/calculations_local_dir/&#39;</span>
+<span class="sd">            &gt;&gt;&gt; self._remote_dir = &#39;./calculations_remote_dir/&#39;</span>
+<span class="sd">            &gt;&gt;&gt; self._qm_path_exe = &#39;/opt/g16/g16&#39;</span>
+<span class="sd">            &gt;&gt;&gt; memory = &quot;500Mb&quot;</span>
+<span class="sd">            &gt;&gt;&gt; logger = chi.init_logger(&quot;Output&quot;, fileoutput = &quot;output_check.log&quot;, append=True, inscreen=output_screen)</span>
+<span class="sd">            &gt;&gt;&gt; server.gaussian_calc(0, 1, self._qm_conformations,</span>
+<span class="sd">                                     gaussian_keywords,</span>
+<span class="sd">                                     sim, self._local_dir, self._remote_dir,</span>
+<span class="sd">                                     self._qm_path_exe,</span>
+<span class="sd">                                     self._qm_scratch_dir,</span>
+<span class="sd">                                     self._cpus_per_task,</span>
+<span class="sd">                                     nodelist=None,</span>
+<span class="sd">                                     localzipfile=zipfile,</span>
+<span class="sd">                                     memory=str(self._memory_per_task) + &quot;Mb&quot;, logger=None)</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">file_base</span> <span class="o">=</span> <span class="n">localzipfile</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">cog_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+        <span class="c1"># Create the database</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span> <span class="o">=</span> <span class="n">DBjobs</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_sp.db&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">]),</span> <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span><span class="o">.</span><span class="n">create_table_qmjobs</span><span class="p">()</span>
+
+        <span class="c1">#print(&quot;1:&quot;, datetime.datetime.now().time())</span>
+
+        <span class="c1"># Create gaussian and script files in the local area</span>
+        <span class="n">inode</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">nnodes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodelist</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">nnodes</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">iconf</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncalc</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">ncalc</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">chi</span><span class="o">.</span><span class="n">gen_conf_fan_algorithm_c</span><span class="p">(</span><span class="n">simulator</span><span class="p">)</span>
+
+            <span class="n">cog_list</span> <span class="o">=</span> <span class="n">simulator</span><span class="o">.</span><span class="n">get_ith_molecule</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geom</span><span class="p">()</span>
+            <span class="n">inputname</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0:s}</span><span class="s2">_</span><span class="si">{1:05d}</span><span class="s2">_</span><span class="si">{2:1d}</span><span class="s2">_</span><span class="si">{3:1d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">],</span> <span class="n">iconf</span><span class="p">,</span> <span class="n">iseg</span><span class="p">,</span> <span class="n">jseg</span><span class="p">)</span>
+            <span class="n">idir</span> <span class="o">=</span> <span class="n">remotedir</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">file_base</span><span class="o">+</span><span class="s2">&quot;/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inputname</span><span class="p">)</span>
+            <span class="n">simulator</span><span class="o">.</span><span class="n">write_qminput_simulator</span><span class="p">(</span><span class="n">idir</span><span class="p">,</span> <span class="n">qm_keywords</span><span class="p">,</span>
+                                              <span class="n">inputname</span><span class="p">,</span>
+                                              <span class="n">delete_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                              <span class="n">mem</span><span class="o">=</span><span class="n">memory</span><span class="p">,</span>
+                                              <span class="n">nproc</span><span class="o">=</span><span class="n">cpuspertask</span><span class="p">,</span>
+                                              <span class="n">is_send_script</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Insert data in the gaussian database</span>
+            <span class="n">sql_insert</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO qm_jobs VALUES (</span><span class="si">{0:d}</span><span class="s2">, &#39;</span><span class="si">{1:s}</span><span class="s2">&#39;, &#39;CREATED&#39;, &#39;NULL&#39;, &#39;NULL&#39;, &#39;</span><span class="si">{2:s}</span><span class="s2">&#39;, &#39;NULL&#39;)&quot;</span><span class="o">.</span>\
+                <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_db_index</span><span class="p">,</span> <span class="n">inputname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">cog_list</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span><span class="o">.</span><span class="n">insert_data</span><span class="p">(</span><span class="n">sql_insert</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_db_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">inode</span> <span class="o">=</span> <span class="p">(</span><span class="n">inode</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">nnodes</span>
+
+        <span class="c1">#print(&quot;6:&quot;,datetime.datetime.now().time())</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status_job&#39;</span> <span class="p">:</span> <span class="s1">&#39;INSERVER&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span><span class="o">.</span><span class="n">update_allcolumns_tosamevalue</span><span class="p">(</span><span class="s2">&quot;qm_jobs&quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span><span class="o">.</span><span class="n">commit_db</span><span class="p">()</span>
+
+        <span class="c1">#print(&quot;8:&quot;,datetime.datetime.now().time())</span>
+        <span class="c1"># Send gaussian jobs to localhost</span>
+        <span class="n">idir_remote</span> <span class="o">=</span> <span class="n">remotedir</span><span class="o">+</span><span class="n">file_base</span><span class="o">+</span><span class="s2">&quot;/&quot;</span></div>
+
+    <span class="c1"># ===========================================================================================</span>
+<div class="viewcode-block" id="ServerLocal.qm_allsend"><a class="viewcode-back" href="../../source/serverlocal.html#chiripa.ServerLocal.ServerLocal.qm_allsend">[docs]</a>    <span class="k">def</span> <span class="nf">qm_allsend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qm_engine</span><span class="p">,</span> <span class="n">remote_dir</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send all gaussian jobs. This only has been tested in Linux</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            remote_dir (str): Path to store files in the remote server.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">generate_bashscript_send_local</span><span class="p">(</span><span class="n">qm_engine</span><span class="p">,</span>  <span class="n">remote_dir</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">)</span>
+
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;cd </span><span class="si">{}</span><span class="s2">; bash full_send.sh&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remote_dir</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span></div>
+
+    <span class="c1"># ===========================================================================================</span>
+<div class="viewcode-block" id="ServerLocal.get_logs"><a class="viewcode-back" href="../../source/serverlocal.html#chiripa.ServerLocal.ServerLocal.get_logs">[docs]</a>    <span class="k">def</span> <span class="nf">get_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_dir</span><span class="p">,</span> <span class="n">remote_dir</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method is used to get all gaussian logs in a</span>
+<span class="sd">        zip file called &quot;logs.zip&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            local_dir (str): Path to store files in the local server.</span>
+<span class="sd">            remote_dir (str): Path to store files in the remote server.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">zipfilename</span> <span class="o">=</span> <span class="s2">&quot;logs.zip&quot;</span>
+        <span class="c1">#os.mkdir(local_dir+&quot;gaussian_logs&quot;)</span>
+
+        <span class="n">cmd1</span> <span class="o">=</span> <span class="s1">&#39;cd </span><span class="si">%s</span><span class="s1">; zip -R </span><span class="si">%s</span><span class="s1"> </span><span class="se">\&#39;</span><span class="s1">*.log</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">remote_dir</span><span class="p">,</span><span class="n">zipfilename</span><span class="p">)</span>
+        <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_cmd</span><span class="p">(</span><span class="n">cmd1</span><span class="p">)</span>
+        <span class="c1">#</span>
+        <span class="n">cmd3</span> <span class="o">=</span> <span class="s1">&#39;cd </span><span class="si">%s</span><span class="s1">; mv </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">remote_dir</span><span class="p">,</span> <span class="n">zipfilename</span><span class="p">,</span> <span class="n">local_dir</span><span class="p">)</span>
+        <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_cmd</span><span class="p">(</span><span class="n">cmd3</span><span class="p">)</span></div>
+
+    <span class="c1"># ===========================================================================================</span>
+<div class="viewcode-block" id="ServerLocal.get_energy_from_calculations"><a class="viewcode-back" href="../../source/serverlocal.html#chiripa.ServerLocal.ServerLocal.get_energy_from_calculations">[docs]</a>    <span class="k">def</span> <span class="nf">get_energy_from_calculations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qm_engine</span><span class="p">,</span> <span class="n">local_dir</span><span class="p">,</span> <span class="n">remote_dir</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the summary files and update the database with the energies from log files.</span>
+<span class="sd">        This is for localhosts</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            qm_engine (str): Name of the QM package (example: gaussian)</span>
+<span class="sd">            local_dir (str): Path to store files in the local server.</span>
+<span class="sd">            remote_dir (str): Path to store files in the remote server.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">energyfilename</span> <span class="o">=</span> <span class="s2">&quot;summary_energy.txt&quot;</span>
+        <span class="n">summaryfilename</span> <span class="o">=</span> <span class="s2">&quot;summary.txt&quot;</span>
+
+        <span class="n">zipfilename</span> <span class="o">=</span> <span class="s2">&quot;summary.zip&quot;</span>
+        <span class="n">cmd1</span> <span class="o">=</span> <span class="s1">&#39;cd </span><span class="si">%s</span><span class="s1">; ls -R *_inputs*/summary*&#39;</span><span class="o">%</span><span class="n">remote_dir</span>
+
+        <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_cmd</span><span class="p">(</span><span class="n">cmd1</span><span class="p">)</span>
+
+        <span class="c1"># Update the database</span>
+        <span class="c1"># Monomers</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+            <span class="n">subdir</span> <span class="o">=</span> <span class="n">qm_engine</span><span class="o">+</span><span class="s2">&quot;_inputs_</span><span class="si">{:1d}</span><span class="s2">_</span><span class="si">{:1d}</span><span class="s2">/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">name2</span> <span class="o">=</span> <span class="s2">&quot;summary_energy.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">name3</span> <span class="o">=</span> <span class="s2">&quot;summary.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">fulldir</span> <span class="o">=</span> <span class="n">remote_dir</span><span class="o">+</span><span class="n">subdir</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fulldir</span><span class="o">+</span><span class="n">name2</span><span class="p">):</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fulldir</span><span class="o">+</span><span class="n">name2</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+                    <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;cp </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">_0_</span><span class="si">%d</span><span class="s1">.txt&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">fulldir</span><span class="o">+</span><span class="n">name2</span><span class="p">,</span> <span class="n">local_dir</span><span class="o">+</span><span class="n">name2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">stdout</span><span class="p">,</span> <span class="n">sterr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">name_item</span><span class="p">,</span><span class="n">energy_h</span><span class="p">,</span> <span class="n">energy_rel</span><span class="p">,</span> <span class="n">time_s</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                            <span class="k">continue</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span><span class="o">.</span><span class="n">update_data_row</span><span class="p">(</span><span class="s2">&quot;qm_jobs&quot;</span><span class="p">,</span> <span class="s2">&quot;energy&quot;</span><span class="p">,</span> <span class="n">energy_h</span><span class="p">,</span> <span class="s2">&quot;name_job&quot;</span><span class="p">,</span> <span class="n">name_item</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span><span class="o">.</span><span class="n">update_data_row</span><span class="p">(</span><span class="s2">&quot;qm_jobs&quot;</span><span class="p">,</span> <span class="s2">&quot;cpu_time&quot;</span><span class="p">,</span> <span class="n">time_s</span><span class="p">,</span> <span class="s2">&quot;name_job&quot;</span><span class="p">,</span> <span class="n">name_item</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fulldir</span><span class="o">+</span><span class="n">name3</span><span class="p">):</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fulldir</span><span class="o">+</span><span class="n">name3</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+                    <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;cp </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">_0_</span><span class="si">%d</span><span class="s1">.txt&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">fulldir</span><span class="o">+</span><span class="n">name3</span><span class="p">,</span> <span class="n">local_dir</span><span class="o">+</span><span class="n">name3</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">stdout</span><span class="p">,</span> <span class="n">sterr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                        <span class="n">name_item</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">name_output</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span><span class="o">.</span><span class="n">update_data_row</span><span class="p">(</span><span class="s2">&quot;qm_jobs&quot;</span><span class="p">,</span> <span class="s2">&quot;status_job&quot;</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="s2">&quot;name_job&quot;</span><span class="p">,</span> <span class="n">name_item</span><span class="p">)</span>
+        <span class="c1"># Pairs</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+                <span class="n">subdir</span> <span class="o">=</span> <span class="n">qm_engine</span> <span class="o">+</span> <span class="s2">&quot;_inputs_</span><span class="si">{:1d}</span><span class="s2">_</span><span class="si">{:1d}</span><span class="s2">/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">name2</span> <span class="o">=</span> <span class="s2">&quot;summary_energy.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">name3</span> <span class="o">=</span> <span class="s2">&quot;summary.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">fulldir</span> <span class="o">=</span> <span class="n">remote_dir</span><span class="o">+</span><span class="n">subdir</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fulldir</span><span class="o">+</span><span class="n">name2</span><span class="p">):</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fulldir</span><span class="o">+</span><span class="n">name2</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+                        <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;cp </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">_</span><span class="si">%d</span><span class="s1">_</span><span class="si">%d</span><span class="s1">.txt&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fulldir</span> <span class="o">+</span> <span class="n">name2</span><span class="p">,</span> <span class="n">local_dir</span> <span class="o">+</span> <span class="n">name2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                        <span class="n">stdout</span><span class="p">,</span> <span class="n">sterr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="n">name_item</span><span class="p">,</span><span class="n">energy_h</span><span class="p">,</span> <span class="n">energy_rel</span><span class="p">,</span> <span class="n">time_s</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                                <span class="k">continue</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span><span class="o">.</span><span class="n">update_data_row</span><span class="p">(</span><span class="s2">&quot;qm_jobs&quot;</span><span class="p">,</span> <span class="s2">&quot;energy&quot;</span><span class="p">,</span> <span class="n">energy_h</span><span class="p">,</span> <span class="s2">&quot;name_job&quot;</span><span class="p">,</span> <span class="n">name_item</span><span class="p">)</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span><span class="o">.</span><span class="n">update_data_row</span><span class="p">(</span><span class="s2">&quot;qm_jobs&quot;</span><span class="p">,</span> <span class="s2">&quot;cpu_time&quot;</span><span class="p">,</span> <span class="n">time_s</span><span class="p">,</span> <span class="s2">&quot;name_job&quot;</span><span class="p">,</span> <span class="n">name_item</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fulldir</span><span class="o">+</span><span class="n">name3</span><span class="p">):</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fulldir</span><span class="o">+</span><span class="n">name3</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+                        <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;cp </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">_</span><span class="si">%d</span><span class="s1">_</span><span class="si">%d</span><span class="s1">.txt&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fulldir</span> <span class="o">+</span> <span class="n">name3</span><span class="p">,</span> <span class="n">local_dir</span> <span class="o">+</span> <span class="n">name3</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                        <span class="n">stdout</span><span class="p">,</span> <span class="n">sterr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                            <span class="n">name_item</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">name_output</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span><span class="o">.</span><span class="n">update_data_row</span><span class="p">(</span><span class="s2">&quot;qm_jobs&quot;</span><span class="p">,</span> <span class="s2">&quot;status_job&quot;</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="s2">&quot;name_job&quot;</span><span class="p">,</span> <span class="n">name_item</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db_base</span><span class="o">.</span><span class="n">commit_db</span><span class="p">()</span></div>
+
+    <span class="c1"># ===========================================================================================</span>
+<div class="viewcode-block" id="ServerLocal.extract_energy_calculations"><a class="viewcode-back" href="../../source/serverlocal.html#chiripa.ServerLocal.ServerLocal.extract_energy_calculations">[docs]</a>    <span class="k">def</span> <span class="nf">extract_energy_calculations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_dir</span><span class="p">,</span> <span class="n">remote_dir</span><span class="p">,</span> <span class="n">qm_engine</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a bash file to get all energy values from logs in the remote_dir.</span>
+<span class="sd">        Files summary_energy.txt and summary.txt are created</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            local_dir (str): Path to store files in the local server.</span>
+<span class="sd">            remote_dir (str): Path to store files in the remote server.</span>
+<span class="sd">            qm_engine (str): Name of the QM package (example: gaussian)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">scriptname</span> <span class="o">=</span> <span class="s2">&quot;check_local_dir.sh&quot;</span>
+
+        <span class="c1"># Generate the bash-script to extract the energy from gaussian calculations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generate_bashscript_check_jobs</span><span class="p">(</span><span class="n">qm_engine</span><span class="p">,</span> <span class="n">remote_dir</span><span class="p">,</span> <span class="n">inputname</span><span class="o">=</span><span class="n">scriptname</span><span class="p">)</span>
+
+        <span class="c1"># Run the script --&gt; Extract energy to a file named: summary_energy.txt</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cmd1</span> <span class="o">=</span> <span class="s1">&#39;cd </span><span class="si">%s</span><span class="s1">; bash ./</span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">remote_dir</span><span class="p">,</span> <span class="n">scriptname</span><span class="p">)</span>
+            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_cmd</span><span class="p">(</span><span class="n">cmd1</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span></div>
+
+    <span class="c1"># ===========================================================================================</span>
+<div class="viewcode-block" id="ServerLocal.generate_bashscript_check_jobs"><a class="viewcode-back" href="../../source/serverlocal.html#chiripa.ServerLocal.ServerLocal.generate_bashscript_check_jobs">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_bashscript_check_jobs</span><span class="p">(</span><span class="n">qm_engine</span><span class="p">,</span> <span class="n">localdir</span><span class="p">,</span> <span class="n">inputname</span><span class="o">=</span><span class="s2">&quot;check_remote_dir.sh&quot;</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Check_remote_dir.sh</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            localdir:</span>
+<span class="sd">            inputname:</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">qm_engine</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">:</span>
+            <span class="n">extract_energy</span> <span class="o">=</span> <span class="s2">&quot;E\(&quot;</span>
+            <span class="n">extract_time</span> <span class="o">=</span> <span class="s2">&quot;`egrep &#39;Elapsed&#39; $idir/$output  | awk &#39;{print $3*86400+$5*3600+$7*60+$9}&#39;`</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">is_complete_calc</span> <span class="o">=</span> <span class="s2">&quot;Normal term&quot;</span>
+        <span class="k">elif</span> <span class="n">qm_engine</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;nwchem&quot;</span><span class="p">:</span>
+            <span class="n">extract_energy</span> <span class="o">=</span> <span class="s2">&quot;Total DFT energy&quot;</span>
+            <span class="n">extract_time</span><span class="o">=</span><span class="s2">&quot;`egrep wall $idir/$output |tail -1|awk &#39;{print $6}&#39;|sed &#39;s/.$//&#39;`</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">is_complete_calc</span> <span class="o">=</span> <span class="s2">&quot;Total times&quot;</span>
+        <span class="k">elif</span> <span class="n">qm_engine</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;gamess&quot;</span><span class="p">:</span>
+            <span class="n">is_complete_calc</span> <span class="o">=</span> <span class="s2">&quot;EXECUTION OF GAMESS TERMINATED&quot;</span>
+            <span class="n">extract_energy</span> <span class="o">=</span> <span class="s2">&quot;TOTAL ENERGY =&quot;</span>
+            <span class="n">extract_time</span> <span class="o">=</span> <span class="s2">&quot;`egrep &#39;TOTAL WALL CLOCK TIME&#39; $idir/$output | tail -1 | awk &#39;{print $5&#39;}`&quot;</span>
+
+        <span class="k">if</span> <span class="n">localdir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;/&quot;</span><span class="p">:</span>
+            <span class="n">localfile</span> <span class="o">=</span> <span class="n">localdir</span> <span class="o">+</span> <span class="n">inputname</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">localfile</span> <span class="o">=</span> <span class="n">localdir</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">inputname</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">localfile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">l</span><span class="o">=</span><span class="s1">&#39;#!/bin/bash</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;rm -f &quot;summary.txt&quot;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;rm -f &quot;summary_energy.txt&quot;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;input=&quot;jobs.txt&quot;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;index=0</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;if [[ -f &quot;$input&quot; ]]; then</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;  while IFS= read -r line</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;  do</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;    input=`echo &quot;$line&quot; | awk </span><span class="se">\&#39;</span><span class="s1">{print $1}</span><span class="se">\&#39;</span><span class="s1">`</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;    idir=`echo &quot;$line&quot; | awk </span><span class="se">\&#39;</span><span class="s1">{print $2}</span><span class="se">\&#39;</span><span class="s1">`</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;    output=`echo &quot;$line&quot; | awk </span><span class="se">\&#39;</span><span class="s1">{print $3}</span><span class="se">\&#39;</span><span class="s1">`</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;    if [[ -f &quot;$idir/$output&quot; &amp;&amp; ! -z `egrep &quot;</span><span class="si">{}</span><span class="s1">&quot; $idir/$output` ]]; then</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">is_complete_calc</span><span class="p">)</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;       echo &quot;$idir COMPLETED $output&quot; &gt;&gt;&quot;summary.txt&quot;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="k">if</span> <span class="n">qm_engine</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;gamess&quot;</span><span class="p">:</span>
+                <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;       en=`egrep &quot;</span><span class="si">{}</span><span class="s1">&quot;  $idir/$output | awk </span><span class="se">\&#39;</span><span class="s1">{{print $4}}</span><span class="se">\&#39;</span><span class="s1">`</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extract_energy</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;            en=`egrep &quot;</span><span class="si">{}</span><span class="s1">&quot;  $idir/$output | awk </span><span class="se">\&#39;</span><span class="s1">{{print $5}}</span><span class="se">\&#39;</span><span class="s1">`</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extract_energy</span><span class="p">)</span>
+                <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;            enmp2=`egrep &quot;UMP2&quot; $idir/$output | awk </span><span class="se">\&#39;</span><span class="s1">{{print $6}}</span><span class="se">\&#39;</span><span class="s1">|tr </span><span class="se">\&#39;</span><span class="s1">D</span><span class="se">\&#39;</span><span class="s1"> </span><span class="se">\&#39;</span><span class="s1">E</span><span class="se">\&#39;</span><span class="s1">`</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;            [[ -z &quot;$enmp2&quot; ]] &amp;&amp; en=$en || tmp=$enmp2</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;            [[ ! -z &quot;$tmp&quot; ]] &amp;&amp; en=$(printf &quot;</span><span class="si">%.14f</span><span class="s1">&quot; $tmp)</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;       time_s=</span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extract_time</span><span class="p">)</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;       if [ $index -eq 0 ]; then</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;          e0=$en</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;       fi</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;       index=`echo $index+1| bc -l`</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;       erel=`printf &quot;</span><span class="si">%.3f</span><span class="s1">&quot; $(echo &quot;scale=3; (($en)-($e0))*627.5095&quot;|bc) `</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;       echo &quot;$idir $en $erel $time_s&quot; &gt;&gt;summary_energy.txt</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;     else</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;       echo &quot;$idir RUNNING $output&quot; &gt;&gt;&quot;summary.txt&quot;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;     fi</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;   done &lt; &quot;$input&quot;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;   [[ ! -z `egrep &quot;PENDING|RUNNING&quot; summary.txt` ]]  || echo -n &gt;done</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39;fi</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">l</span><span class="o">+=</span><span class="s1">&#39; #echo -n &gt;done</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+            <span class="n">txt</span> <span class="o">=</span><span class="n">l</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="ServerLocal.generate_bashscript_send_local"><a class="viewcode-back" href="../../source/serverlocal.html#chiripa.ServerLocal.ServerLocal.generate_bashscript_send_local">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_bashscript_send_local</span><span class="p">(</span><span class="n">qm_engine</span><span class="p">,</span> <span class="n">remotedir</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;full_send.sh</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            localdir:</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">qm_engine</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">:</span>
+            <span class="n">extension</span> <span class="o">=</span> <span class="s2">&quot;com&quot;</span>
+        <span class="k">elif</span> <span class="n">qm_engine</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;nwchem&quot;</span><span class="p">:</span>
+            <span class="n">extension</span> <span class="o">=</span> <span class="s2">&quot;nw&quot;</span>
+        <span class="k">elif</span> <span class="n">qm_engine</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;gamess&quot;</span><span class="p">:</span>
+            <span class="n">extension</span> <span class="o">=</span> <span class="s2">&quot;inp&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="s2">&quot;ERROR: QM Engine </span><span class="si">{}</span><span class="s2"> is unknown.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qm_engine</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">if</span> <span class="n">logger</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">()</span>
+
+
+        <span class="n">localfile</span> <span class="o">=</span> <span class="n">remotedir</span><span class="o">+</span><span class="s2">&quot;full_send.sh&quot;</span>
+
+        <span class="n">l</span> <span class="o">=</span> <span class="s1">&#39;#!/bin/bash</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;TOTALJOBS=`ls -ld *_[0-9]*/*_[0-9]* |wc -l`</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;WK=`pwd`&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;for idir in `ls -d *_[0-9]*/*_[0-9]*`; do</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    cd $idir</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    if [[ ! -e ../jobs.txt ]]; then</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;        echo -n &gt;../jobs.txt</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    fi</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    inp=`ls *.</span><span class="si">{}</span><span class="s1">`</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    out=$inp.log</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    b=`basename $idir`</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    echo &quot;$inp $b $out&quot; &gt;&gt;../jobs.txt</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    bash send.sh</span><span class="se">\n\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    cd $WK</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;done</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">l</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">localfile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Generate Pair Conformations &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Internal Coordinates" href="internal_coordinates.html" />
+    <link rel="prev" title="Gaussian Interface" href="gaussian_interface.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="chiripa.html">Chiripa package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="atomic_data.html">Atomic_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chi_universe.html">Chi_Universe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cubicbox.html">Cubic Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dbjobs.html">DBJobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus_interface.html">DFTBPLUS INTERFACE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian_interface.html">Gaussian Interface</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Generate Pair Conformations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview"><strong>Overview</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example"><strong>Example</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-chiripa.generate_pair_conformations"><strong>API</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="internal_coordinates.html">Internal Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metropolisMC.html">Metropolis MC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moleculargraph.html">Molecular Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nwchem_interface.html">NwChem Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="points_inside_pyramid.html">Points Inside Pyramid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="segment.html">Segment Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverlocal.html">Server Local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverslurm.html">Server Slurm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup_logger.html">Setup Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulator.html">Simulator Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">Utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">Python API Reference</a> &raquo;</li>
+        
+          <li><a href="chiripa.html">Chiripa package</a> &raquo;</li>
+        
+      <li>Generate Pair Conformations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/generate_pair_conformations.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="generate-pair-conformations">
+<h1>Generate Pair Conformations<a class="headerlink" href="#generate-pair-conformations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Bla bla</p>
+</div>
+<div class="section" id="example">
+<h2><strong>Example</strong><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Bla bla</p>
+</div>
+<div class="section" id="module-chiripa.generate_pair_conformations">
+<span id="api"></span><h2><strong>API</strong><a class="headerlink" href="#module-chiripa.generate_pair_conformations" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="chiripa.generate_pair_conformations.Z_calc_group">
+<code class="sig-prename descclassname">chiripa.generate_pair_conformations.</code><code class="sig-name descname">Z_calc_group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename_list</span></em>, <em class="sig-param"><span class="n">filecoords_list</span></em>, <em class="sig-param"><span class="n">filetop_list</span></em>, <em class="sig-param"><span class="n">logger</span></em>, <em class="sig-param"><span class="n">Z_samples</span></em>, <em class="sig-param"><span class="n">Z_putTrialsMonomer</span></em>, <em class="sig-param"><span class="n">Z_nonbondedMethod</span></em>, <em class="sig-param"><span class="n">Z_debug</span></em>, <em class="sig-param"><span class="n">workers</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">iseed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/generate_pair_conformations.html#Z_calc_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.generate_pair_conformations.Z_calc_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group data to run in parallel the values of Z for each pair (“11”, “12”, “21”, “22”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filecoords_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – A 2-element lists containing the path to the coordinate files for each segment.</p></li>
+<li><p><strong>filetop_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – A 2-element lists containing the path to the topology files for each segment.</p></li>
+<li><p><strong>logger</strong> (<em>logger</em>) – Log results.</p></li>
+<li><p><strong>Z_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – int Number of samples to average Z.</p></li>
+<li><p><strong>Z_putTrialsMonomer</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Maximum number of trials to put a Segment.</p></li>
+<li><p><strong>Z_nonbondedMethod</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Non-bonded method.</p></li>
+<li><p><strong>Z_Debug</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> saves information in <code class="docutils literal notranslate"><span class="pre">dirZ</span></code>.</p></li>
+<li><p><strong>workers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Number of processes.</p></li>
+<li><p><strong>iseed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Seed for the random number generator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>results (list)</em> – A list containing the results of the Z calculation in parallel</p>
+</dd>
+</dl>
+<p><strong>Example of results</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span> <span class="p">(</span><span class="s1">&#39;../data/n-hexane.pdb&#39;</span><span class="p">,</span> <span class="s1">&#39;../data/n-hexane.pdb&#39;</span><span class="p">,</span> <span class="mf">10.6</span><span class="p">,</span> <span class="mf">0.7999999999999999</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="mi">1</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span> <span class="p">(</span><span class="s1">&#39;../data/n-hexane.pdb&#39;</span><span class="p">,</span> <span class="s1">&#39;../data/nitrobenzene.pdb&#39;</span><span class="p">,</span> <span class="mf">9.2</span><span class="p">,</span> <span class="mf">0.9797958971132713</span><span class="p">,</span> <span class="s1">&#39;12&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="mi">2</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span> <span class="p">(</span><span class="s1">&#39;../data/nitrobenzene.pdb&#39;</span><span class="p">,</span> <span class="s1">&#39;../data/n-hexane.pdb&#39;</span><span class="p">,</span> <span class="mf">9.8</span><span class="p">,</span> <span class="mf">0.7483314773547883</span><span class="p">,</span> <span class="s1">&#39;21&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+<span class="mi">3</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span> <span class="p">(</span><span class="s1">&#39;../data/nitrobenzene.pdb&#39;</span><span class="p">,</span> <span class="s1">&#39;../data/nitrobenzene.pdb&#39;</span><span class="p">,</span> <span class="mf">9.4</span><span class="p">,</span> <span class="mf">1.0198039027185568</span><span class="p">,</span> <span class="s1">&#39;22&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.generate_pair_conformations.Zwork_per_core">
+<code class="sig-prename descclassname">chiripa.generate_pair_conformations.</code><code class="sig-name descname">Zwork_per_core</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_of_parameters</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/generate_pair_conformations.html#Zwork_per_core"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.generate_pair_conformations.Zwork_per_core" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate a single Z using the list of parameters. This is used in parallel calculation of Z.
+This is called by <code class="docutils literal notranslate"><span class="pre">_Z_calc_group</span></code> function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>list_of_parameters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – List of the parameters.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Items in list of parameters (by position):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filenamecoords</span></code>: (list, string, 2-element) A 2-element lists containing the path to the coordinate files for each segment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filenametop</span></code>: (list, string, 2-element) A 2-element lists containing the path to the topology files for each segment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dirZ</span></code>: (string) Directory to store the pairwise structures generated during the process if <code class="docutils literal notranslate"><span class="pre">Z_debug</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Z_samples</span></code> (integer): Number of samples to average Z</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Z_putTrialsMonomer</span></code> (integer): Maximum number of trials to put a Segment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Z_nonbondedMethod</span></code> (string): Non-bonded method</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Z_Debug</span></code> (Boolean). If <code class="docutils literal notranslate"><span class="pre">True</span></code> saves information in <code class="docutils literal notranslate"><span class="pre">dirZ</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seed</span></code> (integer): Seed for the random number generator.</p></li>
+</ul>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p><em>(tuple)</em> –</p>
+<p>tuple containing:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filenamecoords[0]</span></code> (str) Name of the file containing the coordinatates of the Base segment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filenamecoords[1]</span></code> (str) Name of the file containing the coordinatates of the Screen segment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Z_avg</span></code> (float) Averaged Z-value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Z_std</span></code> (float) Standard deviation of the Z-value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list_of_parameters[2]</span></code> (str) Label “11”, “12”, “21” or “22”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Z_hist</span></code> (list) Returns the values of all calculated Z which can be uesed to build an histogram.</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.generate_pair_conformations.atoms_with_minimum_distances">
+<code class="sig-prename descclassname">chiripa.generate_pair_conformations.</code><code class="sig-name descname">atoms_with_minimum_distances</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/generate_pair_conformations.html#atoms_with_minimum_distances"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.generate_pair_conformations.atoms_with_minimum_distances" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Calculate the minimun distance between two set of atoms and return a list
+with the following format [iat_set1, iat_set2, distance]</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>s</strong> (<a class="reference internal" href="simulator.html#chiripa.Simulator.Simulator" title="chiripa.Simulator.Simulator"><em>Simulator</em></a>) – Simulator to perform the calculations</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.generate_pair_conformations.calculate_single_z_number">
+<code class="sig-prename descclassname">chiripa.generate_pair_conformations.</code><code class="sig-name descname">calculate_single_z_number</code><span class="sig-paren">(</span><em class="sig-param">central_mon</em>, <em class="sig-param">neigh_mon</em>, <em class="sig-param">ntry=2000</em>, <em class="sig-param">iseed=None</em>, <em class="sig-param">box=&lt;chiripa.CubicBox.CubicBox object&gt;</em>, <em class="sig-param">nonbondedEvaluation='truhlar'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/generate_pair_conformations.html#calculate_single_z_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.generate_pair_conformations.calculate_single_z_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function calculate the coordination number Z using the algorithm
+proposed by Fan et al. Macromolecules, 25(14), 1992, 3667-3676.</p>
+<p>The Z number is calculated using a nearest neighouurs around a center molecule.
+The algorithm is as follows:</p>
+<blockquote>
+<div><p>1. Generate  the Simulator object with the central monomer and the
+first position for the other monomer
+2. Try to put the next neighbour around the central monomer
+2.1. Get the neighbour position around the central monomer (gen_conf_fan_algorithm)
+2.2. Check overlap
+2.3. if overlap = False. z=z+1 and go to step 2
+2.4. if overlap = True &amp; itry &lt; ntry –&gt; Go to step 2.1
+2.5. if overlap = True &amp; itry &gt; ntry –&gt; Go to step 3
+3. There is no more room for a new position</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>central_mon</strong> – (type: Segment): Central monomer</p></li>
+<li><p><strong>neigh_mon</strong> – (type: Segment): Neighbour monomer</p></li>
+<li><p><strong>ntry</strong> – (type: integer, default: 2000): Number of trials to put the neighbour monomer around the central monomer</p></li>
+<li><p><strong>iseed</strong> – (type: integer, default:None): Seed for the random number generator (RNG). The value         <code class="docutils literal notranslate"><span class="pre">None</span></code> is given to get a seed value from random.seed() which uses the current        time to generate it. Otherwise, use iseed as intial value for the seed RNG.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>z</em> – (type: float) Number of coordination
+sim: (type: Simulator) Simulator containing the coordination configuration</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.generate_pair_conformations.gen_conf_fan_algorithm">
+<code class="sig-prename descclassname">chiripa.generate_pair_conformations.</code><code class="sig-name descname">gen_conf_fan_algorithm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">iseed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">chosen_solution</span><span class="o">=</span><span class="default_value">'MAX'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/generate_pair_conformations.html#gen_conf_fan_algorithm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.generate_pair_conformations.gen_conf_fan_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function accepts a simulator object and then change the coordinates of the last molecule
+in the molecule list in accordance
+with the previous algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<a class="reference internal" href="simulator.html#chiripa.Simulator.Simulator" title="chiripa.Simulator.Simulator"><em>Simulator</em></a>) – Simulator to perform the calculations</p></li>
+<li><p><strong>iseed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Seed for the random generator number</p></li>
+<li><p><strong>chosen_solution</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – default=”MAX”, allowed values=(“MAX”, “MIN”, “RANDOM”). Blanco et al. shown that        the maximum and minimum solution can avoid the overlap between molecules. Fan et al. used the MAX</p></li>
+<li><p><strong>mol_move</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>r_max</em> – (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.generate_pair_conformations.gen_conf_fan_algorithm_c">
+<code class="sig-prename descclassname">chiripa.generate_pair_conformations.</code><code class="sig-name descname">gen_conf_fan_algorithm_c</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">iseed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">chosen_solution</span><span class="o">=</span><span class="default_value">'MAX'</span></em>, <em class="sig-param"><span class="n">nonbondedEvaluation</span><span class="o">=</span><span class="default_value">'truhlar'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/generate_pair_conformations.html#gen_conf_fan_algorithm_c"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.generate_pair_conformations.gen_conf_fan_algorithm_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solving the overlap problem using the algortihms exposed in :</p>
+<p>Molecular silverware. I. General solutions to excluded volume constrained problems
+(Blanco, M. Journal of Computational Chemistry, 1991, 12(2), 237-247</p>
+<p>Application of Molecular Simulation To Derive Phase Diagrams of Binary Mixtures
+(Fan C. et al. Macromolecules, 1992, 25(14), 3667-3676)</p>
+<p>The function accepts a simulator object and then change the coordinates of the last molecule
+in the molecule list in accordance
+with the previous algorithm.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Parameters</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>s</strong> (type: Simulator): Simulator to perform the calculations</p></li>
+<li><p><strong>iseed</strong> (type int, default=None): Seed for the random generator number</p></li>
+<li><p><strong>chosen_solution</strong> (type: string, default=”MAX”, allowed values=(“MAX”, “MIN”, “RANDOM”). Blanco et al. shown that        the maximum and minimum solution can avoid the overlap between molecules. Fan et al. used the MAX</p></li>
+<li><p><strong>mol_move</strong> (type int, default=-1). Number of the molecule to move. The followed order is that        in the mol_list of the simulator object</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Returns</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>r_max</strong></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="chiripa.generate_pair_conformations.point_on_unit_sphere">
+<code class="sig-prename descclassname">chiripa.generate_pair_conformations.</code><code class="sig-name descname">point_on_unit_sphere</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iseed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/generate_pair_conformations.html#point_on_unit_sphere"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.generate_pair_conformations.point_on_unit_sphere" title="Permalink to this definition">¶</a></dt>
+<dd><p>“Understanding Molecular Simulation”, Frenkel-Smith, 2nEdition
+Algorithm 42 (Random Vector on a Unit Sphere), Pag 578</p>
+<p>A random vector on a sphere of diameter 1 (origin 0,0,0)</p>
+<p>:param iseed
+:return: Point on a unit sphere from xcenter</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="internal_coordinates.html" class="btn btn-neutral float-right" title="Internal Coordinates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gaussian_interface.html" class="btn btn-neutral float-left" title="Gaussian Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1731 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chiripa.MolecularGraph &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/api-docs.html">Python API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>chiripa.MolecularGraph</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for chiripa.MolecularGraph</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">pygraphviz</span> <span class="k">as</span> <span class="nn">pgv</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="c1">#import matplotlib.pyplot as plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">chiripa.utils</span> <span class="kn">import</span> <span class="n">total_size</span>
+
+
+<div class="viewcode-block" id="MolecularGraph"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph">[docs]</a><span class="k">class</span> <span class="nc">MolecularGraph</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_graphdict&#39;</span><span class="p">,</span> <span class="s1">&#39;_nmols&#39;</span><span class="p">,</span> <span class="s1">&#39;_natoms&#39;</span><span class="p">,</span> <span class="s1">&#39;_undirected&#39;</span><span class="p">,</span> <span class="s1">&#39;_bonds&#39;</span><span class="p">,</span> <span class="s1">&#39;_cycles&#39;</span><span class="p">,</span> <span class="s1">&#39;_iatch&#39;</span><span class="p">]</span>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.__init__"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nvert</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">listbonds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">undirected</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        `MolecularGraph` implements objects that describe the connectivity of the atoms in a molecule or polymer chain.</span>
+<span class="sd">        Each atom is a vertex and the edges of the graph represents a bond. The vertice numbering starts at zero</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            * ``nvert`` (int, default = -1): Number of nodes (atoms) of the graph.</span>
+<span class="sd">            * ``listbonds``  (list, default = None): A list containing the edges (bonds) of the graph. The None value is used for a graph without edges.</span>
+<span class="sd">            * ``undirected`` (boolean, default = True): False for directed graph or True for undirected graph. (see warning above)</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            * ``None``</span>
+
+<span class="sd">        Attributes:</span>
+<span class="sd">            * ``self._graphdict`` (dict)--&gt; A dictionary with the following format. The key is the number of node\</span>
+<span class="sd">            and the values is a list with the neighbours to the node</span>
+<span class="sd">            * ``self._nmols`` (list of lists)--&gt; The length of the list is the number of unconnected graphs.\</span>
+<span class="sd">            Each sublist contains the number of atoms of the molecule.</span>
+<span class="sd">            * ``self._bonds`` (list of tuples)--&gt; A list of sets. Each set is a bond. Example:\</span>
+<span class="sd">            [{0,1},{1,2},{1,3}]</span>
+<span class="sd">            * ``self._cycles`` (list of lists)--&gt;  A list of list. Each list is a ring (or cycle).\</span>
+<span class="sd">            Example: [[5, 2, 7, 8, 9, 12, 6, 5]]</span>
+<span class="sd">            * ``self._undirected`` (bool)--&gt; True for an undirected graph, otherwise False</span>
+<span class="sd">            * ``self._natoms`` (int)--&gt; Number of atoms aka number of get_vertices (nodes)</span>
+<span class="sd">            * ``self._iatch`` (ndarray[natoms], integer) : self._iatch[iat] = ich Atom **iat** is in the **ich** chain.</span>
+
+<span class="sd">        Examples::</span>
+
+<span class="sd">            An empty graph:</span>
+
+<span class="sd">                &gt;&gt;&gt; MolecularGraph()</span>
+
+<span class="sd">        A graph without get_edges, only nodes (10)</span>
+
+<span class="sd">            &gt;&gt;&gt; MolecularGraph(nvert=10)</span>
+
+<span class="sd">        A graph with nodes and egdes</span>
+
+<span class="sd">            &gt;&gt;&gt; MolecularGraph(nvert=2, listbonds=[[0,1], [1,2]])</span>
+
+<span class="sd">        A system with two molecules, with 13 and 5 atoms, respectively. The molecule #1 contains a cycle</span>
+
+<span class="sd">        .. image:: ../imgs/graph07_nx.png</span>
+
+<span class="sd">        Data::</span>
+
+<span class="sd">            self._graphdict = {0: [1], 1: [0, 2, 3], 2: [1, 5, 7], 3: [1, 4], 4: [3],</span>
+<span class="sd">            5: [2, 6, 10], 6: [5, 12], 7: [2, 8], 8: [7, 9], 9: [8, 12], 10: [5, 11], 11: [10],</span>
+<span class="sd">            12: [9, 6], 13: [14], 14: [13, 15], 15: [14, 17, 16], 16: [15], 17: [15]}</span>
+
+<span class="sd">            self._bonds = [{0, 1}, {1, 2}, {1, 3}, {2, 5}, {3, 4}, {5, 6}, {10, 5}, {2, 7},</span>
+<span class="sd">            {8, 7}, {8, 9}, {10, 11}, {9, 12}, {12, 6},</span>
+<span class="sd">            {13, 14}, {14, 15}, {17, 15}, {16, 15}]</span>
+
+<span class="sd">            self._natoms = 18</span>
+
+<span class="sd">            self._undirected = True</span>
+
+<span class="sd">            self._cycles = [[5, 2, 7, 8, 9, 12, 6, 5]]</span>
+
+<span class="sd">            self._nmols = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],</span>
+<span class="sd">            [13, 14, 15, 16, 17]]</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Difference between undirected (undirected = True) and directed (undirected = False)</span>
+
+<span class="sd">        .. image:: ../imgs/g2dvsg2u.png</span>
+
+<span class="sd">        Data ::</span>
+
+<span class="sd">            TEST 05 Undirected: {0: [1], 1: [0, 2, 3], 2: [1, 5, 7], 3: [1, 4], 4: [3], 5: [2, 6, 10], 6: [5], 7: [2, 8], 8: [7, 9], 9: [8], 10: [5, 11], 11: [10]}</span>
+<span class="sd">            TEST 05   Directed: {0: [1], 1: [2, 3], 2: [5, 7], 3: [4], 4: [], 5: [6], 6: [], 7: [], 8: [7, 9], 9: [], 10: [5, 11], 11: []}</span>
+
+
+<span class="sd">        .. warning:: Directed graphs should not work properly. The most methods work well with undirected graphs</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bonds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cycles</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iatch</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_undirected</span> <span class="o">=</span> <span class="n">undirected</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_natoms</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">nvert</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nvert</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">listbonds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">ibond</span> <span class="ow">in</span> <span class="n">listbonds</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">ibond</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_forest</span><span class="p">()</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot; Returns the state of the attributtes of an instance&quot;&quot;&quot;</span>
+        <span class="n">objstr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">())</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__slots__</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+                <span class="n">objstr</span> <span class="o">+=</span>  <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="n">objstr</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;: NOT SET&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="n">objstr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">get_vertices: &quot;</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">:</span>
+            <span class="n">objstr</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+        <span class="n">objstr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">get_edges: &quot;</span>
+        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_edges</span><span class="p">():</span>
+            <span class="n">objstr</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+        <span class="k">return</span> <span class="n">objstr</span>
+
+    <span class="c1"># ##################################################################################################################</span>
+    <span class="k">def</span> <span class="nf">__sizeof__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method returns the number of bytes of the actual instance.</span>
+
+<span class="sd">        :return: Number of bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">nbytes</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">nbytes</span> <span class="o">+=</span> <span class="n">total_size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">)</span>
+        <span class="n">nbytes</span> <span class="o">+=</span> <span class="n">total_size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span><span class="p">)</span>
+        <span class="n">nbytes</span> <span class="o">+=</span> <span class="n">total_size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_natoms</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">nbytes</span>
+
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.get_vertices"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.get_vertices">[docs]</a>    <span class="k">def</span> <span class="nf">get_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of all vertices in the graph</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        A list of vertices</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        -------</span>
+<span class="sd">            &gt;&gt;&gt; v = self.g11.get_vertices()</span>
+<span class="sd">            ... [0, 1, 2, 3, 4, 5, 6]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.get_edges"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.get_edges">[docs]</a>    <span class="k">def</span> <span class="nf">get_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It returns a list of all edges in the graph</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        A list containing all edges</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        All edges in the system. The order is [min, max]</span>
+
+<span class="sd">        .. image:: ../imgs/graph11_nx.png</span>
+
+<span class="sd">        &gt;&gt;&gt; e = self.g11.get_edges()</span>
+<span class="sd">        ... el = [{0, 1}, {1, 2}, {1, 3}, {2, 5}, {3, 4}, {5, 6}]</span>
+<span class="sd">        ... self.assertEqual(e, el)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_edges</span><span class="p">()</span></div>
+
+    <span class="c1"># # ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.add_vertex"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.add_vertex">[docs]</a>    <span class="k">def</span> <span class="nf">add_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function add a vertex to the molecular graph. The new vertex is not bonded to any other in the graph.</span>
+<span class="sd">        If the vertex exists in the `self._graphdict` attribute nothing has to be done.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vertex : int</span>
+<span class="sd">            Index of the vertex.</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Add a vertex to a graph</span>
+
+<span class="sd">        &gt;&gt;&gt; g.add_vertex(200)</span>
+
+<span class="sd">        .. image:: ../imgs/then_and_now.png</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">vertex</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_natoms</span> <span class="o">+=</span><span class="mi">1</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.add_edge"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.add_edge">[docs]</a>    <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">,</span> <span class="n">setforest</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        It creates a new edge in the graph between two existing nodes.</span>
+<span class="sd">        The type of parameter **edge** can be a set, a tuple or a list of two nodes;</span>
+<span class="sd">        Multiple edges can exist between two vertices</span>
+<span class="sd">        Both vertex must exist in the molecular graph. If any vertex is not in the</span>
+<span class="sd">        molecular graph nothing is done.</span>
+
+<span class="sd">        .. image:: ../imgs/then_and_now_edges.png</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        edge : set, tuple or list</span>
+<span class="sd">              The vertice numbers to create an edge (aka bond)</span>
+
+<span class="sd">        setforest : boolean, default=True</span>
+<span class="sd">            If True the `_set_forest` method is called.</span>
+<span class="sd">            This is useful when multiple edges are added to a graph,</span>
+<span class="sd">            in this case only in the last addition the parameter `setforest` should be true in order to</span>
+<span class="sd">            update the `self._nmols` attribute (see the example)</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Adding an edge between the vertex 12 and 13 in a molecular graph called `a`</span>
+<span class="sd">        &gt;&gt;&gt;  g.add_edge([12,13])</span>
+
+<span class="sd">        Adding multiple edges</span>
+<span class="sd">        &gt;&gt;&gt;  g.add_edge((1,7), setforest=False)</span>
+<span class="sd">        ...  g.add_edge((2, 8), setforest=False)</span>
+<span class="sd">        ...  g.add_edge((9, 8), setforest=True)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">edge</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">vertex1</span><span class="p">,</span> <span class="n">vertex2</span><span class="p">)</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">vertex1</span> <span class="ow">and</span> <span class="n">vertex2</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">:</span>
+
+                <span class="k">if</span> <span class="n">vertex2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">vertex1</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">vertex1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex2</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_bonds</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">vertex1</span><span class="p">,</span> <span class="n">vertex2</span><span class="p">})</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_undirected</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">vertex1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">vertex2</span><span class="p">]:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">vertex2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">setforest</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_forest</span><span class="p">()</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.remove_edge"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.remove_edge">[docs]</a>    <span class="k">def</span> <span class="nf">remove_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It deletes an edge in the graph between two existing nodes.</span>
+<span class="sd">        The parameter **edge** can be a set, a tuple or a list of two nodes;</span>
+<span class="sd">        Between two vertices can be multiple edges.</span>
+
+<span class="sd">        Both vertex must exist in the molecular graph. If any vertex is not in the</span>
+<span class="sd">        molecular graph nothing is done</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">         edge: Set, tuple or list</span>
+<span class="sd">            Vertices to create an edges (aka bond)</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        &gt;&gt;&gt;g4.remove_edge([2,3])</span>
+
+<span class="sd">        .. image:: ../imgs/then_and_now_removeedges.png</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">edge</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">vertex1</span><span class="p">,</span> <span class="n">vertex2</span><span class="p">)</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">vertex1</span> <span class="ow">and</span> <span class="n">vertex2</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_bonds</span><span class="o">.</span><span class="n">remove</span><span class="p">({</span><span class="n">vertex2</span><span class="p">,</span> <span class="n">vertex1</span><span class="p">})</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">vertex2</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">vertex1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_undirected</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">vertex1</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">vertex2</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_forest</span><span class="p">()</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+    <span class="k">def</span> <span class="nf">_generate_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A method generating the edges of the</span>
+<span class="sd">        graph &quot;graph&quot;. Edges are represented as sets</span>
+<span class="sd">        with one (a loop back to the vertex) or two</span>
+<span class="sd">        get_vertices.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        A list of edges</span>
+
+<span class="sd">        Example: [{0, 1}, {1, 2}, {2, 3}, {3, 4}, {4, 5}, {6, 7}, {8, 7}, {10, 7}, {8, 9}, {8, 11}]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">neighbour</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="p">{</span><span class="n">neighbour</span><span class="p">,</span> <span class="n">vertex</span><span class="p">}</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+                    <span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">vertex</span><span class="p">,</span> <span class="n">neighbour</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">edges</span>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.find_path"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.find_path">[docs]</a>    <span class="k">def</span> <span class="nf">find_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_vertex</span><span class="p">,</span> <span class="n">end_vertex</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="p">[]):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find a path from start_vertex to end_vertex in graph</span>
+
+<span class="sd">        A path is returned.</span>
+
+<span class="sd">        ``Parameters``:</span>
+<span class="sd">            * **start_vertex** (type: integer) --&gt;</span>
+<span class="sd">            * **end_vertex** (type: integer) --&gt;</span>
+<span class="sd">            * **path** (type: list) --&gt;   Path between start_vertex and end_vertex</span>
+
+<span class="sd">        ``Return``:</span>
+<span class="sd">            * **A list of edges**.</span>
+
+<span class="sd">        .. warning:: Do not use this function, instead of use find_all_paths</span>
+
+<span class="sd">        .. warning:: This is a recursive function</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="p">[</span><span class="n">start_vertex</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">start_vertex</span> <span class="o">==</span> <span class="n">end_vertex</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">path</span>
+        <span class="k">if</span> <span class="n">start_vertex</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">start_vertex</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">vertex</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+                <span class="n">extended_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_path</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">end_vertex</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">extended_path</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">extended_path</span>
+        <span class="k">return</span> <span class="p">[]</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.find_all_paths"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.find_all_paths">[docs]</a>    <span class="k">def</span> <span class="nf">find_all_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_vertex</span><span class="p">,</span> <span class="n">end_vertex</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="p">[]):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It finds all paths from start_vertex to</span>
+<span class="sd">            end_vertex in graph, This is a recursive function.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start_vertex : integer</span>
+<span class="sd">            Starting vertex of the path</span>
+<span class="sd">        end_vertex :integer</span>
+<span class="sd">            Finish vertex of the path</span>
+<span class="sd">        path : list of lists</span>
+<span class="sd">            Paths between start_vertex and end_vertex</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        Return a list of paths. If there is not path between start_vertex and end_vertex returns an empty list. The</span>
+<span class="sd">        starting and ending node are included in the path</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Find all paths between the node 2 and 12 of the following graph:</span>
+
+<span class="sd">        .. image:: ../imgs/g3_03_nx.png</span>
+
+<span class="sd">        &gt;&gt;&gt; path = self.g3.find_all_paths(2,12)</span>
+<span class="sd">        ... [[2, 5, 6, 12], [2, 7, 8, 9, 12]]</span>
+
+<span class="sd">        .. warning:: This is a recursive function</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="p">[</span><span class="n">start_vertex</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">start_vertex</span> <span class="o">==</span> <span class="n">end_vertex</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">path</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">start_vertex</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">start_vertex</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">vertex</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+                <span class="n">extended_paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_all_paths</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">end_vertex</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">extended_paths</span><span class="p">:</span>
+                    <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">paths</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.find_all_paths_length"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.find_all_paths_length">[docs]</a>    <span class="k">def</span> <span class="nf">find_all_paths_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_vertex</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="p">[]):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It finds all paths of length ``length`` in graph from start_vertex. This is a recursive function</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start_vertex : integer</span>
+<span class="sd">            Starting vertex of the path</span>
+<span class="sd">        length : integer</span>
+<span class="sd">            Length of the paths to find. This is defined as the number of edges between the start_vertex and the end_vertex</span>
+<span class="sd">        path : list</span>
+<span class="sd">            Path between start_vertex and end_vertex</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Return a list of paths of length **``length``**. If length is greater than the max. length in the graph returns</span>
+<span class="sd">        an empty list. If length is zero returns a list only containing  the start_vertex node.</span>
+<span class="sd">        If there is not path between start_vertex and end_vertex returns an empty list. The</span>
+<span class="sd">        starting node is included in the path</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Find all paths between the starting in the node 2 with length 4 of the following graph:</span>
+
+<span class="sd">        .. image:: ../imgs/g3_03_nx.png</span>
+
+<span class="sd">        .. warning:: This is a recursive function</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">l</span> <span class="o">=</span> <span class="n">length</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span>
+
+        <span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="p">[</span><span class="n">start_vertex</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">path</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">start_vertex</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">start_vertex</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">vertex</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+                <span class="n">extended_paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_all_paths_length</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">extended_paths</span><span class="p">:</span>
+                    <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">paths</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.find_isolated_vertices"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.find_isolated_vertices">[docs]</a>    <span class="k">def</span> <span class="nf">find_isolated_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It returns a list of isolated vertices. A isolated vertex is defined as a vertex without edges</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        Return a list of isolated nodes</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        .. image:: ../imgs/graph04.png</span>
+
+<span class="sd">        &gt;&gt;&gt; self.g4.find_isolated_vertices()</span>
+<span class="sd">        ... [12]</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span>
+        <span class="n">isolated</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
+            <span class="c1"># print(isolated, vertex)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
+                <span class="n">isolated</span> <span class="o">+=</span> <span class="p">[</span><span class="n">vertex</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_undirected</span><span class="p">:</span>
+            <span class="n">l_edges</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">get_edges</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">iedge</span> <span class="ow">in</span> <span class="n">l_edges</span><span class="p">:</span>
+
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iedge</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">isolated</span><span class="p">:</span>
+                        <span class="n">isolated</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">isolated</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.is_connected"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.is_connected">[docs]</a>    <span class="k">def</span> <span class="nf">is_connected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertices_encountered</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span> <span class="n">start_vertex</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determines if the graph is connected. This is a recursive function</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vertices_encountered: set</span>
+<span class="sd">            Returns a set of vertices connected</span>
+<span class="sd">        start_vertex integer</span>
+<span class="sd">            Startting point</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        Return a boolean. True if the graph is connected</span>
+
+<span class="sd">        .. warning:: This is a recursive function</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        &gt;&gt;&gt; g1.is_connected()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">gdict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">gdict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">start_vertex</span><span class="p">:</span>
+            <span class="c1"># choose a vertex from graph as a starting point</span>
+            <span class="n">start_vertex</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">vertices_encountered</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">start_vertex</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertices_encountered</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertices</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">gdict</span><span class="p">[</span><span class="n">start_vertex</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">vertex</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vertices_encountered</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_connected</span><span class="p">(</span><span class="n">vertices_encountered</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.dfs_iterative"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.dfs_iterative">[docs]</a>    <span class="k">def</span> <span class="nf">dfs_iterative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Depth-First Search. Iterative version (DFS: https://en.wikipedia.org/wiki/Depth-first_search)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start : integer</span>
+<span class="sd">            Node to start the search</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        Return a list with the DFS path</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        DFS in a graph</span>
+
+<span class="sd">        &gt;&gt;&gt; g.dfs_iterative(start=6)</span>
+
+<span class="sd">        .. image:: ../imgs/graph06_test12.png</span>
+
+<span class="sd">        Data::</span>
+
+<span class="sd">            [6, 7, 8, 9, 11, 10]</span>
+
+<span class="sd">       &quot;&quot;&quot;</span>
+
+        <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vertices</span><span class="p">()</span>
+
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">))]</span>
+
+        <span class="c1"># Create a stack for DFS</span>
+        <span class="n">stack</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">start</span>
+
+        <span class="c1"># Push the current source node.</span>
+        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">):</span>
+            <span class="c1"># Pop a vertex from stack and print it</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+            <span class="c1"># Stack may contain same vertex twice. So</span>
+            <span class="c1"># we need to print the popped item only</span>
+            <span class="c1"># if it is not visited.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">s</span><span class="p">]:</span>
+                <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="c1"># Get all adjacent vertices of the popped vertex s</span>
+            <span class="c1"># If a adjacent has not been visited, then puah it</span>
+            <span class="c1"># to the stack.</span>
+            <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">s</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                    <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">path</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.bfs_iterative"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.bfs_iterative">[docs]</a>    <span class="k">def</span> <span class="nf">bfs_iterative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Breath-First Search. Iterative version (BFS: https://en.wikipedia.org/wiki/Breath-first_search)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start : integer</span>
+<span class="sd">            Node to start the search</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        Return a list with the BFS path</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        BFS in a graph</span>
+
+<span class="sd">        &gt;&gt;&gt; g.bfs_iterative(start=6)</span>
+
+<span class="sd">        .. image:: ../imgs/graph06_test12.png</span>
+
+<span class="sd">        Data::</span>
+
+<span class="sd">            [6, 7, 8, 10,  9, 11]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">visitedlist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
+
+        <span class="n">g_disorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">g_disorder</span><span class="p">:</span>
+             <span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">g_disorder</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+            <span class="n">vertex</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">vertex</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visitedlist</span><span class="p">:</span>
+                <span class="n">visitedlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">inode</span> <span class="ow">in</span> <span class="n">g</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">visitedlist</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">inode</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">continue</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inode</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">visitedlist</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.get_forest"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.get_forest">[docs]</a>    <span class="k">def</span> <span class="nf">get_forest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It returns a list of lists. Each sublist is a molecule (chain) of the system</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        A list of lists: forest =&gt; [[ichain1], [ichain2], ...]</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        .. image:: ../imgs/graph04.png</span>
+
+<span class="sd">        &gt;&gt;&gt; l2 = self.g4.get_forest()</span>
+<span class="sd">        ... lr = [[0, 1, 2, 3, 4, 5], [6, 7, 8, 9, 11, 10], [12]] #= self._nmols</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span></div>
+
+    <span class="c1"># ###############################################################################################################</span>
+    <span class="k">def</span> <span class="nf">_set_forest_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Method to generate connected components in</span>
+<span class="sd">        an undirected graph. This use dfs a recursive function. Use DFS recursive</span>
+
+<span class="sd">        Returns</span>
+
+<span class="sd">        List of list: A list with the connected components as a sublist of get_vertices</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Get get_vertices</span>
+        <span class="n">gdict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">gdict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">nvertices</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span>
+
+        <span class="c1"># Initialize visited list</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cc</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvertices</span><span class="p">):</span>
+            <span class="n">visited</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvertices</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">cc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">visited</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span> <span class="o">=</span> <span class="n">cc</span>
+
+    <span class="c1"># ###############################################################################################################</span>
+    <span class="k">def</span> <span class="nf">_set_forest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to generate connected components in</span>
+<span class="sd">        an undirected graph. Use DFS iterative</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        List of list: A list with the connected components as a sublist of get_vertices</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Get get_vertices</span>
+        <span class="n">gdict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">gdict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">nvertices</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iatch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nvertices</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+        <span class="c1"># Initialize visited list</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cc</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvertices</span><span class="p">):</span>
+            <span class="n">visited</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvertices</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="n">imol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs_iterative</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
+                <span class="n">cc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">imol</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">ivert</span> <span class="ow">in</span> <span class="n">imol</span><span class="p">:</span>
+                    <span class="n">visited</span><span class="p">[</span><span class="n">ivert</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span> <span class="o">=</span> <span class="n">cc</span>
+
+        <span class="n">nmolecules</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">imolecule</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nmolecules</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">iv</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span><span class="p">[</span><span class="n">imolecule</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_iatch</span><span class="p">[</span><span class="n">iv</span><span class="p">]</span> <span class="o">=</span> <span class="n">imolecule</span>
+
+        <span class="k">return</span> <span class="n">cc</span>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.get_graph"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.get_graph">[docs]</a>    <span class="k">def</span> <span class="nf">get_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It returns the attribute self._graphdict</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        It returns the attribute self._graphdict</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        .. image:: ../imgs/graph11_nx.png</span>
+
+<span class="sd">        &gt;&gt;&gt; g11.get_graph()</span>
+<span class="sd">        ... {0: [1], 1: [2, 3], 2: [5], 3: [4], 4: [], 5: [6], 6: []}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span></div>
+
+    <span class="c1">##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.draw_graph_pygraphviz"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.draw_graph_pygraphviz">[docs]</a>    <span class="k">def</span> <span class="nf">draw_graph_pygraphviz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;simple&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an image of the graph using pygraphviz library</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        title : string</span>
+<span class="sd">            The name of the file containing the image</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Draw the graph `g4` in a file named `graphs/graph04.png`</span>
+
+<span class="sd">        &gt;&gt;&gt; g4.draw_graph_pygraphviz(title=&quot;graphs/graph04&quot;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">pgv</span><span class="o">.</span><span class="n">AGraph</span><span class="p">()</span>
+
+        <span class="c1"># Isolated nodes</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vertices</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">A</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">ibond_old</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bonds</span><span class="p">:</span>
+            <span class="n">ibond_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">ibond_old</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">ibond_copy</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">A</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">ibond_old</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bonds</span><span class="p">:</span>
+            <span class="n">ibond_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">ibond_old</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">ibond_copy</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">ibond_copy</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">A</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="n">filenamedot</span><span class="o">=</span><span class="n">title</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
+        <span class="n">filenamepng</span><span class="o">=</span><span class="n">title</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span>
+        <span class="n">A</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">filenamedot</span><span class="p">)</span> <span class="c1"># write to simple.dot</span>
+        <span class="n">A</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">filenamepng</span><span class="p">,</span><span class="n">prog</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">)</span></div>
+
+    <span class="c1">##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.draw_graph_networkx"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.draw_graph_networkx">[docs]</a>    <span class="k">def</span> <span class="nf">draw_graph_networkx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;simple&#39;</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an image of the graph using networkx library</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        title : string</span>
+<span class="sd">            The name of the file containing the image</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Draw the graph `g4` in a file named `graphs/graph04_f.png`</span>
+
+<span class="sd">        &gt;&gt;&gt; g4.draw_graph_networkx(title=&quot;graphs/graph04&quot;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># try:</span>
+        <span class="c1">#     import networkx as nx</span>
+        <span class="c1">#     import matplotlib.pyplot as plt</span>
+        <span class="c1"># except:</span>
+        <span class="c1">#     pass</span>
+
+        <span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+
+        <span class="c1"># Isolated nodes</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vertices</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">A</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">ibond_old</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bonds</span><span class="p">:</span>
+            <span class="n">ibond_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">ibond_old</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">ibond_copy</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">A</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">ibond_old</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bonds</span><span class="p">:</span>
+            <span class="n">ibond_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">ibond_old</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">ibond_copy</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">ibond_copy</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">A</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="n">filenamepng</span><span class="o">=</span><span class="n">title</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span>
+        <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="c1"># nodes</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span><span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span>
+        <span class="c1"># edges</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">pos</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;solid&quot;</span><span class="p">)</span>
+        <span class="c1"># labels</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">pos</span><span class="p">,</span><span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">font_family</span><span class="o">=</span><span class="s1">&#39;sans-serif&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filenamepng</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">A</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+        <span class="c1">#plt.show()</span>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.draw_graph_forest_pygraphviz"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.draw_graph_forest_pygraphviz">[docs]</a>    <span class="k">def</span> <span class="nf">draw_graph_forest_pygraphviz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;simple&#39;</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an image for each tree of the graph using pygraphviz library. It can be useful to create a file for each molecule</span>
+<span class="sd">        in the system.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        title : string</span>
+<span class="sd">            The patter to be used in the name of the file containing the image</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Draw the each subgraph of the graph `g4` in a file with the pattern `graphs/graph04_f???.png`</span>
+
+<span class="sd">        &gt;&gt;&gt; g4.draw_graph_forest_pygraphviz(title=&quot;graphs/graph04_f&quot;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+
+        <span class="k">for</span> <span class="n">imol</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span><span class="p">)):</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="n">pgv</span><span class="o">.</span><span class="n">AGraph</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">iatom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span><span class="p">[</span><span class="n">imol</span><span class="p">]:</span>
+                <span class="n">A</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">iatom</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">jatom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">iatom</span><span class="p">]:</span>
+                    <span class="n">A</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">iatom</span><span class="p">,</span> <span class="n">jatom</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+            <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">imol</span><span class="p">)</span>
+            <span class="n">filenamepng</span> <span class="o">=</span> <span class="n">string</span><span class="o">+</span><span class="s2">&quot;.png&quot;</span>
+            <span class="n">A</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">string</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span><span class="p">)</span>  <span class="c1"># write to simple.dot</span>
+            <span class="n">A</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">filenamepng</span><span class="p">,</span> <span class="n">prog</span><span class="o">=</span><span class="s2">&quot;neato&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.draw_graph_forest_networkx"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.draw_graph_forest_networkx">[docs]</a>    <span class="k">def</span> <span class="nf">draw_graph_forest_networkx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;simple&#39;</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an image for each tree of the graph using networkx library. It can be useful to create a file for each molecule</span>
+<span class="sd">        in the system.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        title : string</span>
+<span class="sd">            The patter to be used in the name of the file containing the image</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Draw the each subgraph of the graph `g4` in a file with the pattern `graphs/graph04_f???.png`</span>
+
+<span class="sd">        &gt;&gt;&gt; g4.draw_graph_forest_networkx(title=&quot;graphs/graph04_f&quot;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">imol</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span><span class="p">)):</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">iatom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span><span class="p">[</span><span class="n">imol</span><span class="p">]:</span>
+                <span class="n">A</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">iatom</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">jatom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">iatom</span><span class="p">]:</span>
+                    <span class="n">A</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">iatom</span><span class="p">,</span> <span class="n">jatom</span><span class="p">)</span>
+
+            <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s%06d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">imol</span><span class="p">)</span>
+            <span class="n">filenamepng</span> <span class="o">=</span> <span class="n">string</span><span class="o">+</span><span class="s2">&quot;.png&quot;</span>
+
+            <span class="c1">#pos=nx.spring_layout(A, weight=None)</span>
+            <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+            <span class="c1"># nodes</span>
+            <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span><span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span>
+            <span class="c1"># edges</span>
+            <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">pos</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;solid&quot;</span><span class="p">)</span>
+            <span class="c1"># labels</span>
+            <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">pos</span><span class="p">,</span><span class="n">font_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">font_family</span><span class="o">=</span><span class="s1">&#39;sans-serif&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filenamepng</span><span class="p">)</span>
+            <span class="k">del</span> <span class="n">A</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.iscyclic"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.iscyclic">[docs]</a>    <span class="k">def</span> <span class="nf">iscyclic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a boolean list. Each item of the list corresponds to a graph (molecule)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ------</span>
+<span class="sd">        A boolean list</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        .. image:: ../imgs/graph07_nx.png</span>
+
+<span class="sd">        &gt;&gt;&gt; iscyclic2 = self.g7.iscyclic()</span>
+<span class="sd">        ... self.assertEqual(iscyclic2, [True, False])</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ismol_cyclic</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Mark all the get_vertices as not visited</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">nverts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_natoms</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nverts</span><span class="p">):</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">ich</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span><span class="p">)):</span>
+            <span class="n">nvert_ich</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nmols</span><span class="p">[</span><span class="n">ich</span><span class="p">]</span>
+            <span class="c1"># Call the recursive helper function to</span>
+            <span class="c1"># detect cycle in different DFS trees</span>
+            <span class="n">cycle_is_found</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nvert_ich</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>  <span class="c1"># Don&#39;t recur for u if it is already visited</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iscyclicutil</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                        <span class="n">cycle_is_found</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="k">if</span> <span class="n">cycle_is_found</span><span class="p">:</span>
+                <span class="n">ismol_cyclic</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ismol_cyclic</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ismol_cyclic</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+    <span class="k">def</span> <span class="nf">_iscyclicutil</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A recursive function that uses visited[] and parent to detect</span>
+<span class="sd">        cycle in subgraph reachable from vertex v.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Mark the current node as visited</span>
+        <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Recur for all the get_vertices adjacent to this vertex</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+            <span class="c1"># If the node is not visited then recurse on it</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iscyclicutil</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+            <span class="c1"># If an adjacent vertex is visited and not parent of current vertex,</span>
+            <span class="c1"># then there is a cycle</span>
+            <span class="k">elif</span> <span class="n">parent</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.get_allbonds"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.get_allbonds">[docs]</a>    <span class="k">def</span> <span class="nf">get_allbonds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It returns all bonds in the graph.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        A list containing all bond angles</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        All bond angles in the system. The order is [min, max]</span>
+
+<span class="sd">        .. image:: ../imgs/graph07_nx.png</span>
+
+<span class="sd">        &gt;&gt;&gt; bl1 = self.g7.get_allbonds()</span>
+<span class="sd">        ... self.assertEqual(bl1,[[0, 1], [1, 2], [1, 3], [2, 5], [2, 7], [3, 4],</span>
+<span class="sd">        ...                  [5, 6], [5, 10], [6, 12], [7, 8], [8, 9], [9, 12],</span>
+<span class="sd">        ...                   [10, 11], [13, 14], [14, 15], [15, 17], [15, 16]])</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">bl</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Append all bonds</span>
+        <span class="k">for</span> <span class="n">ivert</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vertices</span><span class="p">():</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_all_paths_length</span><span class="p">(</span><span class="n">ivert</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">p</span><span class="p">:</span>
+                <span class="n">at1</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">at2</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="c1"># Removing repeat bonds</span>
+                <span class="k">if</span> <span class="n">at1</span> <span class="o">&gt;</span> <span class="n">at2</span><span class="p">:</span> <span class="k">continue</span>
+                <span class="n">bl</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">at1</span><span class="p">,</span> <span class="n">at2</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">bl</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.get_allbends"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.get_allbends">[docs]</a>    <span class="k">def</span> <span class="nf">get_allbends</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It returns all angle bends in the graph.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        A list containing all bend angles</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        All bend angles in the system</span>
+
+<span class="sd">        .. image:: ../imgs/graph07_nx.png</span>
+
+<span class="sd">        &gt;&gt;&gt; al1 = self.g7.get_allbends()</span>
+<span class="sd">        ... self.assertEqual(al1,[[0, 1, 2], [0, 1, 3], [1, 2, 5], [1, 2, 7],</span>
+<span class="sd">        ...                     [1, 3, 4], [2, 1, 3], [2, 5, 6], [2, 5, 10],</span>
+<span class="sd">        ...                     [2, 7, 8], [5, 2, 7], [5, 6, 12], [5, 10, 11],</span>
+<span class="sd">        ...                     [6, 5, 10], [6, 12, 9], [7, 8, 9], [8, 9, 12],</span>
+<span class="sd">        ...                     [13, 14, 15], [14, 15, 17], [14, 15, 16], [16, 15, 17]])</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">al</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Append all bend angles</span>
+        <span class="k">for</span> <span class="n">ivert</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vertices</span><span class="p">():</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_all_paths_length</span><span class="p">(</span><span class="n">ivert</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">p</span><span class="p">:</span>
+                <span class="n">at1</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">at2</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">at3</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="c1"># Removing repeat bonds</span>
+                <span class="k">if</span> <span class="n">at1</span> <span class="o">&gt;</span> <span class="n">at3</span><span class="p">:</span> <span class="k">continue</span>
+                <span class="n">al</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">at1</span><span class="p">,</span> <span class="n">at2</span><span class="p">,</span> <span class="n">at3</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">al</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.get_alldihedrals"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.get_alldihedrals">[docs]</a>    <span class="k">def</span> <span class="nf">get_alldihedrals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It returns all dihedral angles in the graph.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        A list containing all dihedral angles. In this implementation, the greater atom number is the first atom in the list</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        All dihedral angles in the system</span>
+
+<span class="sd">        .. image:: ../imgs/graph07_nx.png</span>
+
+<span class="sd">        &gt;&gt;&gt; d1 = g7.get_alldihedrals()</span>
+<span class="sd">        ... self.assertEqual(d1,[[5, 2, 1, 0], [7, 2, 1, 0], [4, 3, 1, 0], [6, 5, 2, 1],</span>
+<span class="sd">        ...                     [10, 5, 2, 1], [8, 7, 2, 1], [4, 3, 1, 2], [12, 6, 5, 2],</span>
+<span class="sd">        ...                     [11, 10, 5, 2], [9, 8, 7, 2], [5, 2, 1, 3], [7, 2, 1, 3],</span>
+<span class="sd">        ...                     [8, 7, 2, 5], [9, 12, 6, 5], [7, 2, 5, 6], [11, 10, 5, 6],</span>
+<span class="sd">        ...                     [8, 9, 12, 6], [10, 5, 2, 7], [12, 9, 8, 7], [12, 6, 5, 10],</span>
+<span class="sd">        ...                     [17, 15, 14, 13], [16, 15, 14, 13]])</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">dl</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Append all bend angles</span>
+        <span class="k">for</span> <span class="n">ivert</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vertices</span><span class="p">():</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_all_paths_length</span><span class="p">(</span><span class="n">ivert</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">p</span><span class="p">:</span>
+                <span class="n">at1</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">at2</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">at3</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">at4</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+                <span class="c1"># Removing repeat bonds</span>
+                <span class="k">if</span> <span class="p">[</span><span class="n">at1</span><span class="p">,</span> <span class="n">at2</span><span class="p">,</span> <span class="n">at3</span><span class="p">,</span> <span class="n">at4</span><span class="p">]</span> <span class="ow">in</span> <span class="n">dl</span><span class="p">:</span> <span class="k">continue</span>
+                <span class="n">dl</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">at4</span><span class="p">,</span> <span class="n">at3</span><span class="p">,</span> <span class="n">at2</span><span class="p">,</span> <span class="n">at1</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">dl</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.get_allimpropers"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.get_allimpropers">[docs]</a>    <span class="k">def</span> <span class="nf">get_allimpropers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isbackbone_dict</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It returns all improper angles in the graph.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        isbackbone_dict: Dictionary</span>
+<span class="sd">            The key is the number of the atom and the value True (backbone atom) or False (not backbone atom)</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        A list containing all improper angles. In this implementation, the greater atom number is the first atom in the list</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        All improper angles in the system</span>
+
+<span class="sd">        .. image:: ../imgs/graph07_nx.png</span>
+
+<span class="sd">        &gt;&gt;&gt; isbackbone_dict = {}</span>
+<span class="sd">        ... for i in range(0,self.g7._natoms):</span>
+<span class="sd">        ...    isbackbone_dict[i] = True</span>
+<span class="sd">        ... isbackbone_dict[2] = False</span>
+<span class="sd">        ... isbackbone_dict[5] = False</span>
+<span class="sd">        ... isbackbone_dict[6] = False</span>
+<span class="sd">        ... isbackbone_dict[7] = False</span>
+<span class="sd">        ... isbackbone_dict[8] = False</span>
+<span class="sd">        ... isbackbone_dict[9] = False</span>
+<span class="sd">        ... isbackbone_dict[10] = False</span>
+<span class="sd">        ... isbackbone_dict[11] = False</span>
+<span class="sd">        ... isbackbone_dict[12] = False</span>
+<span class="sd">        ... isbackbone_dict[16] = False</span>
+<span class="sd">        ... d1 = self.g7.get_allimpropers(isbackbone_dict=isbackbone_dict)</span>
+<span class="sd">        ... self.assertEqual(d1,[[1, 0, 3, 2], [2, 5, 7, 1], [15, 14, 17, 16]])</span>
+
+<span class="sd">        .. warning:: A criteria about the order of atoms need to be implemented and checked</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">il</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Append all impropers --&gt;</span>
+        <span class="k">for</span> <span class="n">ivert</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vertices</span><span class="p">():</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_all_paths_length</span><span class="p">(</span><span class="n">ivert</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">iat1</span> <span class="o">=</span> <span class="n">ivert</span>
+                <span class="n">tmplist</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">p</span><span class="p">:</span>
+                    <span class="n">tmplist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">tmplist</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                <span class="n">tmpdict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">iat1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+
+                <span class="k">if</span> <span class="n">isbackbone_dict</span><span class="p">[</span><span class="n">iat1</span><span class="p">]:</span>
+                    <span class="k">while</span> <span class="n">tmplist</span><span class="p">:</span>
+                        <span class="n">a</span> <span class="o">=</span> <span class="n">tmplist</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">isbackbone_dict</span><span class="p">[</span><span class="n">a</span><span class="p">]:</span>
+                            <span class="k">if</span> <span class="n">tmpdict</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                                <span class="n">tmpdict</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">tmpdict</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">tmpdict</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">while</span> <span class="n">tmplist</span><span class="p">:</span>
+                        <span class="n">a</span> <span class="o">=</span> <span class="n">tmplist</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">isbackbone_dict</span><span class="p">[</span><span class="n">a</span><span class="p">]:</span>
+                            <span class="k">if</span> <span class="n">tmpdict</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                                <span class="n">tmpdict</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">tmpdict</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">tmpdict</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+
+                <span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="n">tmpdict</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tmpdict</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">tmpdict</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">tmpdict</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">]</span>
+                <span class="k">if</span> <span class="n">l1</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">il</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">iat1</span> <span class="o">=</span> <span class="n">ivert</span>
+                <span class="n">tmplist</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">p</span><span class="p">:</span>
+                    <span class="n">tmplist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">tmplist</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                <span class="n">tmpdict1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">iat1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+                <span class="n">tmpdict2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">iat1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+
+                <span class="k">if</span> <span class="n">isbackbone_dict</span><span class="p">[</span><span class="n">iat1</span><span class="p">]:</span>
+                    <span class="k">while</span> <span class="n">tmplist</span><span class="p">:</span>
+                        <span class="n">a</span> <span class="o">=</span> <span class="n">tmplist</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">isbackbone_dict</span><span class="p">[</span><span class="n">a</span><span class="p">]:</span>
+                             <span class="k">if</span> <span class="n">tmpdict1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                                 <span class="n">tmpdict1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+                             <span class="k">else</span><span class="p">:</span>
+                                 <span class="n">tmpdict1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+                             <span class="k">if</span> <span class="n">tmpdict2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                                 <span class="n">tmpdict2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+                             <span class="k">else</span><span class="p">:</span>
+                                 <span class="n">tmpdict2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">tmpdict1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                                <span class="n">tmpdict1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">tmpdict2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;ERROR. Improper angles cannot be found in complex branches&quot;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+                <span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="n">tmpdict1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tmpdict1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">tmpdict1</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">tmpdict1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">]</span>
+                <span class="k">if</span> <span class="n">l1</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">il</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span>
+                <span class="n">l2</span> <span class="o">=</span> <span class="p">[</span><span class="n">tmpdict2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tmpdict2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">tmpdict2</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">tmpdict2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">]</span>
+                <span class="k">if</span> <span class="n">l2</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">il</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l2</span><span class="p">)</span>
+
+        <span class="c1"># Aromatic --&gt; Planarity must be get in the force field class (i.e see: trappeUA_ff.py)</span>
+
+        <span class="k">return</span> <span class="n">il</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.get_neighbours"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.get_neighbours">[docs]</a>    <span class="k">def</span> <span class="nf">get_neighbours</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inode</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method returns all neighbours</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        inode :: integer</span>
+<span class="sd">            Number of the parent node</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        It returns a list with all neighbors to the inode.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        .. image:: ../imgs/g3_03_nx.png</span>
+
+<span class="sd">        &gt;&gt;&gt; ln = self.g3.get_neighbours(2)</span>
+<span class="sd">        ... self.assertEqual(ln, [1, 5, 7])</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">li</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_all_paths_length</span><span class="p">(</span><span class="n">inode</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">ln</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">li</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">inode</span><span class="p">:</span>
+                <span class="n">ln</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ln</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ln</span></div>
+
+    <span class="c1"># ##################################################################################################################</span>
+<div class="viewcode-block" id="MolecularGraph.perception_rings"><a class="viewcode-back" href="../../source/moleculargraph.html#chiripa.MolecularGraph.MolecularGraph.perception_rings">[docs]</a>    <span class="k">def</span> <span class="nf">perception_rings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        &quot;A New Algorithm for Exhaustive Ring Perception in a Molecular Graph&quot;</span>
+<span class="sd">        Th. Hanser, Ph. Jauffret, and G. Kaufmann</span>
+<span class="sd">        J. Chem. Inf. Comput. Sci. 1996, 36, 1146-1152</span>
+<span class="sd">        https://doi.org/10.1021/ci960322f</span>
+
+<span class="sd">        Abstract:</span>
+<span class="sd">        A new fast and easy to implement algorithm for exhaustive ring perception is presented. This algorithm is</span>
+<span class="sd">        based upon a progressive reduction (collapsing) of the path graph associated with the molecular graph studied.</span>
+<span class="sd">        The path graph is an image of the molecular graph in which each vertex corresponds to a vertex of the</span>
+<span class="sd">        molecular graph and each edge a-b describes an existing path between a and b in the molecular graph.</span>
+<span class="sd">        During the reduction, nodes of the path graph are removed, and the information related to cycle occurrence</span>
+<span class="sd">        is concentrated in the label of new get_edges between the remaining get_vertices. Each loop formed in the path</span>
+<span class="sd">        graph during this collapsing process corresponds to a cycle in the molecular graph. Once the path graph</span>
+<span class="sd">        has totally collapsed, all the rings in the molecular graph have been perceived.</span>
+
+<span class="sd">        Returns</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># ####################################</span>
+        <span class="k">def</span> <span class="nf">convert_perception_rings</span><span class="p">(</span><span class="n">vertex</span><span class="o">=</span> <span class="p">{}):</span>
+
+            <span class="c1"># Copy the nodes from m-graph to p-graph</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">vertex</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Copy the get_edges from m-graph to p-graph</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphdict</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="p">[</span><span class="n">v</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="ow">in</span> <span class="n">vertex</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="ow">in</span> <span class="n">vertex</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                        <span class="n">vertex</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">v</span><span class="p">,</span><span class="n">n</span><span class="p">])</span>
+
+         <span class="c1"># ####################################</span>
+        <span class="k">def</span> <span class="nf">ordernodesbyconnections_perception_rings</span><span class="p">(</span><span class="n">vertex_dict</span><span class="p">):</span>
+
+            <span class="sd">&quot;&quot;&quot; Takes the dictionary of nodes in pgraph and it returns</span>
+<span class="sd">            a list [ (number_node, connectivity)]. The last element of the</span>
+<span class="sd">            list is the node with a small value for connectivity. This can be extracted</span>
+<span class="sd">            with list.pop()</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            pgraph</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">ordered_nodes_by_connection</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">vertex_dict</span><span class="p">:</span>
+                <span class="n">ordered_nodes_by_connection</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertex_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+            <span class="n">nodes_ordered</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ordered_nodes_by_connection</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:</span> <span class="n">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">nodes_ordered</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+
+
+            <span class="c1"># print(ordered_nodes_by_connection)</span>
+            <span class="c1"># print(ordered_nodes_by_connection.items())</span>
+            <span class="c1"># print(sorted(ordered_nodes_by_connection.items()))</span>
+            <span class="c1"># print(nodes_ordered)</span>
+            <span class="c1">#</span>
+            <span class="c1"># sys.exit()</span>
+
+            <span class="k">return</span> <span class="n">nodes_ordered</span>
+
+        <span class="c1"># ####################################</span>
+        <span class="k">def</span> <span class="nf">get_pairs_perception_rings</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">v_edges</span><span class="p">):</span>
+
+            <span class="sd">&quot;&quot;&quot;Get all pairs for the node v</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">pairs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">v_edges</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                    <span class="n">pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">pairs</span>
+
+        <span class="c1"># ####################################</span>
+        <span class="k">def</span> <span class="nf">intersection_perception_rings</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+
+            <span class="n">x</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">l2</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x</span>
+
+
+        <span class="c1"># ####################################</span>
+        <span class="k">def</span> <span class="nf">remove_perception_rings</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">vertex_dict</span><span class="p">):</span>
+
+            <span class="n">cycles</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">get_pairs_perception_rings</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">vertex_dict</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)):</span>
+                <span class="c1"># It is already a cycle</span>
+                <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span> <span class="k">continue</span>
+
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)):</span>
+                    <span class="c1"># pxy x pxz = {x}</span>
+                    <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span> <span class="k">continue</span>
+                    <span class="c1">#if v in intersection_perception_rings(p[i], p[j]):</span>
+                    <span class="n">set_int</span> <span class="o">=</span> <span class="n">intersection_perception_rings</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="p">({</span><span class="n">v</span><span class="p">}</span> <span class="o">==</span> <span class="n">set_int</span><span class="p">)</span> <span class="ow">or</span> \
+                        <span class="p">({</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]}</span> <span class="o">==</span> <span class="p">{</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]}</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">set_int</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">):</span>
+
+                        <span class="c1"># Temporal variable for the nodes to be deleted</span>
+                        <span class="n">tmp_p_i</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                        <span class="n">tmp_p_j</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+                        <span class="c1"># Concatenate the paths --&gt; pyz &lt;-- pxy + pxz</span>
+                        <span class="k">if</span> <span class="n">tmp_p_i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">v</span><span class="p">:</span> <span class="n">tmp_p_i</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">tmp_p_j</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="o">!=</span> <span class="n">v</span><span class="p">:</span> <span class="n">tmp_p_j</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+                        <span class="n">tmp_p_i</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">tmp_p_j</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+                        <span class="c1"># Update the vertex_dict (p-graph)</span>
+                        <span class="n">s_node_in_path</span> <span class="o">=</span> <span class="n">tmp_p_i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">e_node_in_path</span> <span class="o">=</span> <span class="n">tmp_p_i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+                        <span class="c1"># Update the new path for each vertex</span>
+                        <span class="n">vertex_dict</span><span class="p">[</span><span class="n">s_node_in_path</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_p_i</span><span class="p">)</span>
+
+                        <span class="k">if</span> <span class="n">s_node_in_path</span> <span class="o">!=</span> <span class="n">e_node_in_path</span><span class="p">:</span>
+                            <span class="n">vertex_dict</span><span class="p">[</span><span class="n">e_node_in_path</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_p_i</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">pxy</span> <span class="ow">in</span> <span class="n">p</span><span class="p">:</span>
+
+                <span class="n">fe</span> <span class="o">=</span> <span class="n">pxy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">le</span> <span class="o">=</span> <span class="n">pxy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">fe</span> <span class="o">==</span> <span class="n">le</span><span class="p">:</span>
+                    <span class="n">cycles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pxy</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">fe</span> <span class="o">!=</span> <span class="n">v</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">vertex_dict</span><span class="p">[</span><span class="n">fe</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">pxy</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="n">pxy</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+                        <span class="n">vertex_dict</span><span class="p">[</span><span class="n">fe</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">pxy</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">le</span> <span class="o">!=</span> <span class="n">v</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">vertex_dict</span><span class="p">[</span><span class="n">le</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">pxy</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="n">pxy</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+                        <span class="n">vertex_dict</span><span class="p">[</span><span class="n">le</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">pxy</span><span class="p">)</span>
+
+
+            <span class="k">del</span><span class="p">(</span><span class="n">vertex_dict</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">cycles</span>
+
+        <span class="c1">#  ==========  Main perception_rings Loop ================</span>
+        <span class="c1"># Start a new graph: The P-Graph</span>
+        <span class="n">vertex_edges</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">convert_perception_rings</span><span class="p">(</span><span class="n">vertex</span><span class="o">=</span><span class="n">vertex_edges</span><span class="p">)</span>
+
+        <span class="c1"># Sort nodes by connectivity</span>
+        <span class="n">l_nodes</span> <span class="o">=</span> <span class="n">ordernodesbyconnections_perception_rings</span><span class="p">(</span><span class="n">vertex_edges</span><span class="p">)</span>
+        <span class="c1"># Proccess all nodes in order of connectivity</span>
+        <span class="k">while</span> <span class="n">l_nodes</span><span class="p">:</span>
+
+            <span class="n">inode</span> <span class="o">=</span> <span class="n">l_nodes</span><span class="o">.</span><span class="n">pop</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">remove_perception_rings</span><span class="p">(</span><span class="n">inode</span><span class="p">,</span> <span class="n">vertex_edges</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cycles</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+            <span class="k">pass</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+wheel
+setuptools
+numpy
+pygraphviz
+Cython
+sphinx
+sphinx_rtd_theme
+recommonmark
+paramiko
+colorlog
+pandas

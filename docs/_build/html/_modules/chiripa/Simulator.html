@@ -1,0 +1,628 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chiripa.Simulator &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/api-docs.html">Python API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>chiripa.Simulator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for chiripa.Simulator</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">chiripa</span> <span class="k">as</span> <span class="nn">chi</span>
+
+<div class="viewcode-block" id="Simulator"><a class="viewcode-back" href="../../source/simulator.html#chiripa.Simulator.Simulator">[docs]</a><span class="k">class</span> <span class="nc">Simulator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class collects all information neccesary to make the simulation</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="Simulator.__init__"><a class="viewcode-back" href="../../source/simulator.html#chiripa.Simulator.Simulator.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="o">=</span><span class="p">(),</span> <span class="n">box</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor. Build a simulator object.</span>
+
+<span class="sd">        .. warning::</span>
+<span class="sd">            If the constructor is called with only one molecule, the correct way to do it is:\n</span>
+<span class="sd">            **Simulator(mol=(s1,))** instead of **Simulator(mol=(s1))**.\n</span>
+<span class="sd">            In the last case, the parameter is not interpreted as a tuple</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mol (tuple): Molecules in the simulator</span>
+<span class="sd">            box (Box): A box object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">molecules</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># First add the box and after the molecules</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">box</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">box</span>
+
+        <span class="k">if</span> <span class="n">mol</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">imol</span> <span class="ow">in</span> <span class="n">mol</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">imol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">continue</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_molecule</span><span class="p">(</span><span class="n">imol</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_natoms</span><span class="p">()</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot; Returns the state of the attributtes of an instance&quot;&quot;&quot;</span>
+
+        <span class="n">objstr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">())</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+                <span class="n">objstr</span> <span class="o">+=</span>  <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="n">objstr</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;: NOT SET&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">objstr</span>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="Simulator.add_molecule"><a class="viewcode-back" href="../../source/simulator.html#chiripa.Simulator.Simulator.add_molecule">[docs]</a>    <span class="k">def</span> <span class="nf">add_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Add the ``Segment`` m to the ``Simulator``. If the parameter m is not an instance of ``Segment``</span>
+<span class="sd">        nothing is added to the ``Simulator`` and it returns ``False``</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            m (Segment): A ``Segment`` to be added to the ``Simulator``</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ``True`` if the segment is succesfully added, otherwise ``False``</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">chi</span><span class="o">.</span><span class="n">Segment</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__warningerror_class</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">molecules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="Simulator.get_coordinates"><a class="viewcode-back" href="../../source/simulator.html#chiripa.Simulator.Simulator.get_coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">get_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Return the coordinates of the ``Simulator``</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A ndarray[natoms,3]: Coordinates of all atoms in the system.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">index_mol</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">imol</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecules</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">index_mol</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">coords_full</span> <span class="o">=</span> <span class="n">imol</span><span class="o">.</span><span class="n">_coords</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">coords_full</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">coords_full</span><span class="p">,</span> <span class="n">imol</span><span class="o">.</span><span class="n">_coords</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># print(type(coords_full))</span>
+            <span class="n">index_mol</span> <span class="o">+=</span><span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">coords_full</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="Simulator.get_elements"><a class="viewcode-back" href="../../source/simulator.html#chiripa.Simulator.Simulator.get_elements">[docs]</a>    <span class="k">def</span> <span class="nf">get_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the elements of the ``Simulator``</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Elements in the ``Simulator``. d[index]=element</span>
+
+<span class="sd">        .. code-block::</span>
+
+<span class="sd">            {0: &#39;C&#39;, 1: &#39;H&#39;, 2: &#39;H&#39;, 3: &#39;C&#39;, 4: &#39;H&#39;, 5: &#39;H&#39;, 6: &#39;H&#39;, 7: &#39;H&#39;, 8: &#39;C&#39;, 9: &#39;H&#39;, 10: &#39;H&#39;, 11: &#39;H&#39;, 12: &#39;C&#39;, 13: &#39;H&#39;, 14: &#39;H&#39;, 15: &#39;C&#39;, 16: &#39;H&#39;, 17: &#39;H&#39;, 18: &#39;H&#39;}</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">elements</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">imol</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecules</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">imol</span><span class="o">.</span><span class="n">_elements</span><span class="p">:</span>
+                <span class="n">elements</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">elements</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="Simulator.get_ith_molecule"><a class="viewcode-back" href="../../source/simulator.html#chiripa.Simulator.Simulator.get_ith_molecule">[docs]</a>    <span class="k">def</span> <span class="nf">get_ith_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the ith molecule of the simulator</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            index (int) : Index of the molecule</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A segment instance or None if index is not correct</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">molecules</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecules</span><span class="p">[</span><span class="n">index</span><span class="p">]</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="Simulator.get_natoms"><a class="viewcode-back" href="../../source/simulator.html#chiripa.Simulator.Simulator.get_natoms">[docs]</a>    <span class="k">def</span> <span class="nf">get_natoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the number of atoms</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: Number of atoms</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">imol</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecules</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="o">+=</span> <span class="n">imol</span><span class="o">.</span><span class="n">_natoms</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="Simulator.get_nmolecules"><a class="viewcode-back" href="../../source/simulator.html#chiripa.Simulator.Simulator.get_nmolecules">[docs]</a>    <span class="k">def</span> <span class="nf">get_nmolecules</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Get the number of molecules of the simulator</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: Number of segments in the ``Simulator``</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">molecules</span><span class="p">)</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="Simulator.get_unique_elements"><a class="viewcode-back" href="../../source/simulator.html#chiripa.Simulator.Simulator.get_unique_elements">[docs]</a>    <span class="k">def</span> <span class="nf">get_unique_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a list with the chemical elements present in the ``Simulator``</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A set with the name of the elements</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">elements</span> <span class="o">=</span> <span class="p">()</span>
+        <span class="k">for</span> <span class="n">imol</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecules</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">imol</span><span class="o">.</span><span class="n">_elements</span><span class="p">)</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="n">t</span>
+
+        <span class="n">elements</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">elements</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="Simulator.remove_molecule"><a class="viewcode-back" href="../../source/simulator.html#chiripa.Simulator.Simulator.remove_molecule">[docs]</a>    <span class="k">def</span> <span class="nf">remove_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Remove the segment with index m from the Simulator</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            m (int): Index of the segment in the molecule list</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            True if the segment is removed from the simulator, otherwise False</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">molecules</span><span class="p">):</span>
+
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecules</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="Simulator.write_PDB_simulator"><a class="viewcode-back" href="../../source/simulator.html#chiripa.Simulator.Simulator.write_PDB_simulator">[docs]</a>    <span class="k">def</span> <span class="nf">write_PDB_simulator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filenamePDB</span><span class="o">=</span><span class="s1">&#39;simulator.pdb&#39;</span><span class="p">,</span>
+                            <span class="n">title</span><span class="o">=</span><span class="s1">&#39;no title&#39;</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">writeconnect</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">with_vmd_tcl</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">appendpdb</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Write the molecules in the Simulator object to a pdb file.</span>
+
+<span class="sd">        If the PDB file exists, the file will be overwritten.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filenamePDB (str): Name of the pdb (or path)</span>
+<span class="sd">            title (str): Title in the PDB file section</span>
+<span class="sd">            box (Box): The Box information to be written in the PDB file CRYST section</span>
+<span class="sd">            writeconnect(bool): If TRUE the &quot;CONECT&quot; section will be written</span>
+<span class="sd">            with_vmd_tcl (str): Create a default (template) TCL script to load the PDB in VMD</span>
+<span class="sd">            appendpdb (bool): Append the structure to an existing PDB file</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">box</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">box</span>
+
+        <span class="n">header</span><span class="o">=</span><span class="s2">&quot;HEADER    Generated by Chipar</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;TITLE    </span><span class="si">{0:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cryst</span><span class="o">=</span><span class="s2">&quot;CRYST1</span><span class="si">{0:9.3f}{1:9.3f}{2:9.3f}{3:7.2f}{4:7.2f}{5:7.2f}</span><span class="s2"> </span><span class="si">{6:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span>\
+                <span class="nb">format</span><span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="s1">&#39;P 1&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cryst</span><span class="o">=</span><span class="s2">&quot;CRYST1</span><span class="si">{0:9.3f}{1:9.3f}{2:9.3f}{3:7.2f}{4:7.2f}{5:7.2f}</span><span class="s2"> </span><span class="si">{6:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span>\
+                <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">Lx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">Ly</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">Lz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">beta</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">gamma</span><span class="p">,</span> <span class="s1">&#39;P 1&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">appendpdb</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filenamePDB</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+
+            <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">cryst</span><span class="p">)</span>
+
+            <span class="c1"># ATOMS</span>
+            <span class="n">chain_identification</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;E&#39;</span><span class="p">]</span>
+            <span class="n">imol</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">iatom_global</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">iseg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecules</span><span class="p">:</span>
+                <span class="n">imol</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="n">iseg</span><span class="o">.</span><span class="n">get_coords</span><span class="p">()</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">imol</span><span class="o">%</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">chain_identification</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="k">for</span> <span class="n">iatom</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iseg</span><span class="o">.</span><span class="n">_natoms</span><span class="p">):</span>
+                    <span class="n">iatom_global</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">line</span> <span class="o">=</span><span class="s2">&quot;ATOM  </span><span class="si">{0:5d}</span><span class="s2"> </span><span class="si">{1:4s}{2:1s}{3:3s}</span><span class="s2"> </span><span class="si">{4:1s}{5:4d}{6:1s}</span><span class="s2">   </span><span class="si">{7:8.3f}{8:8.3f}{9:8.3f}{10:6.2f}{11:6.2f}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span>\
+                        <span class="nb">format</span><span class="p">(</span><span class="n">iatom_global</span><span class="p">,</span> <span class="n">iseg</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">iatom</span><span class="p">],</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;MOL&#39;</span><span class="p">,</span><span class="n">chain_identification</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">imol</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">c</span><span class="p">[</span><span class="n">iatom</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="n">iatom</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="n">iatom</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+            <span class="c1"># CONNECTIVITY</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">writeconnect</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">iseg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecules</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iseg</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">_graphdict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">line</span><span class="o">=</span><span class="s2">&quot;CONECT</span><span class="si">{0:5d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">offset</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">ielem</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                                <span class="n">line</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{0:5d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ielem</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">offset</span><span class="p">)</span>
+                        <span class="n">line</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                    <span class="n">offset</span> <span class="o">+=</span> <span class="n">iseg</span><span class="o">.</span><span class="n">_natoms</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;END</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+        <span class="c1"># Write TCL for vmd --&gt; vmd -e &lt;name of the tcl&gt;</span>
+        <span class="n">onlyfilenamePDB</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span><span class="o">+</span><span class="n">filenamePDB</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">filenameTCL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filenamePDB</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;.tcl&quot;</span>
+        <span class="k">if</span> <span class="n">with_vmd_tcl</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filenameTCL</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+
+                <span class="n">loadpdb</span> <span class="o">=</span> <span class="s2">&quot;mol new </span><span class="si">{0:s}</span><span class="s2"> autobonds no waitfor all</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">onlyfilenamePDB</span><span class="p">)</span>
+                <span class="n">representation</span> <span class="o">=</span><span class="s2">&quot;pbc box -center origin</span><span class="se">\n</span><span class="s2">&quot;</span> \
+                                 <span class="s2">&quot;mol delrep 0 top</span><span class="se">\n</span><span class="s2">&quot;</span> \
+                                 <span class="s2">&quot;mol selection all</span><span class="se">\n</span><span class="s2">&quot;</span> \
+                                 <span class="s2">&quot;mol representation CPK</span><span class="se">\n</span><span class="s2">&quot;</span> \
+                                 <span class="s2">&quot;mol addrep top</span><span class="se">\n</span><span class="s2">&quot;</span> \
+                                 <span class="s2">&quot;mol showrep top 0 on</span><span class="se">\n</span><span class="s2">&quot;</span> \
+                                 <span class="s2">&quot;mol modcolor 0 top </span><span class="se">\&quot;</span><span class="s2">Chain</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
+
+                <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">loadpdb</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">representation</span><span class="p">)</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="Simulator.write_qminput_simulator"><a class="viewcode-back" href="../../source/simulator.html#chiripa.Simulator.Simulator.write_qminput_simulator">[docs]</a>    <span class="k">def</span> <span class="nf">write_qminput_simulator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maindir</span><span class="p">,</span> <span class="n">qm_keywords</span><span class="p">,</span>
+                                <span class="n">inputname</span><span class="p">,</span> <span class="n">delete_ok</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                <span class="n">nproc</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">mem</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">is_send_script</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">partition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nodelist</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+
+        <span class="sd">&quot;&quot;&quot;Write an input for a QM package.</span>
+<span class="sd">         Each package needs an interface. QM packages implemented:</span>
+
+<span class="sd">            * Gaussian16 (https://gaussian.com/)</span>
+<span class="sd">            * NwChem 6.8 and 6.6 (https://www.nwchem-sw.org/)</span>
+<span class="sd">            * Gamess version (https://www.msg.chem.iastate.edu/gamess/)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            maindir (str): Directory to store the input file</span>
+<span class="sd">            qm_keywords (dict): A dictionary with QM keywords to run the calculation</span>
+<span class="sd">            delete_ok: (bool): If True the maindir is overwritten</span>
+<span class="sd">            inputname (str): Name of the gaussian file</span>
+<span class="sd">            mem (str): Memory used by gaussian</span>
+<span class="sd">            nproc (str): Number of processors</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the input file is succesfully created</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">isok</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># Create the directory to run the calculation</span>
+        <span class="n">fullpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">maindir</span><span class="p">)</span> <span class="c1"># Full path to the directory to run Gaussian16</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">delete_ok</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">isok</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Create the input file for Gaussian package</span>
+        <span class="n">elements_full</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_elements</span><span class="p">()</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_coordinates</span><span class="p">()</span>
+
+        <span class="c1"># =========================== WRITE SCRIPTS ==============================</span>
+        <span class="c1"># Write inputs</span>
+        <span class="k">if</span> <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">:</span>
+            <span class="n">finputname</span> <span class="o">=</span> <span class="n">fullpath</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">inputname</span> <span class="o">+</span> <span class="s2">&quot;.com&quot;</span>
+            <span class="n">chi</span><span class="o">.</span><span class="n">gaussian_write_optm</span><span class="p">(</span><span class="n">finputname</span><span class="p">,</span> <span class="n">elements_full</span><span class="p">,</span>
+                                    <span class="n">coords</span><span class="p">,</span> <span class="n">qm_keywords</span><span class="p">,</span>
+                                    <span class="n">chkfullpath</span><span class="o">=</span><span class="n">inputname</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;.chk&quot;</span><span class="p">,</span>
+                                    <span class="n">nproc</span> <span class="o">=</span> <span class="n">nproc</span><span class="p">,</span>
+                                    <span class="n">mem</span><span class="o">=</span><span class="n">mem</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;nwchem&quot;</span><span class="p">:</span>
+            <span class="n">finputname</span> <span class="o">=</span> <span class="n">fullpath</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">inputname</span> <span class="o">+</span> <span class="s2">&quot;.nw&quot;</span>
+            <span class="n">chi</span><span class="o">.</span><span class="n">nwchem_write_optm</span><span class="p">(</span><span class="n">finputname</span><span class="p">,</span> <span class="n">elements_full</span><span class="p">,</span>
+                                  <span class="n">coords</span><span class="p">,</span> <span class="n">qm_keywords</span><span class="p">,</span>
+                                  <span class="n">nproc</span><span class="o">=</span><span class="n">nproc</span><span class="p">,</span>
+                                  <span class="n">mem</span><span class="o">=</span><span class="n">mem</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;gamess&quot;</span><span class="p">:</span>
+            <span class="n">finputname</span> <span class="o">=</span> <span class="n">fullpath</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">inputname</span> <span class="o">+</span> <span class="s2">&quot;.inp&quot;</span>
+            <span class="n">chi</span><span class="o">.</span><span class="n">gamess_write_optm</span><span class="p">(</span><span class="n">finputname</span><span class="p">,</span> <span class="n">elements_full</span><span class="p">,</span>
+                                  <span class="n">coords</span><span class="p">,</span> <span class="n">qm_keywords</span><span class="p">,</span>
+                                  <span class="n">nproc</span><span class="o">=</span><span class="n">nproc</span><span class="p">,</span>
+                                  <span class="n">mem</span><span class="o">=</span><span class="n">mem</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="s2">&quot;ERROR SIMULATOR WRITE INNPUT QM FOR THE COMBINATION: </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">is_send_script</span><span class="o">.</span> <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">()</span>
+
+        <span class="c1"># =========================== SLURM SCRIPTS ==============================</span>
+        <span class="c1"># Write send bash scripts --&gt; To run the job in the server</span>
+        <span class="k">if</span> <span class="n">is_send_script</span> <span class="o">==</span> <span class="s2">&quot;slurm&quot;</span> <span class="ow">and</span> <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">:</span>
+            <span class="n">chi</span><span class="o">.</span><span class="n">gaussian_basic_slurm_script</span><span class="p">(</span><span class="n">maindir</span><span class="p">,</span>
+                                            <span class="n">inputname</span><span class="p">,</span>
+                                            <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_path&#39;</span><span class="p">],</span>
+                                            <span class="n">partition</span><span class="p">,</span>
+                                            <span class="n">nodelist</span><span class="o">=</span><span class="n">nodelist</span><span class="p">,</span>
+                                            <span class="n">jobname</span><span class="o">=</span><span class="n">inputname</span><span class="p">,</span>
+                                            <span class="n">cpuspertask</span><span class="o">=</span><span class="n">nproc</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="n">mem</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">is_send_script</span> <span class="o">==</span> <span class="s2">&quot;slurm&quot;</span> <span class="ow">and</span> <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">]</span> <span class="o">==</span>  <span class="s2">&quot;nwchem&quot;</span><span class="p">:</span>
+            <span class="n">chi</span><span class="o">.</span><span class="n">nwchem_basic_slurm_script</span><span class="p">(</span><span class="n">maindir</span><span class="p">,</span>
+                                          <span class="n">inputname</span><span class="p">,</span>
+                                          <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_path&#39;</span><span class="p">],</span>
+                                          <span class="n">partition</span><span class="p">,</span>
+                                          <span class="n">nodelist</span><span class="o">=</span><span class="n">nodelist</span><span class="p">,</span>
+                                          <span class="n">jobname</span><span class="o">=</span><span class="n">inputname</span><span class="p">,</span>
+                                          <span class="n">cpuspertask</span><span class="o">=</span><span class="n">nproc</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="n">mem</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">is_send_script</span> <span class="o">==</span> <span class="s2">&quot;slurm&quot;</span> <span class="ow">and</span> <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">]</span> <span class="o">==</span>  <span class="s2">&quot;gamess&quot;</span><span class="p">:</span>
+            <span class="n">chi</span><span class="o">.</span><span class="n">gamess_basic_slurm_script</span><span class="p">(</span><span class="n">maindir</span><span class="p">,</span>
+                                          <span class="n">inputname</span><span class="p">,</span>
+                                          <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_path&#39;</span><span class="p">],</span>
+                                          <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;scratch_dir&#39;</span><span class="p">],</span>
+                                          <span class="n">partition</span><span class="p">,</span>
+                                          <span class="n">nodelist</span><span class="o">=</span><span class="n">nodelist</span><span class="p">,</span>
+                                          <span class="n">jobname</span><span class="o">=</span><span class="n">inputname</span><span class="p">,</span>
+                                          <span class="n">cpuspertask</span><span class="o">=</span><span class="n">nproc</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="n">mem</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">is_send_script</span> <span class="o">==</span> <span class="s2">&quot;localhost&quot;</span> <span class="ow">and</span> <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">:</span>
+            <span class="n">chi</span><span class="o">.</span><span class="n">gaussian_basic_local_script</span><span class="p">(</span><span class="n">maindir</span><span class="p">,</span> <span class="n">inputname</span><span class="p">,</span>
+                                            <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_path&#39;</span><span class="p">],</span>
+                                            <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;scratch_dir&#39;</span><span class="p">],)</span>
+
+        <span class="k">elif</span> <span class="n">is_send_script</span> <span class="o">==</span> <span class="s2">&quot;localhost&quot;</span> <span class="ow">and</span> <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;nwchem&quot;</span><span class="p">:</span>
+            <span class="n">chi</span><span class="o">.</span><span class="n">nwchem_basic_local_script</span><span class="p">(</span><span class="n">maindir</span><span class="p">,</span> <span class="n">inputname</span><span class="p">,</span>
+                                            <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_path&#39;</span><span class="p">],</span>
+                                            <span class="n">cpuspertask</span><span class="o">=</span><span class="n">nproc</span><span class="p">,)</span>
+
+        <span class="k">elif</span> <span class="n">is_send_script</span> <span class="o">==</span> <span class="s2">&quot;localhost&quot;</span> <span class="ow">and</span> <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;gamess&quot;</span><span class="p">:</span>
+            <span class="n">chi</span><span class="o">.</span><span class="n">gamess_basic_local_script</span><span class="p">(</span><span class="n">maindir</span><span class="p">,</span> <span class="n">inputname</span><span class="p">,</span>
+                                          <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_path&#39;</span><span class="p">],</span>
+                                          <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;scratch_dir&#39;</span><span class="p">],</span>
+                                          <span class="n">cpuspertask</span><span class="o">=</span><span class="n">nproc</span><span class="p">,)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="s2">&quot;ERROR SIMULATOR WRITE SEND QM FOR tHE COMBINATION: </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">is_send_script</span><span class="p">,</span> <span class="n">qm_keywords</span><span class="p">[</span><span class="s1">&#39;qm_engine&#39;</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">isok</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+    <span class="k">def</span> <span class="nf">__warningerror_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">txt</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">msg</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">======== WARNING ==========</span><span class="se">\n</span><span class="s2">&quot;</span> \
+                   <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">The paramater passed to Simulator.add_molecule must be an Segment instance.</span><span class="se">\n</span><span class="s2">&quot;</span> \
+                   <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Molecule is not added to the Simulator object!!!.</span><span class="se">\n</span><span class="s2"> &quot;</span> \
+                   <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">======== WARNING ==========</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

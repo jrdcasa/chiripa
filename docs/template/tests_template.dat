@@ -1,0 +1,51 @@
+import unittest
+import datetime
+import chiripa as chi
+
+class AtomicData(unittest.TestCase):
+
+    # ##################################################################################################################
+    @classmethod
+    def setUpClass(cls):
+
+        cls.log = chi.init_logger("Output", fileoutput="out/test_atomicdata.log", append=False, inscreen=False)
+        cls.log.info("\n\tJob Information\n\t---------------")
+        m = "\n\t***************** START Atomic_Data TEST *****************"
+        print(m) if cls.log is None else cls.log.info(m)
+        now = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+        cls.log.info("\t\tStarting: \t {}\n".format(now))
+
+
+
+
+    # ##################################################################################################################
+    def test_01_manualarrays(self):
+
+        """Test if d is almost equal to result
+
+        Returns
+        -------
+        None
+
+        """
+
+        m = "\n\t\t============== START TEST_01 ==============\n"+ \
+            "\t                   Atomic mass \n"
+        print(m) if self.log is None else self.log.info(m)
+
+        m = "\t\t==============  END  TEST_01 =============="
+        print(m) if self.log is None else self.log.info(m)
+
+    # ##################################################################################################################
+    def tearDown(self):
+
+        m = "\n\t*****************  END  Atomic_Data TEST *****************"
+        print(m) if self.log is None else self.log.info(m)
+        now = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+        self.log.info("\t\tFinishing: \t {}\n".format(now))
+
+
+if __name__ == '__main__':
+
+    unittest.main()
+

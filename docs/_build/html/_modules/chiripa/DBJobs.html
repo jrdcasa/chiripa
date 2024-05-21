@@ -1,0 +1,597 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chiripa.DBJobs &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/api-docs.html">Python API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>chiripa.DBJobs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for chiripa.DBJobs</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<div class="viewcode-block" id="DBjobs"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs">[docs]</a><span class="k">class</span> <span class="nc">DBjobs</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Class to represent the database of jobs</span>
+
+<span class="sd">    This class is used to keep track the QM jobs in the server.</span>
+<span class="sd">    The database has a table called ``qm_jobs`` with the following columns:</span>
+
+<span class="sd">        * ``id_job`` (integer): Primary key of the table</span>
+<span class="sd">        * ``name_job`` (string): Name of the input file in the QM package.\</span>
+<span class="sd">        The pattern is **&lt;name_of_the_qm_package&gt;_&lt;identification&gt;_&lt;0,1,2&gt;_&lt;1,2&gt;**\</span>
+<span class="sd">        Example: nwchem_00024_0_1 (for segment 1) or gauss_00374_2_1 (for pair 2,1)</span>
+<span class="sd">        * ``status_job`` (string): Status of the job in the server</span>
+<span class="sd">        * ``pid_slurm`` (integer): Job PID from slurm queue management</span>
+<span class="sd">        * ``energy`` (float): Electronic energy from the output</span>
+<span class="sd">        * ``cog`` (list[3]): Center of geometry</span>
+
+<span class="sd">    **Attributes**</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        _con (Connection): Connecting to the SQLite database (sqlite3.Connection)</span>
+<span class="sd">        _cursor (Cursor): Connection object to execute SQLite queries from Python. (sqlite3.Cursor)</span>
+<span class="sd">        _dbname (str): Path to the database file</span>
+<span class="sd">        _logger (Logger): Logger to send messages</span>
+
+<span class="sd">    **Methods**</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.__init__"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dbname</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Constructor of a DBjobs object</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dbname (str): Path to the database</span>
+<span class="sd">            logger (logger): Logger to send messages</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dbname</span> <span class="o">=</span> <span class="n">dbname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">logger</span>
+
+        <span class="c1"># Create connection to the database</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_con</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbname</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">sqlite3</span><span class="o">.</span><span class="n">Error</span><span class="p">)</span></div>
+
+    <span class="c1"># ************************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.check_for_table"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.check_for_table">[docs]</a>    <span class="k">def</span> <span class="nf">check_for_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tablename</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Checks if table ``tablename`` exists</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tablename (string): Name of the table in the database</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ``True`` if the tablename exists otherwise ``False``</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">is_table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_schema</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tablename</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.close_connection"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.close_connection">[docs]</a>    <span class="k">def</span> <span class="nf">close_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Close the database connection</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.commit_db"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.commit_db">[docs]</a>    <span class="k">def</span> <span class="nf">commit_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Commits the database</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.create_table_qmjobs"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.create_table_qmjobs">[docs]</a>    <span class="k">def</span> <span class="nf">create_table_qmjobs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot; Create table ``qmjobs`` if it does not exist in the database</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ``True`` if the table is created otherwise ``False``</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;CREATE TABLE qm_jobs(id_job integer PRIMARY KEY, </span><span class="se">\</span>
+<span class="s2">                                                          name_job text, </span><span class="se">\</span>
+<span class="s2">                                                          status_job text, </span><span class="se">\</span>
+<span class="s2">                                                          pid_slurm integer, </span><span class="se">\</span>
+<span class="s2">                                                          energy real, </span><span class="se">\</span>
+<span class="s2">                                                          cog text, </span><span class="se">\</span>
+<span class="s2">                                                          cpu_time real)&quot;</span><span class="p">)</span>
+            <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Error</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1">#print(&quot;The table qmjobs in database {} already exists&quot;.format(self._dbname))</span>
+                <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1">#self._logger.info(&quot;\tThe table qmjobs in database {} already exists&quot;.format(self._dbname))</span>
+                <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">pass</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">success</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.insert_data"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.insert_data">[docs]</a>    <span class="k">def</span> <span class="nf">insert_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sql</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Insert data in the datababase using a valid SQL sentence</span>
+
+<span class="sd">        If data does not exist, then insert into the database otherwise not insertion is done</span>
+
+<span class="sd">        Using a sql INSERT sentence</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sql (string): A valid sql sentence</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ``True`` if data are inserted otherwise ``False``</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            sql_insert = &quot;INSERT INTO qm_jobs VALUES ({0:d}, &#39;{1:s}&#39;, &#39;CREATED&#39;, &#39;NULL&#39;, &#39;NULL&#39;, &#39;{2:s}&#39;)&quot;.\</span>
+<span class="sd">            format(self._db_index, inputname, str(cog_list)[1:-1])</span>
+<span class="sd">            db.insert_data(sql_insert):</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Error</span><span class="p">:</span>
+            <span class="c1">#print(sys.exc_info())</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+    <span class="c1"># ************************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.number_of_rows"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.number_of_rows">[docs]</a>    <span class="k">def</span> <span class="nf">number_of_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tablename</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Returns the number of rows of the table</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tablename (str): Name of the table</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (int) Number of rows</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;SELECT COUNT(*) from </span><span class="si">{0:}</span><span class="s1">&#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+
+        <span class="n">nrows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">nrows</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.remove_row"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.remove_row">[docs]</a>    <span class="k">def</span> <span class="nf">remove_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tablename</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">id_job</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Remove a row</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tablename (string): Name of hte table</span>
+<span class="sd">            fieldname (string): Name of the column to delete</span>
+<span class="sd">            id_job (any): Value for the fieldname</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ``True`` if the row is remove otherwise ``False``</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;DELETE FROM </span><span class="si">{0:}</span><span class="s1"> WHERE </span><span class="si">{1:}</span><span class="s1">=?&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="p">(</span><span class="n">id_job</span><span class="p">,))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commit_db</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Error</span><span class="p">:</span>
+            <span class="c1">#print(sys.exc_info())</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.remove_table"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.remove_table">[docs]</a>    <span class="k">def</span> <span class="nf">remove_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tablename</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Remove table in the database</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tablename (str):</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;DROP TABLE </span><span class="si">{0:}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.sort_by_column"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.sort_by_column">[docs]</a>    <span class="k">def</span> <span class="nf">sort_by_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tablename</span><span class="p">,</span> <span class="n">columnname</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Sort columns</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tablename (str): Name of the table</span>
+<span class="sd">            columnname (str): Column name in the table</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (tuple), list with the ordered rows, maximum index</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM </span><span class="si">{}</span><span class="s2"> ORDER BY </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="n">columnname</span><span class="p">)</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="n">rows_list</span> <span class="o">=</span> <span class="n">rows</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">index_max</span> <span class="o">=</span> <span class="n">rows_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">rows_list</span><span class="p">,</span> <span class="n">index_max</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.update_allcolumns_tosamevalue"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.update_allcolumns_tosamevalue">[docs]</a>    <span class="k">def</span> <span class="nf">update_allcolumns_tosamevalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Update all rows of a certain column in the dictionary</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            table (str): Name of the table</span>
+<span class="sd">            d (dict): Dictionary {&lt;name_of_column&gt;: &lt;value for the whole column&gt;}</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the operation is success.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;UPDATE </span><span class="si">{}</span><span class="s2"> SET </span><span class="si">{}</span><span class="s2"> = &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Error</span><span class="p">:</span>
+            <span class="c1">#print(sys.exc_info())</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.update_data_row"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.update_data_row">[docs]</a>    <span class="k">def</span> <span class="nf">update_data_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">field_value</span><span class="p">,</span> <span class="n">where_field</span><span class="p">,</span> <span class="n">where_value</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Update date by row using where</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            table (str):</span>
+<span class="sd">            field (str):</span>
+<span class="sd">            field_value (any):</span>
+<span class="sd">            where_field (str):</span>
+<span class="sd">            where_value (any):</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;UPDATE </span><span class="si">{0:}</span><span class="s2"> SET </span><span class="si">{1:}</span><span class="s2"> = &#39;</span><span class="si">{2:}</span><span class="s2">&#39; WHERE </span><span class="si">{3:}</span><span class="s2"> = &#39;</span><span class="si">{4:}</span><span class="s2">&#39;&quot;&quot;&quot;</span><span class="o">.</span>\
+            <span class="nb">format</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">field_value</span><span class="p">,</span> <span class="n">where_field</span><span class="p">,</span> <span class="n">where_value</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CJJJJ&quot;</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">()</span></div>
+
+    <span class="c1"># ************************************************************************************</span>
+    <span class="k">def</span> <span class="nf">_db_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Show the name of the tables in the database</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT name FROM sqlite_master WHERE type=&#39;table&#39;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="n">list_of_tuples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">list_of_tuples</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">l</span>
+
+    <span class="c1"># ************************************************************************************</span>
+<div class="viewcode-block" id="DBjobs.account_qm"><a class="viewcode-back" href="../../source/dbjobs.html#chiripa.DBJobs.DBjobs.account_qm">[docs]</a>    <span class="k">def</span> <span class="nf">account_qm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tablename</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Account for the total number of QM and the completed QM jobs in the database</span>
+<span class="sd">        The format of the lists are:</span>
+
+<span class="sd">        total_qm_pairs    = [2,2,2,2]</span>
+<span class="sd">        complete_qm_pairs = [1,1,1,1] --&gt; [segment_1_1, segment_1_2, segment_2_1, segment_2_2]</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tablename (str): Name of the table to find</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A tuple of two lists. The total_qm_pairs and complete_qm_pairs</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Pair 1-0, 2-0, 1-1, 1-2, 2-1, 2-2</span>
+        <span class="n">total_qm_pairs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">complete_qm_pairs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">running_qm_pairs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">inserver_qm_pairs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">pending_qm_pairs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">error_qm_pairs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">iseg</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{0:}</span><span class="s1"> WHERE name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1">&#39;</span><span class="o">.</span> \
+                <span class="nb">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iseg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+            <span class="n">rows_total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">total_qm_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows_total</span><span class="p">))</span>
+
+            <span class="n">sql_completed</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{0:}</span><span class="s1"> WHERE name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;COMPLETED&quot; &#39;</span><span class="o">.</span> \
+                <span class="nb">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iseg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_completed</span><span class="p">)</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">complete_qm_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+
+            <span class="n">sql_error</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{0:}</span><span class="s1"> WHERE &#39;</span> \
+                        <span class="s1">&#39;(name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;RUNNING&quot;) OR &#39;</span> \
+                        <span class="s1">&#39;(name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;PENDING&quot;) OR &#39;</span> \
+                        <span class="s1">&#39;(name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;INSERVER&quot;) OR &#39;</span> \
+                        <span class="s1">&#39;(name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;COMPLETED&quot;)  &#39;</span><span class="o">.</span> \
+                <span class="nb">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iseg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_error</span><span class="p">)</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">error_qm_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows_total</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+
+            <span class="n">sql_running</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{0:}</span><span class="s1"> WHERE name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;RUNNING&quot; &#39;</span><span class="o">.</span> \
+                <span class="nb">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iseg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_running</span><span class="p">)</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">running_qm_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+
+            <span class="n">sql_pending</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{0:}</span><span class="s1"> WHERE name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;PENDING&quot; &#39;</span><span class="o">.</span> \
+                <span class="nb">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iseg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_pending</span><span class="p">)</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">pending_qm_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+
+            <span class="n">sql_inserver</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{0:}</span><span class="s1"> WHERE name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;INSERVER&quot; &#39;</span><span class="o">.</span> \
+                <span class="nb">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iseg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_inserver</span><span class="p">)</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">inserver_qm_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">iseg</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">jseg</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+                <span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{0:}</span><span class="s1"> WHERE name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1">&#39;</span><span class="o">.</span>\
+                    <span class="nb">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="n">iseg</span><span class="p">,</span> <span class="n">jseg</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+                <span class="n">rows_total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="n">total_qm_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows_total</span><span class="p">))</span>
+
+                <span class="n">sql_completed</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{0:}</span><span class="s1"> WHERE name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;COMPLETED&quot; &#39;</span><span class="o">.</span>\
+                    <span class="nb">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="n">iseg</span><span class="p">,</span> <span class="n">jseg</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_completed</span><span class="p">)</span>
+                <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="n">complete_qm_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+
+                <span class="n">sql_error</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{0:}</span><span class="s1"> WHERE &#39;</span> \
+                            <span class="s1">&#39;(name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;RUNNING&quot;) OR &#39;</span> \
+                            <span class="s1">&#39;(name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;PENDING&quot;) OR &#39;</span> \
+                            <span class="s1">&#39;(name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;INSERVER&quot;) OR &#39;</span>\
+                            <span class="s1">&#39;(name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;COMPLETED&quot;)  &#39;</span><span class="o">.</span> \
+                            <span class="nb">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="n">iseg</span><span class="p">,</span> <span class="n">jseg</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_error</span><span class="p">)</span>
+                <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="n">error_qm_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows_total</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+
+                <span class="n">sql_running</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{0:}</span><span class="s1"> WHERE name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;RUNNING&quot; &#39;</span><span class="o">.</span> \
+                    <span class="nb">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="n">iseg</span><span class="p">,</span> <span class="n">jseg</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_running</span><span class="p">)</span>
+                <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="n">running_qm_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+
+                <span class="n">sql_pending</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{0:}</span><span class="s1"> WHERE name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;PENDING&quot; &#39;</span><span class="o">.</span> \
+                    <span class="nb">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="n">iseg</span><span class="p">,</span> <span class="n">jseg</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_pending</span><span class="p">)</span>
+                <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="n">pending_qm_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+
+                <span class="n">sql_inserver</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{0:}</span><span class="s1"> WHERE name_job LIKE </span><span class="se">\&quot;</span><span class="s1">%</span><span class="si">{1:1d}</span><span class="s1">_</span><span class="si">{2:1d}</span><span class="se">\&quot;</span><span class="s1"> AND status_job == &quot;INSERVER&quot; &#39;</span><span class="o">.</span> \
+                    <span class="nb">format</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="n">iseg</span><span class="p">,</span> <span class="n">jseg</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_inserver</span><span class="p">)</span>
+                <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="n">inserver_qm_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">total_qm_pairs</span><span class="p">,</span> <span class="n">inserver_qm_pairs</span><span class="p">,</span>  <span class="n">pending_qm_pairs</span><span class="p">,</span> <span class="n">complete_qm_pairs</span><span class="p">,</span> <span class="n">error_qm_pairs</span><span class="p">,</span> <span class="n">running_qm_pairs</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

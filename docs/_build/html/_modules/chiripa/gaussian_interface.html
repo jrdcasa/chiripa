@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chiripa.gaussian_interface &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/api-docs.html">Python API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>chiripa.gaussian_interface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for chiripa.gaussian_interface</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="gaussian_write_optm"><a class="viewcode-back" href="../../source/gaussian_interface.html#chiripa.gaussian_interface.gaussian_write_optm">[docs]</a><span class="k">def</span> <span class="nf">gaussian_write_optm</span><span class="p">(</span><span class="n">ffullname</span><span class="p">,</span> <span class="n">dict_elements</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span>
+                        <span class="n">gaussian_keywords</span><span class="p">,</span> <span class="n">chkfullpath</span><span class="o">=</span><span class="s2">&quot;./gauss.chk&quot;</span><span class="p">,</span>
+                        <span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mem</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Input file generated by CHIRIPA&quot;</span><span class="p">,</span>
+                        <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">multiplicity</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write an input to perform a calculation in Gaussian16.</span>
+
+<span class="sd">    ``Parameters``:</span>
+<span class="sd">        * **path_to_dftb_program**</span>
+<span class="sd">        * **ffullname** (type: str) --&gt; Full path to write the input file (fullpath+&quot;dftb_in.hsd&quot;).\</span>
+<span class="sd">         The input name in dftbplus(v.19.1) must be &quot;dftb_in.hsd&quot;.</span>
+<span class="sd">        * **dict_elements** (type: dictionary) --&gt; A dictionary d[index] = &#39;name_of_atom&#39;.\</span>
+<span class="sd">         Example: {0:&#39;C&#39;, 1:&#39;H&#39;, ...}. It must have natoms elements</span>
+<span class="sd">        * **coords** (type: ndarray[natoms,3]) --&gt; Atom coordinates</span>
+<span class="sd">        * **gaussian_keywords** (type:dict) --&gt; A dict containing keywords for gaussian</span>
+<span class="sd">        * **chkfullpath** (type: str, default=&quot;./gauss.chk&quot;) --&gt; Path to the chk file</span>
+<span class="sd">        * **nproc** (type: integer, default=4) --&gt; Number of processes to be used in Gaussian</span>
+<span class="sd">        * **mem** (type: str, default=&#39;8Gb&#39;) --&gt; Memory to be used by gaussian</span>
+<span class="sd">        * **title** (type: str, default=&#39;Inpu...&#39;) --&gt; Title of the gaussian job</span>
+<span class="sd">        * **charge** (type: integer, default=0) --&gt; Total charge</span>
+<span class="sd">        * **multiplicity** (type: integer, default=1) --&gt; Multiplicity spin</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Check input parameters ******</span>
+    <span class="k">if</span> <span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_elements</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning!!!. The </span><span class="si">{}</span><span class="s2"> cannot be written. &quot;</span>
+              <span class="s2">&quot;Number of atoms in element list and number of coordinates must be the same&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ffullname</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ffullname</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+
+        <span class="c1"># Write chk line</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%c</span><span class="s2">hk=</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">chkfullpath</span><span class="p">))</span>
+
+        <span class="c1"># Write nproc line</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;%nproc=</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nproc</span><span class="p">))</span>
+
+        <span class="c1"># Write mem line</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">mem</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;%mem=</span><span class="si">{}</span><span class="s2">Mb</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mem</span><span class="p">))</span>
+
+        <span class="c1"># Write keyword line</span>
+        <span class="k">if</span> <span class="n">gaussian_keywords</span><span class="p">[</span><span class="s1">&#39;qm_task&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;energy&#39;</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;#p </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gaussian_keywords</span><span class="p">[</span><span class="s1">&#39;basis_set&#39;</span><span class="p">],</span>
+                                        <span class="n">gaussian_keywords</span><span class="p">[</span><span class="s1">&#39;qm_method&#39;</span><span class="p">],</span>
+                                        <span class="n">gaussian_keywords</span><span class="p">[</span><span class="s1">&#39;other_keys&#39;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;#p </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gaussian_keywords</span><span class="p">[</span><span class="s1">&#39;qm_task&#39;</span><span class="p">],</span>
+                                           <span class="n">gaussian_keywords</span><span class="p">[</span><span class="s1">&#39;basis_set&#39;</span><span class="p">],</span>
+                                           <span class="n">gaussian_keywords</span><span class="p">[</span><span class="s1">&#39;qm_method&#39;</span><span class="p">],</span>
+                                           <span class="n">gaussian_keywords</span><span class="p">[</span><span class="s1">&#39;other_keys&#39;</span><span class="p">])</span>
+
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">:</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Write title line</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">-%b-%Y %H:%M:%S&quot;</span><span class="p">)</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">title</span><span class="o">+</span><span class="s2">&quot; (&quot;</span><span class="o">+</span><span class="n">d</span><span class="o">+</span><span class="s2">&quot;)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">title</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">:</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Write title charge and multiplicity</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">charge</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">))</span>
+        <span class="c1"># Coordinates ******</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">icoord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+            <span class="n">iel</span> <span class="o">=</span> <span class="n">dict_elements</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0:s}</span><span class="s2"> </span><span class="si">{1:&gt;12.6f}</span><span class="s2"> </span><span class="si">{2:&gt;12.6f}</span><span class="s2"> </span><span class="si">{3:&gt;12.6f}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span>
+                            <span class="nb">format</span><span class="p">(</span><span class="n">iel</span><span class="p">,</span> <span class="n">icoord</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">icoord</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">icoord</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+<span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="gaussian_basic_slurm_script"><a class="viewcode-back" href="../../source/gaussian_interface.html#chiripa.gaussian_interface.gaussian_basic_slurm_script">[docs]</a><span class="k">def</span> <span class="nf">gaussian_basic_slurm_script</span><span class="p">(</span><span class="n">maindir</span><span class="p">,</span> <span class="n">inputname</span><span class="p">,</span>
+                                <span class="n">g16pathexe</span><span class="p">,</span>
+                                <span class="n">partition</span><span class="p">,</span>
+                                <span class="n">nodelist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">jobname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">fnamescript</span><span class="o">=</span><span class="s2">&quot;send.sh&quot;</span><span class="p">,</span>
+                                <span class="n">numbernodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                <span class="n">cpuspertask</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write a script to run gaussian 16 in server with slurm queue system</span>
+
+<span class="sd">    ``Parameters``::</span>
+<span class="sd">        * **fnamescript** (type str) : Name of the script to run with sbatch</span>
+<span class="sd">        * **g16path** (type str) : Path to the gaussian executable</span>
+<span class="sd">        * **inputname** (type str) : name of the input file to run Gaussian</span>
+<span class="sd">        * **partition** (type str) : name of the partition in the Slurm system</span>
+<span class="sd">        * **nodelist** (type list) : list of nodes to run the job</span>
+<span class="sd">        * **numbernodes** (type integer) : Number of nodes</span>
+<span class="sd">        * **cpuspertask** (type integer) : Number of cores within the nodes</span>
+<span class="sd">        * **memory** (type integer): Memory in Megabytes</span>
+<span class="sd">        * **jobname** (type str) : Name in the job list</span>
+
+<span class="sd">    ``Returns``::</span>
+<span class="sd">        * **None**</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">jobname</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">jobname</span> <span class="o">=</span> <span class="s2">&quot;g16_chiripa&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">maindir</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">fnamescript</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;#!/bin/bash</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">partition</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;#SBATCH --partition=</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">partition</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nodelist</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">nodelist</span><span class="p">:</span>
+                <span class="n">l</span><span class="o">+=</span><span class="n">item</span><span class="o">+</span><span class="s2">&quot;, &quot;</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;#SBATCH --exclude=</span><span class="se">\&quot;</span><span class="si">{}</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;#SBATCH -N </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numbernodes</span><span class="p">))</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;#SBATCH --cpus-per-task=</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cpuspertask</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">memory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;#SBATCH --mem=</span><span class="si">{}</span><span class="s2">M</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">memory</span><span class="p">))</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;#SBATCH --job-name=</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobname</span><span class="p">))</span>
+        <span class="n">g16path</span><span class="p">,</span> <span class="n">exe</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">g16pathexe</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">g16legacy_root=</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g16path</span><span class="p">))</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;GAUSS_SCRDIR=</span><span class="se">\&quot;</span><span class="s2">$TMPDIR</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;source $g16legacy_root/bsd/g16.profile</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;export g16legacy_root GAUSS_SCRDIR</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;$g16legacy_root/</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exe</span><span class="p">,</span> <span class="n">inputname</span><span class="p">))</span></div>
+
+<span class="c1"># ***********************************************************************************</span>
+<span class="k">def</span> <span class="nf">gaussian_basic_local_script</span><span class="p">(</span><span class="n">maindir</span><span class="p">,</span> <span class="n">inputname</span><span class="p">,</span>
+                                <span class="n">qm_path_exe</span><span class="p">,</span> <span class="n">scratchdir</span><span class="p">,</span>
+                                <span class="n">fnamescript</span><span class="o">=</span><span class="s2">&quot;send.sh&quot;</span><span class="p">):</span>
+    <span class="n">g16path</span><span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">qm_path_exe</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">g16exe</span> <span class="o">=</span> <span class="n">qm_path_exe</span>
+
+    <span class="k">if</span> <span class="n">maindir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;/&quot;</span><span class="p">:</span>
+        <span class="n">localfile</span> <span class="o">=</span> <span class="n">maindir</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">fnamescript</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">localfile</span> <span class="o">=</span> <span class="n">maindir</span> <span class="o">+</span> <span class="n">fnamescript</span>
+
+    <span class="n">l</span> <span class="o">=</span> <span class="s1">&#39;#!/bin/bash</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">l</span> <span class="o">+=</span><span class="s1">&#39;echo </span><span class="se">\&quot;</span><span class="s1">Job Started!!! `date`</span><span class="se">\&quot;</span><span class="s1"> &gt;time.dat</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+    <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;# Environment variables Gaussian16</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;export GAUSS_EXEDIR=</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g16path</span><span class="p">,</span> <span class="n">g16path</span><span class="o">+</span><span class="s2">&quot;/bsd&quot;</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;export GAUSS_SCRDIR=</span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scratchdir</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    inp=`ls </span><span class="si">{}</span><span class="s1">.com`</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inputname</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    out=$inp.log</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    </span><span class="si">{}</span><span class="s1"> &lt;$inp &gt;$out</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qm_path_exe</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">+=</span> <span class="s1">&#39;    rm -f *.chk</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">l</span> <span class="o">+=</span><span class="s1">&#39;echo </span><span class="se">\&quot;</span><span class="s1">Job Done!!! `date`</span><span class="se">\&quot;</span><span class="s1"> &gt;&gt;time.dat</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">txt</span><span class="o">=</span><span class="n">l</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">localfile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+
+<span class="c1"># ***********************************************************************************</span>
+<span class="c1"># def gaussian_basic_local_script(remotedir, qm_path_exe, scratchdir):</span>
+<span class="c1">#</span>
+<span class="c1">#     &quot;&quot;&quot;full_send.sh</span>
+<span class="c1">#</span>
+<span class="c1">#     Args:</span>
+<span class="c1">#         localdir:</span>
+<span class="c1">#</span>
+<span class="c1">#     Returns:</span>
+<span class="c1">#</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     g16path= os.path.split(qm_path_exe)[0]</span>
+<span class="c1">#     g16exe = qm_path_exe</span>
+<span class="c1">#     localfile = remotedir+&quot;full_send.sh&quot;</span>
+<span class="c1">#</span>
+<span class="c1">#     l = &#39;#!/bin/bash\n&#39;</span>
+<span class="c1">#     l += &#39;\n&#39;</span>
+<span class="c1">#     l += &#39;# Environment variables Gaussian16\n&#39;</span>
+<span class="c1">#     l += &#39;export GAUSS_EXEDIR={}:{}\n&#39;.format(g16path, g16path+&quot;/bsd&quot;)</span>
+<span class="c1">#     l += &#39;export GAUSS_SCRDIR={}\n&#39;.format(scratchdir)</span>
+<span class="c1">#     l += &#39;\n&#39;</span>
+<span class="c1">#     l += &#39;TOTALJOBS=`ls -ld *_[0-9]*/*_[0-9]* |wc -l`\n&#39;</span>
+<span class="c1">#     l += &#39;\n&#39;</span>
+<span class="c1">#     l += &#39;for idir in `ls -d *_[0-9]*/*_[0-9]*`; do\n&#39;</span>
+<span class="c1">#     l += &#39;\n&#39;</span>
+<span class="c1">#     l += &#39;    cd $idir\n&#39;</span>
+<span class="c1">#     l += &#39;\n&#39;</span>
+<span class="c1">#     l += &#39;    if [[ ! -e ../jobs.txt ]]; then\n&#39;</span>
+<span class="c1">#     l += &#39;        echo -n &gt;../jobs.txt\n&#39;</span>
+<span class="c1">#     l += &#39;    fi\n&#39;</span>
+<span class="c1">#     l += &#39;    inp=`ls *.com`\n&#39;</span>
+<span class="c1">#     l += &#39;    out=$inp.log\n&#39;</span>
+<span class="c1">#     l += &#39;\n&#39;</span>
+<span class="c1">#     l += &#39;    b=`basename $idir`\n&#39;</span>
+<span class="c1">#     l += &#39;    echo &quot;$inp $b $out&quot; &gt;&gt;../jobs.txt\n&#39;</span>
+<span class="c1">#     l += &#39;`   {} &lt;$inp &gt;$out\n`\n&#39;.format(g16exe)</span>
+<span class="c1">#     l += &#39;    rm *.chk\n&#39;</span>
+<span class="c1">#     l += &#39;    cd ../..\n&#39;</span>
+<span class="c1">#     l += &#39;done\n&#39;</span>
+<span class="c1">#     txt=l</span>
+<span class="c1">#</span>
+<span class="c1">#     with open(localfile, &#39;w&#39;) as f:</span>
+<span class="c1">#         f.writelines(txt)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

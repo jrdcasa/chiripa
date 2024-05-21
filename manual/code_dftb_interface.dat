@@ -1,0 +1,232 @@
+    # ***********************************************************************************
+    def write_DFTBopt_simulator(self, maindir, delete_ok=False):
+
+        """Write a DFTB input to perform optimization on the ``Simulator``
+
+        .. warning::
+
+            It is not finnished. It needs more implementation
+
+        Args:
+            maindir:
+            delete_ok:
+
+        Returns:
+
+        """
+
+        isok = True
+        # Create the directory to run the calculation
+        fullpath = os.path.abspath(maindir) # Full path to the directory to run DFTB+
+        try:
+            os.makedirs(fullpath)
+        except FileExistsError:
+            if delete_ok:
+                shutil.rmtree(fullpath)
+                os.makedirs(fullpath)
+            else:
+                isok = False
+
+        # Create the input file for DFTB+ optimization
+        path_to_dftb_program = "/opt/DFTB_20.01/dftbplus-20.2.1/"
+        finputname = fullpath + "/dftb_in.hsd"
+        natoms = self.get_natoms()
+        elements_full = self.get_elements()
+        coords = self.get_coordinates()
+
+        chi.dftbplus_write_optm(path_to_dftb_program, finputname, natoms,
+                                elements_full, coords, dispersion='dftd3')
+
+
+        print("HE SALIDO POR AQUI")
+        exit()
+
+        return isok
+
+        
+##### ====== dftbplus_interface.py
+        
+        
+def dftbplus_write_optm(path_to_dftb_program, ffullname, natoms, dict_elements, coords,
+                        scc=True, optmethod="LBFGS", startatommove=1, endatommove=-1,
+                        set_of_parameters="mio-1-1", dispersion=None):
+
+    """
+    Write an input to optimize the structure using DFTB plus (v.19.1)
+
+    ``Parameters``:
+        * **path_to_dftb_program**
+        * **ffullname** (type: str) --> Full path to write the input file (fullpath+"dftb_in.hsd").\
+         The input name in dftbplus(v.19.1) must be "dftb_in.hsd".
+        * **natoms** (type: int) --> Number of atoms
+        * **dict_elements** (type: dictionary) --> A dictionary d[index] = 'name_of_atom'.\
+         Example: {0:'C', 1:'H', ...}. It must have natoms elements
+        * **coords** (type: ndarray[natoms,3]) --> Atom coordinates
+        * **scc** (type boolean, default=True) --> SCC-DFTB method YES or NO
+        * **optmethod** (type: str, default='LBFGS') --> Optimization method must be defined in the\
+        geometry_optimizations list. If is None, then a single point calculation is performed.
+        * **startatommove** (type: int) --> Starting atom to move
+        * **endatommove** (type: int) --> Ending atom to move
+        * **set_of_parameters** (type: str) --> Name of the set of parameter to be used in the DFTB method \
+        The directory must exist in the $DFTB_PROGRAM/parameters/ path.
+
+        Atoms to move::
+
+            Starting and ending indices of the atoms to move, using the format start:end.
+            This notation selects all atoms between start and end indices to be moved.
+            A note of caution about the notation, DFTB allows one to specify the atoms as a list
+            ({1 2 3 4 5 6}) but this option is not implemented here.
+            Thus, normally, in the case of CHIRIPA
+            library there are two fragments which are in order. For example:
+            Fragment 1: {1 2 3 4 5 6}
+            Fragment 2: {7 8 9 10}
+            To keep fixed the first fragment, we use startatomove=7 and endatommove=-1 or 10.
+
+    """
+
+    # Check input parameters ******
+    if len(dict_elements) != natoms:
+        print("Warning!!!. The {} cannot be written. "
+              "Number of atoms and number of elements are not equals".format(ffullname))
+        return False
+
+    if coords.shape[0] != natoms:
+        print("Warning!!!. The {} cannot be written. "
+              "Number of atoms and number of coordinates are not equals".format(ffullname))
+        return False
+
+    # Check options ******
+    geometry_optimizations = ["steepest_descent", "conjugate_gradient", "gdiis", "lbfgs"]
+    if not optmethod.lower() in geometry_optimizations:
+        print("Warning!!!. The {} cannot be written.\n"
+              "Method {} is not in the geometry "
+              "optimization options {}".format(ffullname, optmethod, geometry_optimizations))
+        return False
+
+    set_of_parameters_available = ["mio-1-1", "3ob-3-1"]
+    if not optmethod.lower() in geometry_optimizations:
+        print("Warning!!!. The {} cannot be written.\n "
+              "Set of parameters {} is not in the geometry "
+              "optimization options {}".format(ffullname, set_of_parameters, set_of_parameters_available))
+        return False
+
+    # Get unique type of atoms
+    unique_atoms = sorted(set(list(dict_elements.values())))
+    max_angular_momentum ={ 'H':'s','O':'p', 'N':'p', 'C':'p' }
+    if len(unique_atoms) != len(max_angular_momentum):
+        print("Warning!!!. The {} cannot be written.\n"
+              "unique_atoms        : {}\n"
+              "max_angular_momentum: {}\n"
+              "Some atom(s) is(are) not in both lists\n".format(ffullname, unique_atoms, max_angular_momentum))
+        return False
+
+    # Check dispersion method
+    dispersion_list = ["dftd3"]
+    print(dispersion, not dispersion is None, dispersion in dispersion_list)
+    if not dispersion is None and not dispersion in dispersion_list:
+        print("Warning!!!. The {} cannot be written.\n"
+              "Required dispersion method is not implemented({})\n"
+              "Allowed dispersion methods implemented are: {}\n".format(ffullname, dispersion, dispersion_list))
+        return False
+
+    with open(ffullname,'w') as fin:
+
+        # keyword  ******
+        fin.writelines("Geometry = GenFormat {\n")
+
+        # Number of atoms ******
+        fin.writelines("{0:5d} C\n".format(natoms))
+
+        # Type of atoms ******
+        dicttypes = {}
+        index = 1
+        for ielem in unique_atoms:
+            fin.writelines("{0:2s} ".format(ielem))
+            dicttypes[ielem] = index
+            index += 1
+        fin.writelines("\n")
+
+        # Coordinates ******
+        index = 1
+        for icoord in coords:
+            iel = dict_elements[index-1]
+            fin.writelines("{0:4d} {1:4d} {2:>12.6f} {3:>12.6f} {4:>12.6f} \n".
+                            format(index, dicttypes[iel], icoord[0], icoord[1], icoord[2]))
+            index += 1
+        fin.writelines("}\n\n")
+
+        # Driver ******
+        if not optmethod is None:
+            fin.writelines("Driver = {0:s} {1:s}\n".format(optmethod,'{'))
+
+            default_opts_driver = "\tMovedAtoms = {}:{} \n" \
+                                  "\tMaxForceComponent = 1E-4 \n" \
+                                  "\tMaxSteps = 1000 \n" \
+                                  "\tOutputPrefix = \"geom.out\" \n" \
+                                  "\tAppendGeometries = Yes \n".format(startatommove, endatommove)
+            fin.writelines(default_opts_driver)
+            fin.writelines("}\n\n")
+
+        # Hamiltonian ******
+        fin.writelines("Hamiltonian = DFTB {0:s}\n".format('{'))
+        if scc:
+            fin.writelines("  Scc = Yes\n")
+        else:
+            fin.writelines("  Scc = No\n")
+
+        #SlaterKoster Files
+        fin.writelines("  SlaterKosterFiles {0:s}\n".format('{'))
+        n_unique_atoms = len(unique_atoms)
+        print(unique_atoms)
+        for i in range(n_unique_atoms):
+            for j in range(i,n_unique_atoms):
+                if i == j:
+                    str = "{}-{}".format(unique_atoms[i],unique_atoms[j])
+                    fin.writelines("    {0:s} = \"{1:s}/parameters/{2:s}/{3:s}.skf\"\n".
+                                   format(str, path_to_dftb_program, set_of_parameters, str))
+                else:
+                    str1 = "{}-{}".format(unique_atoms[i],unique_atoms[j])
+                    str2 = "{}-{}".format(unique_atoms[j],unique_atoms[i])
+                    fin.writelines("    {0:s} = \"{1:s}/parameters/{2:s}/{3:s}.skf\"\n".
+                                   format(str1, path_to_dftb_program, set_of_parameters, str1))
+                    fin.writelines("    {0:s} = \"{1:s}/parameters/{2:s}/{3:s}.skf\"\n".
+                                   format(str2, path_to_dftb_program, set_of_parameters, str2))
+        fin.writelines("  }\n\n")
+
+        #MaxAngularMomentum
+        fin.writelines("  MaxAngularMomentum {0:s}\n".format('{'))
+        for itype in unique_atoms:
+            fin.writelines("    {0:s} = \"{1:s}\"\n".format(itype, max_angular_momentum[itype]))
+        fin.writelines("  }\n\n")
+
+        # Dispersion
+        if not dispersion is None:
+            fin.writelines("  Dispersion = {0:s} {1:s}\n".format(dispersion, '{'))
+            fin.writelines("    Damping = {0:s} {1:s}\n".format('ZeroDamping', '{'))
+            fin.writelines("      sr6 = 0.7461\n")
+            fin.writelines("      alpha6 = 14.0\n")
+            fin.writelines("    }\n")
+            fin.writelines("    s6 = 1.0\n")
+            fin.writelines("    s8 = 3.209\n")
+            fin.writelines("  }\n")
+
+        fin.writelines("}\n\n")
+
+        #Options
+        fin.writelines("Options {0:s}\n".format('{}'))
+        fin.writelines("\n")
+
+        #Analysis
+        fin.writelines("Analysis {0:s}\n".format('{'))
+        fin.writelines("  CalculateForces = Yes\n")
+        fin.writelines("}\n\n")
+
+        #ParserOptions
+        fin.writelines("ParserOptions {0:s}\n".format('{'))
+        fin.writelines("  ParserVersion = 7\n")
+        fin.writelines("}\n\n")
+
+    return True
+
+
+

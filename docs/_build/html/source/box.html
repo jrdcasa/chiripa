@@ -1,0 +1,337 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Box &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chi_Universe" href="chi_universe.html" />
+    <link rel="prev" title="Atomic_data" href="atomic_data.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="chiripa.html">Chiripa package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="atomic_data.html">Atomic_data</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Box</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview"><strong>Overview</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example"><strong>Example</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attributes"><strong>Attributes</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api"><strong>API</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chi_universe.html">Chi_Universe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cubicbox.html">Cubic Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dbjobs.html">DBJobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus_interface.html">DFTBPLUS INTERFACE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian_interface.html">Gaussian Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate_pair_conformations.html">Generate Pair Conformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internal_coordinates.html">Internal Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metropolisMC.html">Metropolis MC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moleculargraph.html">Molecular Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nwchem_interface.html">NwChem Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="points_inside_pyramid.html">Points Inside Pyramid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="segment.html">Segment Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverlocal.html">Server Local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverslurm.html">Server Slurm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup_logger.html">Setup Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulator.html">Simulator Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">Utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">Python API Reference</a> &raquo;</li>
+        
+          <li><a href="chiripa.html">Chiripa package</a> &raquo;</li>
+        
+      <li>Box</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/box.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="box">
+<h1>Box<a class="headerlink" href="#box" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Define a simulation BOX. This is an Abstract Class.</p>
+</div>
+<div class="section" id="example">
+<h2><strong>Example</strong><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>This class cannot be directly instantiated because is an abstract class</p>
+</div>
+<div class="section" id="attributes">
+<h2><strong>Attributes</strong><a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">units</span></code> (string) : Allowed values are “real” or “reduced”. Indicate the class of units to be used in the box definition.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nameunits</span></code> (string) : For “real” –&gt; “angstroms”. For “reduced” –&gt; “sigma”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code>  (ndarray(3)): Unit cell vector a</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">b</span></code>  (ndarray(3)): Unit cell vector b</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>  (ndarray(3)): Unit cell vector c</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code> (float): Axial angle <span class="math notranslate nohighlight">\(\alpha\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beta</span></code>  (float): Axial angle <span class="math notranslate nohighlight">\(\beta\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gamma</span></code> (float): Axial angle <span class="math notranslate nohighlight">\(\gamma\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xlo</span></code> (float): X coordinates of the box origin in distance units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ylo</span></code> (float): Y coordinates of the box origin in distance units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zlo</span></code> (float): Z coordinates of the box origin in distance units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xhi</span></code> (float): X coordinates of the box origin in distance units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yhi</span></code> (float): Y coordinates of the box origin in distance units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zhi</span></code> (float): Z coordinates of the box origin in distance units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Lx</span></code> (float):  Length of the edge in the X-direction <span class="math notranslate nohighlight">\(x_{hi}-x_{lo}\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ly</span></code> (float):  Length of the edge in the Y-direction <span class="math notranslate nohighlight">\(y_{hi}-y_{lo}\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Lz</span></code> (float):  Length of the edge in the Z-direction <span class="math notranslate nohighlight">\(z_{hi}-z_{lo}\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">typebox</span></code> (string): “cubic”.Only “cubic” is implemented in this version</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isorthonormal</span></code> (boolean): Simulation box orthogonal or not</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cellGrid</span></code> (ndarray[3]): Number of subcells for each dimension, [nx, ny, nz]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nearby</span></code> (ndarray[27,nx*ny*nz]): Neigbours array</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="api">
+<h2><strong>API</strong><a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="chiripa.Box.Box">
+<em class="property">class </em><code class="sig-prename descclassname">chiripa.Box.</code><code class="sig-name descname">Box</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xhigh</span></em>, <em class="sig-param"><span class="n">yhigh</span></em>, <em class="sig-param"><span class="n">zhigh</span></em>, <em class="sig-param"><span class="n">xlow</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">ylow</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">zlow</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">90.0</span></em>, <em class="sig-param"><span class="n">beta</span><span class="o">=</span><span class="default_value">90.0</span></em>, <em class="sig-param"><span class="n">gamma</span><span class="o">=</span><span class="default_value">90.0</span></em>, <em class="sig-param"><span class="n">units</span><span class="o">=</span><span class="default_value">'real'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Box.html#Box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Box.Box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This class cannot be directly instantiated  because is an abstract class.</p>
+</div>
+<dl class="py method">
+<dt id="chiripa.Box.Box.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xhigh</span></em>, <em class="sig-param"><span class="n">yhigh</span></em>, <em class="sig-param"><span class="n">zhigh</span></em>, <em class="sig-param"><span class="n">xlow</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">ylow</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">zlow</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">90.0</span></em>, <em class="sig-param"><span class="n">beta</span><span class="o">=</span><span class="default_value">90.0</span></em>, <em class="sig-param"><span class="n">gamma</span><span class="o">=</span><span class="default_value">90.0</span></em>, <em class="sig-param"><span class="n">units</span><span class="o">=</span><span class="default_value">'real'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Box.html#Box.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Box.Box.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>The simulation box has its origin at (xlo, ylo, zlo) point. The lattice vectors are defined as:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Orthogonal cubic box <strong>a</strong> =(xhi-xlo,0,0), <strong>b</strong> =(0, yhi-ylo,0), <strong>c</strong> =(0, 0,zhi-zlo), a=b=c, alpha=beta=gamma=90</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xhigh</strong> – (type float) –&gt; X Coordinate of the maximum vertex in distance units</p></li>
+<li><p><strong>yhigh</strong> – (type float) –&gt; Y Coordinate of the maximum vertex in distance units</p></li>
+<li><p><strong>zhigh</strong> – (type float) –&gt; Z Coordinate of the maximum vertex in distance units</p></li>
+<li><p><strong>xlow</strong> – (type float, default=0.0) –&gt; X coordinates of the box origin in distance units</p></li>
+<li><p><strong>ylow</strong> – (type float, default=0.0) –&gt; Y coordinates of the box origin in distance units</p></li>
+<li><p><strong>zlow</strong> – (type float, default=0.0) –&gt; Z coordinates of the box origin in distance units</p></li>
+<li><p><strong>alpha</strong> – (type float, default=90.0) –&gt; Angles between b and c in degrees</p></li>
+<li><p><strong>beta</strong> – (type float, default=90.0) –&gt; Angles between a and c in degrees</p></li>
+<li><p><strong>gamma</strong> – (type float, default=90.0) –&gt; Angles between a and b in degrees</p></li>
+<li><p><strong>units</strong> – (type string, default=”real”) –&gt; <strong>real</strong> or <strong>reduced</strong> units</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Box.Box.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Box.html#Box.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Box.Box.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the state of the attributtes of an instance. Override __str__ method</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Box.Box.center_of_box">
+<em class="property">abstract </em><code class="sig-name descname">center_of_box</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Box.html#Box.center_of_box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Box.Box.center_of_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Virtual method to be implemented in all derived classes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Box.Box.linked_cell">
+<em class="property">abstract </em><code class="sig-name descname">linked_cell</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">max_rc</span></em>, <em class="sig-param"><span class="n">skin</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Box.html#Box.linked_cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Box.Box.linked_cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Virtual method to be implemented in all derived classes</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="chi_universe.html" class="btn btn-neutral float-right" title="Chi_Universe" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="atomic_data.html" class="btn btn-neutral float-left" title="Atomic_data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

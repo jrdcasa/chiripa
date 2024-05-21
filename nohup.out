@@ -1,0 +1,75 @@
+
+  ============================================================================  
+
+    ja-netfilter 2022.2.0
+
+    A javaagent framework :)
+
+    https://github.com/ja-netfilter/ja-netfilter
+
+  ============================================================================  
+
+2024-05-20 18:59:59,139 [   1211]   WARN - #c.i.n.i.NotificationGroupManagerImpl - Notification group CodeWithMe is already registered (group=com.intellij.notification.NotificationGroup@ba4bc9e). Plugin descriptor: PluginDescriptor(name=Code With Me, id=com.jetbrains.codeWithMe, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/plugins/cwm-plugin, version=222.3345.131, package=null, isBundled=true)
+2024-05-20 18:59:59,264 [   1336]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "Visual Studio" not found PluginDescriptor(name=IDEA CORE, id=com.intellij, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/lib, version=222.3345.131, package=com.intellij.feedback, isBundled=true)
+2024-05-20 18:59:59,272 [   1344]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "Eclipse" not found PluginDescriptor(name=IDEA CORE, id=com.intellij, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/lib, version=222.3345.131, package=com.intellij.feedback, isBundled=true)
+2024-05-20 18:59:59,272 [   1344]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "NetBeans 6.5" not found PluginDescriptor(name=IDEA CORE, id=com.intellij, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/lib, version=222.3345.131, package=com.intellij.feedback, isBundled=true)
+2024-05-20 18:59:59,273 [   1345]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "Visual Studio" not found PluginDescriptor(name=IDEA CORE, id=com.intellij, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/lib, version=222.3345.131, package=com.intellij.feedback, isBundled=true)
+2024-05-20 18:59:59,317 [   1389]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "Visual Studio" not found PluginDescriptor(name=HTML Tools, id=HtmlTools, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/plugins/htmltools, version=222.3345.131, package=null, isBundled=true)
+2024-05-20 18:59:59,325 [   1397]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "Eclipse" not found PluginDescriptor(name=GitHub, id=org.jetbrains.plugins.github, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/plugins/github, version=222.3345.131, package=org.jetbrains.plugins.github, isBundled=true)
+2024-05-20 18:59:59,330 [   1402]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "Eclipse" not found PluginDescriptor(name=Space, id=com.jetbrains.space, moduleName=intellij.space.vcs, descriptorPath=intellij.space.vcs.xml, path=/opt/JetBrains/pycharm-2022.2/plugins/space, version=222.3345.131, package=com.intellij.space.vcs, isBundled=true)
+2024-05-20 18:59:59,332 [   1404]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "Eclipse" not found PluginDescriptor(name=JavaScript and TypeScript, id=JavaScript, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/plugins/JavaScriptLanguage, version=222.3345.131, package=null, isBundled=true)
+2024-05-20 18:59:59,333 [   1405]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "Visual Studio" not found PluginDescriptor(name=JavaScript and TypeScript, id=JavaScript, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/plugins/JavaScriptLanguage, version=222.3345.131, package=null, isBundled=true)
+2024-05-20 18:59:59,347 [   1419]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "Eclipse" not found PluginDescriptor(name=Python, id=Pythonid, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/plugins/python, version=222.3345.131, package=null, isBundled=true)
+2024-05-20 18:59:59,348 [   1420]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "NetBeans 6.5" not found PluginDescriptor(name=Python, id=Pythonid, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/plugins/python, version=222.3345.131, package=null, isBundled=true)
+2024-05-20 18:59:59,351 [   1423]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "Visual Studio" not found PluginDescriptor(name=Python, id=Pythonid, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/plugins/python, version=222.3345.131, package=null, isBundled=true)
+2024-05-20 18:59:59,352 [   1424]   WARN - #c.i.o.a.i.ActionManagerImpl - keymap "Eclipse" not found PluginDescriptor(name=Python, id=Pythonid, descriptorPath=plugin.xml, path=/opt/JetBrains/pycharm-2022.2/plugins/python, version=222.3345.131, package=null, isBundled=true)
+Info  | RdCoroutineScope          | 30:JobScheduler FJ pool 8/11 | RdCoroutineHost overridden 
+2024-05-20 19:00:00,453 [   2525]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,484 [   2556]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,493 [   2565]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,500 [   2572]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,507 [   2579]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,514 [   2586]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,532 [   2604]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,536 [   2608]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,542 [   2614]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,547 [   2619]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,554 [   2626]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,560 [   2632]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,564 [   2636]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,566 [   2638]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,570 [   2642]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,573 [   2645]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,575 [   2647]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,577 [   2649]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,579 [   2651]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,582 [   2654]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,584 [   2656]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,586 [   2658]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,590 [   2662]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,597 [   2669]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,600 [   2672]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,602 [   2674]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,607 [   2679]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,610 [   2682]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,613 [   2685]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,615 [   2687]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,619 [   2691]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,622 [   2694]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:00,640 [   2712]   WARN - #c.i.e.t.TargetBasedSdks - SDK target configuration data is absent
+2024-05-20 19:00:04,004 [   6076]   WARN - #g.r.GitUntrackedFilesHolder - Ignoring ignored file under another root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology/replicate_polymer_lib/__pycache__/prepare_lammps.cpython-310.pyc; root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology; mapped root: null
+2024-05-20 19:00:04,005 [   6077]   WARN - #g.r.GitUntrackedFilesHolder - Ignoring ignored file under another root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology/tests/__pycache__/05-test_create_polyply.cpython-310.pyc; root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology; mapped root: null
+2024-05-20 19:00:04,005 [   6077]   WARN - #g.r.GitUntrackedFilesHolder - Ignoring ignored file under another root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology/replicate_polymer_lib/__pycache__/__init__.cpython-38.pyc; root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology; mapped root: null
+2024-05-20 19:00:04,005 [   6077]   WARN - #g.r.GitUntrackedFilesHolder - Ignoring ignored file under another root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology/create_lammps_from_gromacs_lib/__pycache__/parse_arguments.cpython-38.pyc; root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology; mapped root: null
+2024-05-20 19:00:04,005 [   6077]   WARN - #g.r.GitUntrackedFilesHolder - Ignoring ignored file under another root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology/replicate_polymer_lib/__pycache__/insert_nonopenmm_ff_terms.cpython-310.pyc; root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology; mapped root: null
+2024-05-20 19:00:04,006 [   6078]   WARN - #g.r.GitUntrackedFilesHolder - Ignoring ignored file under another root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology/replicate_polymer_lib/forcefield/__pycache__/periodic_table.cpython-310.pyc; root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology; mapped root: null
+2024-05-20 19:00:04,006 [   6078]   WARN - #g.r.GitUntrackedFilesHolder - Ignoring ignored file under another root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology/replicate_polymer_lib/forcefield/__pycache__/atomtyper.cpython-38.pyc; root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology; mapped root: null
+2024-05-20 19:00:04,006 [   6078]   WARN - #g.r.GitUntrackedFilesHolder - Ignoring ignored file under another root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology/create_library_monomer_lib/__pycache__/get_all_ff_for_residues.cpython-310.pyc; root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology; mapped root: null
+2024-05-20 19:00:04,007 [   6079]   WARN - #g.r.GitUntrackedFilesHolder - Ignoring ignored file under another root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology/replicate_polymer_lib/forcefield/__pycache__/element.cpython-38.pyc; root: /home/jramos/Programacion/GITHUB_REPO_DIR/replicate_polymer_topology; mapped root: null
+2024-05-20 19:00:04,010 [   6082]   WARN - #g.r.GitUntrackedFilesHolder - Ignoring ignored files under another root: 67 files total
+2024-05-20 19:00:05,431 [   7503]   WARN - #c.i.o.a.i.ActionUpdater - 640 ms to grab EDT for BackAction#update@MainToolbar (com.intellij.ide.actions.BackAction)
+2024-05-20 19:00:05,431 [   7503]   WARN - #c.i.o.a.i.ActionUpdater - 627 ms to grab EDT for CWMTelephonyGroup#update@NavBarToolbar (com.jetbrains.rd.platform.codeWithMe.telephony.CWMTelephonyGroup)
+2024-05-20 19:00:05,661 [   7733]   WARN - #c.i.o.a.i.ActionUpdater - 227 ms to grab EDT for ForwardAction#update@MainToolbar (com.intellij.ide.actions.ForwardAction)
+2024-05-20 19:00:05,661 [   7733]   WARN - #c.i.o.a.i.ActionUpdater - 228 ms to grab EDT for CodeWithMeUsersAction#update@NavBarToolbar (com.jetbrains.rd.platform.codeWithMe.toolbar.CodeWithMeUsersAction)
+2024-05-20 19:00:08,939 [  11011]   WARN - #c.i.u.x.Binding - no accessors for org.jetbrains.idea.perforce.perforce.ConnectionId
+2024-05-20 19:10:40,458 [ 642530]   WARN - #c.j.p.r.PythonCommandLineState - Python interpreter flavor is not taken into account while initializing Python path

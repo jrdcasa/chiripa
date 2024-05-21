@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Server Slurm &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Setup Logger" href="setup_logger.html" />
+    <link rel="prev" title="Server Local" href="serverlocal.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="chiripa.html">Chiripa package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="atomic_data.html">Atomic_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chi_universe.html">Chi_Universe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cubicbox.html">Cubic Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dbjobs.html">DBJobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus_interface.html">DFTBPLUS INTERFACE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian_interface.html">Gaussian Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate_pair_conformations.html">Generate Pair Conformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internal_coordinates.html">Internal Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metropolisMC.html">Metropolis MC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moleculargraph.html">Molecular Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nwchem_interface.html">NwChem Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="points_inside_pyramid.html">Points Inside Pyramid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="segment.html">Segment Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverlocal.html">Server Local</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Server Slurm</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview"><strong>Overview</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example"><strong>Example</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api"><strong>API</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="setup_logger.html">Setup Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulator.html">Simulator Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">Utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">Python API Reference</a> &raquo;</li>
+        
+          <li><a href="chiripa.html">Chiripa package</a> &raquo;</li>
+        
+      <li>Server Slurm</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/serverslurm.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="server-slurm">
+<h1>Server Slurm<a class="headerlink" href="#server-slurm" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="example">
+<h2><strong>Example</strong><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="api">
+<h2><strong>API</strong><a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="chiripa.ServerSlurm.ServerSlurm">
+<em class="property">class </em><code class="sig-prename descclassname">chiripa.ServerSlurm.</code><code class="sig-name descname">ServerSlurm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nameserver</span></em>, <em class="sig-param"><span class="n">databasename</span></em>, <em class="sig-param"><span class="n">username</span></em>, <em class="sig-param"><span class="n">key_file</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="server.html#chiripa.Server.Server" title="chiripa.Server.Server"><code class="xref py py-class docutils literal notranslate"><span class="pre">chiripa.Server.Server</span></code></a></p>
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nameserver</span></em>, <em class="sig-param"><span class="n">databasename</span></em>, <em class="sig-param"><span class="n">username</span></em>, <em class="sig-param"><span class="n">key_file</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize a server based on SLURM queue system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nameserver</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the server (i.e: trueno.csic.es or localhost).</p></li>
+<li><p><strong>databasename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – File name of the database.</p></li>
+<li><p><strong>username</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – User name in the server</p></li>
+<li><p><strong>key_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the key file generated with “ssh-keygen -t rsa”.             The passphrase must be empty and the public part must be installed in the server             (see <a class="reference external" href="https://serverpilot.io/docs/how-to-use-ssh-public-key-authentication/">web</a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.close_connection">
+<code class="sig-name descname">close_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.close_connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.close_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if we are actively connected to the server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>bool</em> – True if we have a connection open to the server, and False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.connection">
+<code class="sig-name descname">connection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open a connection to this server. Throws an exception if the connection fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A <a class="reference external" href="http://docs.paramiko.org/en/stable/api/client.html">SSHClient</a> connection to this server</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.execute_cmd">
+<code class="sig-name descname">execute_cmd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">command</span></em>, <em class="sig-param"><span class="n">other_input</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.execute_cmd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.execute_cmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a command (from the WORKING directory) on this server.
+Throws an exception if the connection fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>command</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name to execute.</p></li>
+<li><p><strong>other_input</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Text to be written to stdin.</p></li>
+<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – A timeout to use when executing the command, in seconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>tuple</em> – All text written to stdout by the command
+as a tuple of strings (stdout, stderr).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A typical use of the method.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">remote_dir</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zipfilename</span> <span class="o">=</span> <span class="s2">&quot;file.zip&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cmd2</span> <span class="o">=</span> <span class="s1">&#39;cd </span><span class="si">%s</span><span class="s1">; rm -f </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">remote_dir</span><span class="p">,</span><span class="n">zipfilename</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_cmd</span><span class="p">(</span><span class="n">cmd2</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.extract_energy_calculations">
+<code class="sig-name descname">extract_energy_calculations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">local_dir</span></em>, <em class="sig-param"><span class="n">remote_dir</span></em>, <em class="sig-param"><span class="n">qm_engine</span><span class="o">=</span><span class="default_value">'gaussian'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.extract_energy_calculations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.extract_energy_calculations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a bash file to get all energy values from logs in the remote_dir.
+Files summary_energy.txt and summary.txt are created</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>local_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to store files in the local server.</p></li>
+<li><p><strong>remote_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to store files in the remote server.</p></li>
+<li><p><strong>qm_engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the QM package (example: gaussian)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.ftp_connect">
+<code class="sig-name descname">ftp_connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.ftp_connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.ftp_connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open an sftp connection to this server. Throws an exception if the connection fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An <a class="reference external" href="http://docs.paramiko.org/en/stable/api/client.html">sftp</a> connection to this server.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.generate_bashscript_check_jobs">
+<em class="property">static </em><code class="sig-name descname">generate_bashscript_check_jobs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">qm_engine</span></em>, <em class="sig-param"><span class="n">localdir</span></em>, <em class="sig-param"><span class="n">inputname</span><span class="o">=</span><span class="default_value">'check_remote_dir.sh'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.generate_bashscript_check_jobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.generate_bashscript_check_jobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a bash script to check the jobs in the server. The name of the bash script is given by
+the parameter inputname</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qm_engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the QM package (gaussian or nwchem)</p></li>
+<li><p><strong>localdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to store files in the local server.</p></li>
+<li><p><strong>inputname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the script</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.generate_bashscript_send_slurm">
+<em class="property">static </em><code class="sig-name descname">generate_bashscript_send_slurm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">localdir</span></em>, <em class="sig-param"><span class="n">remotedir</span></em>, <em class="sig-param"><span class="n">maxjobsslurm</span><span class="o">=</span><span class="default_value">50</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.generate_bashscript_send_slurm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.generate_bashscript_send_slurm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the script <strong>full_send.sh</strong> in order to send jobs to a SLURM server</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>localdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to store files in the local server.</p></li>
+<li><p><strong>remotedir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to store files in the remote server.</p></li>
+<li><p><strong>maxjobsslurm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Number of maximum jobs send to slurm</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.get_energy_from_calculations">
+<code class="sig-name descname">get_energy_from_calculations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">qm_engine</span></em>, <em class="sig-param"><span class="n">local_dir</span></em>, <em class="sig-param"><span class="n">remote_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.get_energy_from_calculations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.get_energy_from_calculations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the summary files and update the database with the energies from log files.
+This is for SLURM servers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qm_engine</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the QM package (example: gaussian)</p></li>
+<li><p><strong>local_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to store files in the local server.</p></li>
+<li><p><strong>remote_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to store files in the remote server.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.get_logs">
+<code class="sig-name descname">get_logs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">local_dir</span></em>, <em class="sig-param"><span class="n">remote_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.get_logs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.get_logs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Virtual method to be implemented in all derived classes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.is_connected">
+<code class="sig-name descname">is_connected</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.is_connected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.is_connected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if we are actively connected to the server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>bool</em> – True if we have a connection open to the server, and False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.qm_allsend">
+<code class="sig-name descname">qm_allsend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">localdir</span></em>, <em class="sig-param"><span class="n">remotedir</span></em>, <em class="sig-param"><span class="n">partitionmaster</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nodelistmaster</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">jobname</span><span class="o">=</span><span class="default_value">'all_sh'</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxjobsslurm</span><span class="o">=</span><span class="default_value">60</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.qm_allsend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.qm_allsend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send all qm jobs to a SLURM server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>localdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to store files in the local server.</p></li>
+<li><p><strong>remotedir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to store files in the remote server.</p></li>
+<li><p><strong>partitionmaster</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the node to send the script to send the gaussian jobs to the queue server</p></li>
+<li><p><strong>nodelistmaster</strong> (<em>List</em>) – List containing the name of the nodes where gaussian calculation will run</p></li>
+<li><p><strong>jobname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the job in SLURM syst</p></li>
+<li><p><strong>logger</strong> (<em>Logger</em>) – A <a class="reference internal" href="setup_logger.html"><span class="doc">Logger</span></a> instance</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.ServerSlurm.ServerSlurm.qm_calc">
+<code class="sig-name descname">qm_calc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iseg</span></em>, <em class="sig-param"><span class="n">jseg</span></em>, <em class="sig-param"><span class="n">ncalc</span></em>, <em class="sig-param"><span class="n">qm_keywords</span></em>, <em class="sig-param"><span class="n">simulator</span></em>, <em class="sig-param"><span class="n">localdir</span></em>, <em class="sig-param"><span class="n">remotedir</span></em>, <em class="sig-param"><span class="n">cpuspertask</span></em>, <em class="sig-param"><span class="n">nodelist</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nodelistmaster</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">partition</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">partitionmaster</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">localzipfile</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">memory</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/ServerSlurm.html#ServerSlurm.qm_calc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.ServerSlurm.ServerSlurm.qm_calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare the data to send Gaussian16 jobs</p>
+<ol class="arabic">
+<li><p>Create the database if it does not exist</p></li>
+<li><p>Define the number of nodes used in the calculations</p></li>
+<li><p>For each pair segement replica:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>Write qm inputs</p></li>
+<li><p>Write script to send the calculation</p></li>
+<li><p>Insert data in the database</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Zip all qm jobs.</p></li>
+<li><p>FTP qm inputs.</p></li>
+<li><p>Unzip the remote file.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>iseg</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Index for the Base Segment</p></li>
+<li><p><strong>jseg</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Index for the Screening Segment</p></li>
+<li><p><strong>ncalc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Number of replicas for the pair iseg-jseg.</p></li>
+<li><p><strong>qm_keywords</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – TODO</p></li>
+<li><p><strong>simulator</strong> (<a class="reference internal" href="simulator.html#chiripa.Simulator.Simulator" title="chiripa.Simulator.Simulator"><em>Simulator</em></a>) – A <a class="reference internal" href="simulator.html"><span class="doc">Simulator</span></a> instance.</p></li>
+<li><p><strong>localdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to store files in the local server.</p></li>
+<li><p><strong>remotedir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to store files in the remote server.</p></li>
+<li><p><strong>qmpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path the to the qm executable.</p></li>
+<li><p><strong>scratch_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to the scratch dir used for gaussian</p></li>
+<li><p><strong>cpuspertask</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Number of cpus to use in the gaussian calculation</p></li>
+<li><p><strong>nodelist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – List of nodes in the remote server. <strong>(default=None)</strong>.</p></li>
+<li><p><strong>nodelistmaster</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – Node to run the general script</p></li>
+<li><p><strong>partition</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the partition to run the calculations</p></li>
+<li><p><strong>partitionmaster</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the partition run the general script</p></li>
+<li><p><strong>localzipfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path for a zip file of the inputs <strong>(default=”gaussian_inputs.zip”)</strong></p></li>
+<li><p><strong>memory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Memory (example: 500Mb)</p></li>
+<li><p><strong>logger</strong> (<em>Logger</em>) – A <a class="reference internal" href="setup_logger.html"><span class="doc">Logger</span></a> instance</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Use example</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="setup_logger.html" class="btn btn-neutral float-right" title="Setup Logger" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="serverlocal.html" class="btn btn-neutral float-left" title="Server Local" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

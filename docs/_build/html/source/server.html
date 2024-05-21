@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Server &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Server Local" href="serverlocal.html" />
+    <link rel="prev" title="Segment Object" href="segment.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="chiripa.html">Chiripa package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="atomic_data.html">Atomic_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chi_universe.html">Chi_Universe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cubicbox.html">Cubic Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dbjobs.html">DBJobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus_interface.html">DFTBPLUS INTERFACE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian_interface.html">Gaussian Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate_pair_conformations.html">Generate Pair Conformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internal_coordinates.html">Internal Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metropolisMC.html">Metropolis MC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moleculargraph.html">Molecular Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nwchem_interface.html">NwChem Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="points_inside_pyramid.html">Points Inside Pyramid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="segment.html">Segment Object</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Server</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview"><strong>Overview</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example"><strong>Example</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attributes"><strong>Attributes</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api"><strong>API</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="serverlocal.html">Server Local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverslurm.html">Server Slurm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup_logger.html">Setup Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulator.html">Simulator Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">Utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">Python API Reference</a> &raquo;</li>
+        
+          <li><a href="chiripa.html">Chiripa package</a> &raquo;</li>
+        
+      <li>Server</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/server.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="server">
+<h1>Server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This is an Abstract Class (ABC in python). It just provides an interface for Server subclasses.
+Server class represents an entry point to generate a subclass to send jobs for different
+simulation packages (example: Gaussian, NWchem) and different type of servers (example: Slurm, localhost)</p>
+</div>
+<div class="section" id="example">
+<h2><strong>Example</strong><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>This class cannot be directly instantiated because is an abstract class</p>
+</div>
+<div class="section" id="attributes">
+<h2><strong>Attributes</strong><a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_nameserver</span></code> (string) : Name of the server (example: localhost, trueno.csic.es).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_username</span></code> (string) : User name in the server or None for localhost</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_key_file</span></code> (string) : Path to the ssh key file (more information about ssh keys can be found in this <a class="reference external" href="https://serverpilot.io/docs/how-to-use-ssh-public-key-authentication/">web</a> )</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_client</span></code> (SSHClient) : A SSHClient instance to handle the SSH connection (more in <a class="reference external" href="http://docs.paramiko.org/en/stable/api/client.html">paramiko</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_dbindex</span></code> (int) : Index to know the last element added to the database</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_db_base</span></code> (DBJobs) : Instance to handle the database</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="api">
+<h2><strong>API</strong><a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="chiripa.Server.Server">
+<em class="property">class </em><code class="sig-prename descclassname">chiripa.Server.</code><code class="sig-name descname">Server</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nameserver</span></em>, <em class="sig-param"><span class="n">dbname</span></em>, <em class="sig-param"><span class="n">username</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keyfile</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Server.html#Server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Server.Server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>Abstract class for a Server object</p>
+<dl class="py method">
+<dt id="chiripa.Server.Server.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nameserver</span></em>, <em class="sig-param"><span class="n">dbname</span></em>, <em class="sig-param"><span class="n">username</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keyfile</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Server.html#Server.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Server.Server.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Server abstract class</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Parameters</span></code>::</dt><dd><ul class="simple">
+<li><p><strong>nameserver</strong> (type: string): Name of the server (example: localhost, trueno.csic.es)</p></li>
+<li><p><strong>dbname</strong>: (type: string) : File name of the database</p></li>
+<li><p><strong>username</strong> (type: string, default=None): User name in the server or None for localhost</p></li>
+<li><dl class="simple">
+<dt><strong>keyfile</strong> (type: string, default=None): Path to the ssh key file (more information about ssh keys can be found in</dt><dd><p>this <a class="reference external" href="https://serverpilot.io/docs/how-to-use-ssh-public-key-authentication/">web</a> )</p>
+</dd>
+</dl>
+</li>
+<li><p><strong>logger</strong> (type: logger, default=None): Logger instance</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Server.Server.execute_cmd">
+<em class="property">abstract </em><code class="sig-name descname">execute_cmd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Server.html#Server.execute_cmd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Server.Server.execute_cmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Virtual method to be implemented in all derived classes
+Implementation on the server to execute a command (from the WORKING directory)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Server.Server.extract_energy_calculations">
+<em class="property">abstract </em><code class="sig-name descname">extract_energy_calculations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Server.html#Server.extract_energy_calculations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Server.Server.extract_energy_calculations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Virtual method to be implemented in all derived classes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Server.Server.get_energy_from_calculations">
+<em class="property">abstract </em><code class="sig-name descname">get_energy_from_calculations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Server.html#Server.get_energy_from_calculations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Server.Server.get_energy_from_calculations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Virtual method to be implemented in all derived classes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Server.Server.get_logs">
+<em class="property">abstract </em><code class="sig-name descname">get_logs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Server.html#Server.get_logs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Server.Server.get_logs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Virtual method to be implemented in all derived classes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Server.Server.qm_allsend">
+<em class="property">abstract </em><code class="sig-name descname">qm_allsend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Server.html#Server.qm_allsend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Server.Server.qm_allsend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Virtual method to be implemented in all derived classes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Server.Server.qm_calc">
+<em class="property">abstract </em><code class="sig-name descname">qm_calc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Server.html#Server.qm_calc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Server.Server.qm_calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Virtual method to be implemented in all derived classes</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="serverlocal.html" class="btn btn-neutral float-right" title="Server Local" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="segment.html" class="btn btn-neutral float-left" title="Segment Object" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

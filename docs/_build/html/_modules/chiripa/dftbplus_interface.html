@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chiripa.dftbplus_interface &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/api-docs.html">Python API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>chiripa.dftbplus_interface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for chiripa.dftbplus_interface</h1><div class="highlight"><pre>
+<span></span>
+<div class="viewcode-block" id="dftbplus_write_optm"><a class="viewcode-back" href="../../source/dftbplus_interface.html#chiripa.dftbplus_interface.dftbplus_write_optm">[docs]</a><span class="k">def</span> <span class="nf">dftbplus_write_optm</span><span class="p">(</span><span class="n">path_to_dftb_program</span><span class="p">,</span> <span class="n">ffullname</span><span class="p">,</span> <span class="n">natoms</span><span class="p">,</span> <span class="n">dict_elements</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span>
+                        <span class="n">scc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">optmethod</span><span class="o">=</span><span class="s2">&quot;LBFGS&quot;</span><span class="p">,</span> <span class="n">startatommove</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">endatommove</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="n">set_of_parameters</span><span class="o">=</span><span class="s2">&quot;mio-1-1&quot;</span><span class="p">,</span> <span class="n">dispersion</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write an input to optimize the structure using DFTB plus (v.19.1)</span>
+
+<span class="sd">    ``Parameters``:</span>
+<span class="sd">        * **path_to_dftb_program**</span>
+<span class="sd">        * **ffullname** (type: str) --&gt; Full path to write the input file (fullpath+&quot;dftb_in.hsd&quot;).\</span>
+<span class="sd">         The input name in dftbplus(v.19.1) must be &quot;dftb_in.hsd&quot;.</span>
+<span class="sd">        * **natoms** (type: int) --&gt; Number of atoms</span>
+<span class="sd">        * **dict_elements** (type: dictionary) --&gt; A dictionary d[index] = &#39;name_of_atom&#39;.\</span>
+<span class="sd">         Example: {0:&#39;C&#39;, 1:&#39;H&#39;, ...}. It must have natoms elements</span>
+<span class="sd">        * **coords** (type: ndarray[natoms,3]) --&gt; Atom coordinates</span>
+<span class="sd">        * **scc** (type boolean, default=True) --&gt; SCC-DFTB method YES or NO</span>
+<span class="sd">        * **optmethod** (type: str, default=&#39;LBFGS&#39;) --&gt; Optimization method must be defined in the\</span>
+<span class="sd">        geometry_optimizations list. If is None, then a single point calculation is performed.</span>
+<span class="sd">        * **startatommove** (type: int) --&gt; Starting atom to move</span>
+<span class="sd">        * **endatommove** (type: int) --&gt; Ending atom to move</span>
+<span class="sd">        * **set_of_parameters** (type: str) --&gt; Name of the set of parameter to be used in the DFTB method \</span>
+<span class="sd">        The directory must exist in the $DFTB_PROGRAM/parameters/ path.</span>
+
+<span class="sd">        Atoms to move::</span>
+
+<span class="sd">            Starting and ending indices of the atoms to move, using the format start:end.</span>
+<span class="sd">            This notation selects all atoms between start and end indices to be moved.</span>
+<span class="sd">            A note of caution about the notation, DFTB allows one to specify the atoms as a list</span>
+<span class="sd">            ({1 2 3 4 5 6}) but this option is not implemented here.</span>
+<span class="sd">            Thus, normally, in the case of CHIRIPA</span>
+<span class="sd">            library there are two fragments which are in order. For example:</span>
+<span class="sd">            Fragment 1: {1 2 3 4 5 6}</span>
+<span class="sd">            Fragment 2: {7 8 9 10}</span>
+<span class="sd">            To keep fixed the first fragment, we use startatomove=7 and endatommove=-1 or 10.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Check input parameters ******</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_elements</span><span class="p">)</span> <span class="o">!=</span> <span class="n">natoms</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning!!!. The </span><span class="si">{}</span><span class="s2"> cannot be written. &quot;</span>
+              <span class="s2">&quot;Number of atoms and number of elements are not equals&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ffullname</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">natoms</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning!!!. The </span><span class="si">{}</span><span class="s2"> cannot be written. &quot;</span>
+              <span class="s2">&quot;Number of atoms and number of coordinates are not equals&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ffullname</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># Check options ******</span>
+    <span class="n">geometry_optimizations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;steepest_descent&quot;</span><span class="p">,</span> <span class="s2">&quot;conjugate_gradient&quot;</span><span class="p">,</span> <span class="s2">&quot;gdiis&quot;</span><span class="p">,</span> <span class="s2">&quot;lbfgs&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">optmethod</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">geometry_optimizations</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning!!!. The </span><span class="si">{}</span><span class="s2"> cannot be written.</span><span class="se">\n</span><span class="s2">&quot;</span>
+              <span class="s2">&quot;Method </span><span class="si">{}</span><span class="s2"> is not in the geometry &quot;</span>
+              <span class="s2">&quot;optimization options </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ffullname</span><span class="p">,</span> <span class="n">optmethod</span><span class="p">,</span> <span class="n">geometry_optimizations</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">set_of_parameters_available</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mio-1-1&quot;</span><span class="p">,</span> <span class="s2">&quot;3ob-3-1&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">optmethod</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">geometry_optimizations</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning!!!. The </span><span class="si">{}</span><span class="s2"> cannot be written.</span><span class="se">\n</span><span class="s2"> &quot;</span>
+              <span class="s2">&quot;Set of parameters </span><span class="si">{}</span><span class="s2"> is not in the geometry &quot;</span>
+              <span class="s2">&quot;optimization options </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ffullname</span><span class="p">,</span> <span class="n">set_of_parameters</span><span class="p">,</span> <span class="n">set_of_parameters_available</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># Get unique type of atoms</span>
+    <span class="n">unique_atoms</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">dict_elements</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+    <span class="n">max_angular_momentum</span> <span class="o">=</span><span class="p">{</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;O&#39;</span><span class="p">:</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span><span class="s1">&#39;p&#39;</span> <span class="p">}</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_atoms</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">max_angular_momentum</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning!!!. The </span><span class="si">{}</span><span class="s2"> cannot be written.</span><span class="se">\n</span><span class="s2">&quot;</span>
+              <span class="s2">&quot;unique_atoms        : </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span>
+              <span class="s2">&quot;max_angular_momentum: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span>
+              <span class="s2">&quot;Some atom(s) is(are) not in both lists</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ffullname</span><span class="p">,</span> <span class="n">unique_atoms</span><span class="p">,</span> <span class="n">max_angular_momentum</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># Check dispersion method</span>
+    <span class="n">dispersion_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dftd3&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dispersion</span><span class="p">,</span> <span class="ow">not</span> <span class="n">dispersion</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dispersion</span> <span class="ow">in</span> <span class="n">dispersion_list</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dispersion</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">dispersion</span> <span class="ow">in</span> <span class="n">dispersion_list</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning!!!. The </span><span class="si">{}</span><span class="s2"> cannot be written.</span><span class="se">\n</span><span class="s2">&quot;</span>
+              <span class="s2">&quot;Required dispersion method is not implemented(</span><span class="si">{}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span>
+              <span class="s2">&quot;Allowed dispersion methods implemented are: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ffullname</span><span class="p">,</span> <span class="n">dispersion</span><span class="p">,</span> <span class="n">dispersion_list</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ffullname</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+
+        <span class="c1"># keyword  ******</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;Geometry = GenFormat {</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Number of atoms ******</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0:5d}</span><span class="s2"> C</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">natoms</span><span class="p">))</span>
+
+        <span class="c1"># Type of atoms ******</span>
+        <span class="n">dicttypes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">ielem</span> <span class="ow">in</span> <span class="n">unique_atoms</span><span class="p">:</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0:2s}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ielem</span><span class="p">))</span>
+            <span class="n">dicttypes</span><span class="p">[</span><span class="n">ielem</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Coordinates ******</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">icoord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+            <span class="n">iel</span> <span class="o">=</span> <span class="n">dict_elements</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0:4d}</span><span class="s2"> </span><span class="si">{1:4d}</span><span class="s2"> </span><span class="si">{2:&gt;12.6f}</span><span class="s2"> </span><span class="si">{3:&gt;12.6f}</span><span class="s2"> </span><span class="si">{4:&gt;12.6f}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span>
+                            <span class="nb">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dicttypes</span><span class="p">[</span><span class="n">iel</span><span class="p">],</span> <span class="n">icoord</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">icoord</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">icoord</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Driver ******</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">optmethod</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;Driver = </span><span class="si">{0:s}</span><span class="s2"> </span><span class="si">{1:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">optmethod</span><span class="p">,</span><span class="s1">&#39;{&#39;</span><span class="p">))</span>
+
+            <span class="n">default_opts_driver</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">MovedAtoms = </span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span> \
+                                  <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">MaxForceComponent = 1E-4 </span><span class="se">\n</span><span class="s2">&quot;</span> \
+                                  <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">MaxSteps = 1000 </span><span class="se">\n</span><span class="s2">&quot;</span> \
+                                  <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">OutputPrefix = </span><span class="se">\&quot;</span><span class="s2">geom.out</span><span class="se">\&quot;</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span> \
+                                  <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">AppendGeometries = Yes </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">startatommove</span><span class="p">,</span> <span class="n">endatommove</span><span class="p">)</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">default_opts_driver</span><span class="p">)</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Hamiltonian ******</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;Hamiltonian = DFTB </span><span class="si">{0:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">scc</span><span class="p">:</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;  Scc = Yes</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;  Scc = No</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1">#SlaterKoster Files</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;  SlaterKosterFiles </span><span class="si">{0:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">))</span>
+        <span class="n">n_unique_atoms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_atoms</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">unique_atoms</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_unique_atoms</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n_unique_atoms</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                    <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unique_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">unique_atoms</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                    <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;    </span><span class="si">{0:s}</span><span class="s2"> = </span><span class="se">\&quot;</span><span class="si">{1:s}</span><span class="s2">/parameters/</span><span class="si">{2:s}</span><span class="s2">/</span><span class="si">{3:s}</span><span class="s2">.skf</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span><span class="o">.</span>
+                                   <span class="nb">format</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">path_to_dftb_program</span><span class="p">,</span> <span class="n">set_of_parameters</span><span class="p">,</span> <span class="nb">str</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">str1</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unique_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">unique_atoms</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                    <span class="n">str2</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unique_atoms</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">unique_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;    </span><span class="si">{0:s}</span><span class="s2"> = </span><span class="se">\&quot;</span><span class="si">{1:s}</span><span class="s2">/parameters/</span><span class="si">{2:s}</span><span class="s2">/</span><span class="si">{3:s}</span><span class="s2">.skf</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span><span class="o">.</span>
+                                   <span class="nb">format</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span> <span class="n">path_to_dftb_program</span><span class="p">,</span> <span class="n">set_of_parameters</span><span class="p">,</span> <span class="n">str1</span><span class="p">))</span>
+                    <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;    </span><span class="si">{0:s}</span><span class="s2"> = </span><span class="se">\&quot;</span><span class="si">{1:s}</span><span class="s2">/parameters/</span><span class="si">{2:s}</span><span class="s2">/</span><span class="si">{3:s}</span><span class="s2">.skf</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span><span class="o">.</span>
+                                   <span class="nb">format</span><span class="p">(</span><span class="n">str2</span><span class="p">,</span> <span class="n">path_to_dftb_program</span><span class="p">,</span> <span class="n">set_of_parameters</span><span class="p">,</span> <span class="n">str2</span><span class="p">))</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;  }</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1">#MaxAngularMomentum</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;  MaxAngularMomentum </span><span class="si">{0:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">itype</span> <span class="ow">in</span> <span class="n">unique_atoms</span><span class="p">:</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;    </span><span class="si">{0:s}</span><span class="s2"> = </span><span class="se">\&quot;</span><span class="si">{1:s}</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">itype</span><span class="p">,</span> <span class="n">max_angular_momentum</span><span class="p">[</span><span class="n">itype</span><span class="p">]))</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;  }</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Dispersion</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">dispersion</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;  Dispersion = </span><span class="si">{0:s}</span><span class="s2"> </span><span class="si">{1:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dispersion</span><span class="p">,</span> <span class="s1">&#39;{&#39;</span><span class="p">))</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;    Damping = </span><span class="si">{0:s}</span><span class="s2"> </span><span class="si">{1:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;ZeroDamping&#39;</span><span class="p">,</span> <span class="s1">&#39;{&#39;</span><span class="p">))</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;      sr6 = 0.7461</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;      alpha6 = 14.0</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;    }</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;    s6 = 1.0</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;    s8 = 3.209</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;  }</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1">#Options</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;Options </span><span class="si">{0:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">))</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1">#Analysis</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;Analysis </span><span class="si">{0:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">))</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;  CalculateForces = Yes</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1">#ParserOptions</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;ParserOptions </span><span class="si">{0:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">))</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;  ParserVersion = 7</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">fin</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="s2">&quot;}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

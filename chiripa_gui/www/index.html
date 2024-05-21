@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./ngl/dist/ngl.js"></script>
+    <link rel="stylesheet" href="./css/default.css">
+
+</head>
+
+<body>
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var stage = new NGL.Stage("viewport1");
+      var stringC = "'TITLE      n-hexane\nREMARK   1 File created by GaussView 6.0.16\nHETATM    1  C           0      -0.666  -0.374   0.000                       C\nHETATM    2  C           0      -1.882   0.553   0.000                       C\nHETATM    3  C           0      -3.207  -0.210  -0.000                       C\nHETATM    4  H           0      -0.713  -1.030  -0.880                       H\nHETATM    5  H           0      -0.713  -1.029   0.881                       H\nHETATM    6  H           0      -1.832   1.207  -0.880                       H\nHETATM    7  H           0      -1.832   1.207   0.880                       H\nHETATM    8  H           0      -3.283  -0.850   0.885                       H\nHETATM    9  H           0      -3.283  -0.850  -0.885                       H\nHETATM   10  H           0      -4.063   0.472   0.000                       H\nHETATM   11  C           0       0.666   0.374  -0.000                       C\nHETATM   12  C           0       1.882  -0.553  -0.000                       C\nHETATM   13  C           0       3.207   0.210   0.000                       C\nHETATM   14  H           0       0.713   1.029  -0.881                       H\nHETATM   15  H           0       0.713   1.030   0.880                       H\nHETATM   16  H           0       1.832  -1.207  -0.880                       H\nHETATM   17  H           0       1.832  -1.207   0.880                       H\nHETATM   18  H           0       3.283   0.850   0.885                       H\nHETATM   19  H           0       3.283   0.850  -0.885                       H\nHETATM   20  H           0       4.063  -0.472  -0.000                       H\nEND\nCONECT    1    2    4    5   11\nCONECT    2    1    3    6    7\nCONECT    3    2    8    9   10\nCONECT    4    1\nCONECT    5    1\nCONECT    6    2\nCONECT    7    2\nCONECT    8    3\nCONECT    9    3\nCONECT   10    3\nCONECT   11    1   12   14   15\nCONECT   12   11   13   16   17\nCONECT   13   12   18   19   20\nCONECT   14   11\nCONECT   15   11\nCONECT   16   12\nCONECT   17   12\nCONECT   18   13\nCONECT   19   13\nCONECT   20   13\n'";
+      var stringB = new Blob([stringC], {type: 'text/plain'})
+      stage.setParameters({ backgroundColor: "white" });
+      stage.loadFile(stringB , {ext: "pdb"}).then(function(o) {
+          o.addRepresentation("ball+stick")
+          o.addRepresentation("surface", {
+            opacity: 0.3,
+            side: "front",
+              color:'yellow'
+          })
+          o.autoView()
+      })
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var stage = new NGL.Stage("viewport2");
+      var stringC = "'TITLE      nitrobenzene\nREMARK   1 File created by GaussView 6.0.16\nHETATM    1  C           0       2.523   0.000   0.000                       C\nHETATM    2  C           0       1.823   1.211   0.000                       C\nHETATM    3  C           0       0.425   1.223  -0.000                       C\nHETATM    4  C           0      -0.244   0.000  -0.000                       C\nHETATM    5  C           0       0.425  -1.223  -0.000                       C\nHETATM    6  C           0       1.823  -1.211   0.000                       C\nHETATM    7  H           0       3.609  -0.000   0.000                       H\nHETATM    8  H           0       2.364   2.153   0.000                       H\nHETATM    9  H           0      -0.142   2.146  -0.000                       H\nHETATM   10  H           0      -0.142  -2.146  -0.000                       H\nHETATM   11  H           0       2.364  -2.153   0.000                       H\nHETATM   12  N           0      -1.724   0.000  -0.000                       N\nHETATM   13  O           0      -2.290  -1.091  -0.000                       O\nHETATM   14  O           0      -2.290   1.091  -0.000                       O\nEND\nCONECT    1    2    6    7\nCONECT    2    1    3    8\nCONECT    3    2    4    9\nCONECT    4    3    5   12\nCONECT    5    4    6   10\nCONECT    6    5    1   11\nCONECT    7    1\nCONECT    8    2\nCONECT    9    3\nCONECT   10    5\nCONECT   11    6\nCONECT   12    4   13   14\nCONECT   13   12\nCONECT   14   12\n'";
+      var stringB = new Blob([stringC], {type: 'text/plain'})
+      stage.setParameters({ backgroundColor: "white" });
+      stage.loadFile(stringB , {ext: "pdb"}).then(function(o) {
+          o.addRepresentation("ball+stick")
+          o.addRepresentation("surface", {
+            opacity: 0.3,
+            side: "front"
+          })
+          o.autoView()
+      })
+    });
+
+  </script>
+  <div class="row">
+      <div class="column">
+        <h2>Segment 1</h2>
+        <div id="viewport1" style="width:600px; height:400px; margin: 0 auto;"></div>
+      </div>
+      <div class="column">
+        <h2>Segment 2</h2>
+        <div id="viewport2" style="width:600px; height:400px; margin: 0 auto;"></div>
+      </div>
+
+  </div>
+
+</body>
+</html>

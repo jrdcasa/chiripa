@@ -1,0 +1,739 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Segment Object &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Server" href="server.html" />
+    <link rel="prev" title="Points Inside Pyramid" href="points_inside_pyramid.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="chiripa.html">Chiripa package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="atomic_data.html">Atomic_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chi_universe.html">Chi_Universe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cubicbox.html">Cubic Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dbjobs.html">DBJobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus_interface.html">DFTBPLUS INTERFACE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian_interface.html">Gaussian Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate_pair_conformations.html">Generate Pair Conformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internal_coordinates.html">Internal Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metropolisMC.html">Metropolis MC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moleculargraph.html">Molecular Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nwchem_interface.html">NwChem Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="points_inside_pyramid.html">Points Inside Pyramid</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Segment Object</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview"><strong>Overview</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example"><strong>Example</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attributes"><strong>Attributes</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#methods"><strong>Methods</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-chiripa.Segment"><strong>API</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverlocal.html">Server Local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverslurm.html">Server Slurm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup_logger.html">Setup Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulator.html">Simulator Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">Utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">Python API Reference</a> &raquo;</li>
+        
+          <li><a href="chiripa.html">Chiripa package</a> &raquo;</li>
+        
+      <li>Segment Object</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/segment.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="segment-object">
+<h1>Segment Object<a class="headerlink" href="#segment-object" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Segment object is used to represent a molecular structure</p>
+<p>A PET monomer represented as a Segment:</p>
+<a class="reference internal image-reference" href="../_images/PET_segment.png"><img alt="Principle of angle bending" class="align-center" src="../_images/PET_segment.png" style="width: 600px;" /></a>
+<p>The attributes of the Segment object are summarized in the figure.</p>
+</div>
+<div class="section" id="example">
+<h2><strong>Example</strong><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This generates the example of the figure</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="n">Segment</span><span class="p">(</span><span class="n">filecoord</span><span class="o">=</span><span class="s2">&quot;../data/pet_1mon_aa.pdb&quot;</span><span class="p">)</span>
+<span class="c1"># This creates a empty segment</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="n">Segment</span><span class="p">()</span>
+<span class="c1"># Creating a segment for an ethylene monomer</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="n">Segment</span><span class="p">(</span><span class="n">natoms</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">xlist</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.002</span><span class="p">],</span> <span class="n">ylist</span><span class="o">=</span><span class="p">[</span><span class="mf">0.765</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.777</span><span class="p">],</span> <span class="n">zlist</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">elementlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="attributes">
+<h2><strong>Attributes</strong><a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>_filecoord: str</dt><dd><p>Path to the coordinate file used as input.</p>
+</dd>
+<dt>_filetop: str</dt><dd><p>Path to the topology file used as input. If is None, the topology is guessed.</p>
+</dd>
+<dt>_filetypeatoms: str</dt><dd><p>Path to a file containing the type atoms. (see above the format of this file)</p>
+</dd>
+<dt>_logger: logger</dt><dd><p>LOGGER TO DO</p>
+</dd>
+<dt>_natoms: int</dt><dd><p>Number of atoms.</p>
+</dd>
+<dt>_coords: ndarray[natoms,3] type=float64</dt><dd><p>Coordinates of the atoms</p>
+</dd>
+<dt>_topology: topology</dt><dd><p>Topology object</p>
+</dd>
+<dt>_typeelements: ndarray[natoms] type=str</dt><dd><p>Type of elements read from self._filetypeatoms</p>
+</dd>
+<dt>_elements: ndarray[natoms] type=str</dt><dd><p>Name of the elements</p>
+</dd>
+<dt>_charge: int</dt><dd><p>Net charge of the segment</p>
+</dd>
+<dt>_isBOassigned: boolean</dt><dd><p>If it is <code class="docutils literal notranslate"><span class="pre">True</span></code> the order bonds have been assigened using the algorithm
+reported in <a class="reference external" href="https://doi.org/10.1186/s13321-019-0340-0">https://doi.org/10.1186/s13321-019-0340-0</a></p>
+</dd>
+<dt>_dummy_head_atom: integer</dt><dd><p>Index of the atom acting as dummy head atom to mimic polymer chain. The value is -1 when is not used.</p>
+</dd>
+<dt>_dummy_tail_atom: integer</dt><dd><p>Index of the atom acting as dummy tail atom to mimic polymer chain. The value is -1 when is not used.</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="methods">
+<h2><strong>Methods</strong><a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.assign_bond_orders" title="chiripa.Segment.Segment.assign_bond_orders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.assign_bond_orders</span></code></a></p></td>
+<td><p>This function assigns bond orders to the bonds according to the algorithm reported in:</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.calc_vdw_volume_VABC" title="chiripa.Segment.Segment.calc_vdw_volume_VABC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.calc_vdw_volume_VABC</span></code></a></p></td>
+<td><p>Calculation of the van der Waals volume using the method reported by Zhao et al.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.center_of_geom" title="chiripa.Segment.Segment.center_of_geom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.center_of_geom</span></code></a></p></td>
+<td><p>Calculate the center of geometry of the current coordinates</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.center_of_mass" title="chiripa.Segment.Segment.center_of_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.center_of_mass</span></code></a></p></td>
+<td><p>Calculate the center of mass of the current coordinates</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.check_parameter_consistence" title="chiripa.Segment.Segment.check_parameter_consistence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.check_parameter_consistence</span></code></a></p></td>
+<td><p>It checks the length of the parameters passed through the constructor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.euler_orientation" title="chiripa.Segment.Segment.euler_orientation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.euler_orientation</span></code></a></p></td>
+<td><p>New coordinates of the atoms accordingly to random Euler angles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.get_coords" title="chiripa.Segment.Segment.get_coords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.get_coords</span></code></a></p></td>
+<td><p>Get the coordinates of the segment</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.load_from_disk" title="chiripa.Segment.Segment.load_from_disk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.load_from_disk</span></code></a></p></td>
+<td><p>Wrapper to load the structure from disk.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.read_gro_from_scratch" title="chiripa.Segment.Segment.read_gro_from_scratch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.read_gro_from_scratch</span></code></a></p></td>
+<td><p>Read the coordinates from a gro file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.read_pdb_from_scratch" title="chiripa.Segment.Segment.read_pdb_from_scratch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.read_pdb_from_scratch</span></code></a></p></td>
+<td><p>Read thecoordinates from a pdb file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.read_sdf_coordtopo_from_scratch" title="chiripa.Segment.Segment.read_sdf_coordtopo_from_scratch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.read_sdf_coordtopo_from_scratch</span></code></a></p></td>
+<td><p>Read coordinates and topology from a SDF file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.read_topology_from_pdb" title="chiripa.Segment.Segment.read_topology_from_pdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.read_topology_from_pdb</span></code></a></p></td>
+<td><p>Try to set up the topology reading a PDB file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.read_topology_from_xyz" title="chiripa.Segment.Segment.read_topology_from_xyz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.read_topology_from_xyz</span></code></a></p></td>
+<td><p>Try to set up the topology reading a XYZ file, the bonds are guessed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.read_xyz_from_scratch" title="chiripa.Segment.Segment.read_xyz_from_scratch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.read_xyz_from_scratch</span></code></a></p></td>
+<td><p>Read the coordinates from a xyz file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.set_charge" title="chiripa.Segment.Segment.set_charge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.set_charge</span></code></a></p></td>
+<td><p>Setup the total charge of the segment</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.set_topology_from_disk" title="chiripa.Segment.Segment.set_topology_from_disk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.set_topology_from_disk</span></code></a></p></td>
+<td><p>Wrapper to load the topology from disk.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.set_typeatoms" title="chiripa.Segment.Segment.set_typeatoms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.set_typeatoms</span></code></a></p></td>
+<td><p>Set the type of atoms in the segment (self._typeelements)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.translate_vector" title="chiripa.Segment.Segment.translate_vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.translate_vector</span></code></a></p></td>
+<td><p>Translate the segment along the vector v.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.Segment.Segment.write_xyz" title="chiripa.Segment.Segment.write_xyz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.Segment.Segment.write_xyz</span></code></a></p></td>
+<td><p>Write the segment to a XYZ file</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-chiripa.Segment">
+<span id="api"></span><h2><strong>API</strong><a class="headerlink" href="#module-chiripa.Segment" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="chiripa.Segment.Segment">
+<em class="property">class </em><code class="sig-prename descclassname">chiripa.Segment.</code><code class="sig-name descname">Segment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">filecoord</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filetop</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filetypeatoms</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">natoms</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">xlist</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ylist</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">zlist</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">elementlist</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">guesstopol</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">dummy_head</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">dummy_tail</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class to represent molecules</p>
+<p>There are two ways to build a Segment object:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Segment(filecoord=’ethylene.pdb’)</p></li>
+<li><p>Segment(natoms=2, xlist= [], ylist=[], zlist = [], elements = [])</p></li>
+</ol>
+</div></blockquote>
+<p>If <strong>filecoord</strong> is present, the paremeters <strong>natoms</strong>, <strong>xlist</strong>, <strong>ylist</strong>, <strong>zlist</strong> and <strong>elementlist</strong> are ignored.
+Otherwise, these parameters must be consistent.</p>
+<p>if <strong>filetop</strong> is not given, then the topology is guessed.</p>
+<p>if <strong>filetypeatoms</strong> is present, the types assignation is done according to the file.
+The order of the atoms must be the same that the order in the coordinates and topology files.
+The format of this file must be the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">Atom</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">type_of_atom</span><span class="o">&gt;</span>
+<span class="mi">1</span> <span class="n">C</span> <span class="n">c3</span>
+<span class="mi">2</span> <span class="n">C</span> <span class="n">c3</span>
+<span class="mi">3</span> <span class="n">C</span> <span class="n">c3</span>
+<span class="o">...</span>
+<span class="mi">14</span> <span class="n">H</span> <span class="n">hc</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be careful when use np.transpose function. This function seems to change the order of the array to
+“Fortran-type” instead to C-Order. If use np.transpose you will use np.ascontiguousarray</p>
+<p>Example:</p>
+<p>a = np.tranpose(b) –&gt; a in Fortran order irrespective of the order of C</p>
+<p>a = np.ascontiguousarray(np.transpose(b)) –&gt; a in C order</p>
+<p>This issue is important when use mode=”c” in pyx files for Cython</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For big molecules (&gt;1000 atoms) deactivate the guessing of topology (guesstopol=False)</p>
+</div>
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">filecoord</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filetop</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filetypeatoms</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">natoms</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">xlist</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ylist</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">zlist</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">elementlist</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">guesstopol</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">dummy_head</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">dummy_tail</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor of a Segment object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the segment</p></li>
+<li><p><strong>filecoord</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path of the coordinates filecoord (Format: PDB, GRO, XYZ)</p></li>
+<li><p><strong>filetop</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path of the topology (Format: PDB)</p></li>
+<li><p><strong>filetypeatoms</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the file containing the matching between atoms and atomtypes.
+This is used mainly to assign the reevaluated distances
+by <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/acs.jpcb.7b08461">Okuwaki_ et_ al_. (Table 2)</a></p></li>
+<li><p><strong>natoms</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Number of atoms</p></li>
+<li><p><strong>xlist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – Float numbers x component of the coordinates (in angstroms)</p></li>
+<li><p><strong>ylist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – y component of the coordinates (in angstroms)</p></li>
+<li><p><strong>zlist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – z component of the coordinates (in angstroms)</p></li>
+<li><p><strong>elementlist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Element Symbol</p></li>
+<li><p><strong>guesstopol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – If True activate the guessing of topology based in a distance algorithm.</p></li>
+<li><p><strong>dummy_head</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Index of the atom acting as dummy head atom to mimic polymer chain</p></li>
+<li><p><strong>dummy_tail</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Index of the atom acting as dummy tail atom to mimic polymer chain</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.assign_bond_orders">
+<code class="sig-name descname">assign_bond_orders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.assign_bond_orders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.assign_bond_orders" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function assigns bond orders to the bonds according to the algorithm reported in:</p>
+<p>“Automated simultaneous assignment of bond orders and formal charges”
+Ivan D. Welsh and Jane R. Allison
+J. Cheminform (2019) 11:18</p>
+<p><a class="reference external" href="https://doi.org/10.1186/s13321-019-0340-0">https://doi.org/10.1186/s13321-019-0340-0</a></p>
+<p>The function uses the external software <code class="docutils literal notranslate"><span class="pre">indigo-bondorders</span></code> (located in thirdparty/indigo-bondorder).
+This code is compiled and installed in thirdparty/indigox</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The structure to assign bonds needs to have all hydrogen bonds correctly placed.
+United atom models do not work with this function.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.calc_vdw_volume_VABC">
+<code class="sig-name descname">calc_vdw_volume_VABC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.calc_vdw_volume_VABC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.calc_vdw_volume_VABC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculation of the van der Waals volume using the method reported by Zhao et al.</p>
+<p>“Fast Calculation of van der Waals Volume as a Sum of Atomic and
+Bond Contributions and Its Application to Drug Compounds”,  J. Org. Chem. 2003, 68, 7368-7373
+<a class="reference external" href="https://pubs.acs.org/doi/10.1021/jo034808o">https://pubs.acs.org/doi/10.1021/jo034808o</a>.</p>
+<p>The VdW radii and volume are taken from
+element_vdw_vmd_radius_bondi and element_vdw_vmd_volume_bondi, respectively.</p>
+<p>The formula (4) of the article will be used in this function:</p>
+<a class="reference internal image-reference" href="../_images/volume_vdw.png"><img alt="../_images/volume_vdw.png" src="../_images/volume_vdw.png" style="width: 400pt;" /></a>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p><em>(tuple)</em> –</p>
+<p>tuple containing:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">volume_vdw</span></code> (float) Van der waals volume using equation 4 in (angstroms^3/molecule).
+<code class="docutils literal notranslate"><span class="pre">volume_tsar</span></code> (float) Van der waals volume using equation 6 in (angstroms^3/molecule).</p>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.center_of_geom">
+<code class="sig-name descname">center_of_geom</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atomlist</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.center_of_geom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.center_of_geom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the center of geometry of the current coordinates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>atomlist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – Index of the atoms to calculate the center of geometry. If <code class="docutils literal notranslate"><span class="pre">None</span></code> all atoms are used</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">cog</span></code> – ndarray[3] of float64. Coordinates of the <code class="docutils literal notranslate"><span class="pre">Segment</span></code> geometry center</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.center_of_mass">
+<code class="sig-name descname">center_of_mass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atomlist</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.center_of_mass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.center_of_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the center of mass of the current coordinates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>atomlist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – Index of the atoms to calculate the center of mass. If <code class="docutils literal notranslate"><span class="pre">None</span></code> all atoms are used</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">com</span></code> – ndarray[3] of float64. Coordinates of the <code class="docutils literal notranslate"><span class="pre">Segment</span></code> center of mass</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.check_parameter_consistence">
+<code class="sig-name descname">check_parameter_consistence</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.check_parameter_consistence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.check_parameter_consistence" title="Permalink to this definition">¶</a></dt>
+<dd><p>It checks the length of the parameters passed through the constructor.</p>
+<p>The length of the x, y, z and element arrays must be equal to the number ot atoms.
+If there is not consistency raises a ValueError otherwise return True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>True</em> – if all parameters are consistent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.euler_orientation">
+<code class="sig-name descname">euler_orientation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iseed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.euler_orientation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.euler_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>New coordinates of the atoms accordingly to random Euler angles.
+There are many definitions of the Euler angles
+(see: <a class="reference external" href="https://en.wikipedia.org/wiki/Euler_angles">https://en.wikipedia.org/wiki/Euler_angles</a>)</p>
+<p>The definition here used is that given in:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MATHEMATICAL</span> <span class="n">METHODS</span> <span class="n">FOR</span> <span class="n">PHYSICISTS</span>
+<span class="n">SEVENTH</span> <span class="n">EDITION</span>
+<span class="n">George</span> <span class="n">B</span><span class="o">.</span> <span class="n">Arfken</span><span class="p">,</span> <span class="n">Hans</span> <span class="n">J</span><span class="o">.</span> <span class="n">Weber</span><span class="p">,</span> <span class="n">Frank</span> <span class="n">E</span><span class="o">.</span> <span class="n">Harris</span>
+<span class="n">pag</span><span class="p">:</span> <span class="mi">140</span><span class="o">-</span><span class="mi">142</span>
+</pre></div>
+</div>
+<img alt="../_images/euler_book.png" src="../_images/euler_book.png" />
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>iseed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Seed for the pseudo-random number generator. If <code class="docutils literal notranslate"><span class="pre">None</span></code> the seed is created from the current system time
+otherwise a deterministic random data using the <code class="docutils literal notranslate"><span class="pre">iseed</span></code> value is expected</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">euler</span></code> – , list of floats, <span class="math notranslate nohighlight">\({\alpha}\)</span>, <span class="math notranslate nohighlight">\({\beta}\)</span> and <span class="math notranslate nohighlight">\({\gamma}\)</span> values for the Euler angles in radians</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.get_coords">
+<code class="sig-name descname">get_coords</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atomlist</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.get_coords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.get_coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the coordinates of the segment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>atomlist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – Index of the atoms to return. If <code class="docutils literal notranslate"><span class="pre">None</span></code> all atoms are returned</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">coords</span></code> – ndarray[natoms, 3], natoms = self._natoms or len(atomlist)). Coordinates array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.load_from_disk">
+<code class="sig-name descname">load_from_disk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.load_from_disk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.load_from_disk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper to load the structure from disk. Allowed files are pdb, xyz and gro files.
+The format of the file is taken from the extension of the file. If this extension is unkown then
+the method raises an exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to the file in the disk</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.printerror">
+<code class="sig-name descname">printerror</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.printerror"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.printerror" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the error message msg1 to the logger</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>msg1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Message error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.read_gro_from_scratch">
+<code class="sig-name descname">read_gro_from_scratch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gro_path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.read_gro_from_scratch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.read_gro_from_scratch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the coordinates from a gro file. It checks if the file exist</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gro_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to the file in the disk</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.read_pdb_from_scratch">
+<code class="sig-name descname">read_pdb_from_scratch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdb_path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.read_pdb_from_scratch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.read_pdb_from_scratch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read thecoordinates from a pdb file. It checks if the file exist</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pdb_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to the file in the disk</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.read_sdf_coordtopo_from_scratch">
+<code class="sig-name descname">read_sdf_coordtopo_from_scratch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sdf_path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.read_sdf_coordtopo_from_scratch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.read_sdf_coordtopo_from_scratch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read coordinates and topology from a SDF file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sdf_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to the sdf file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.read_topology_from_gro">
+<code class="sig-name descname">read_topology_from_gro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.read_topology_from_gro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.read_topology_from_gro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to set up the topology reading a XYZ file, the
+bonds are guessed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to the XYZ file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.read_topology_from_pdb">
+<code class="sig-name descname">read_topology_from_pdb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.read_topology_from_pdb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.read_topology_from_pdb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to set up the topology reading a PDB file. The “CONECT” section is
+used to yield the connectivity of the molecule, if present. Otherwise, the
+bonds are guessed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to the PDB file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.read_topology_from_xyz">
+<code class="sig-name descname">read_topology_from_xyz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.read_topology_from_xyz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.read_topology_from_xyz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to set up the topology reading a XYZ file, the
+bonds are guessed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to the XYZ file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.read_xyz_from_scratch">
+<code class="sig-name descname">read_xyz_from_scratch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xyz_path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.read_xyz_from_scratch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.read_xyz_from_scratch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the coordinates from a xyz file. It checks if the file exist</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>xyz_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to the file in the disk</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.set_charge">
+<code class="sig-name descname">set_charge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">charge</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.set_charge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.set_charge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup the total charge of the segment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>charge</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Total charge of the segment</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.set_topology_from_disk">
+<code class="sig-name descname">set_topology_from_disk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.set_topology_from_disk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.set_topology_from_disk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper to load the topology from disk. Allowed files are pdb, xyz and sdf files.
+The format of the file is taken from the extension of the file. If this extension is unkown then
+the method raises an exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to the file in the disk</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.set_typeatoms">
+<code class="sig-name descname">set_typeatoms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filetypeatoms</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.set_typeatoms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.set_typeatoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the type of atoms in the segment (self._typeelements)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filetypeatoms</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – File containing the type of atoms</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">Atom</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">type_of_atom</span><span class="o">&gt;</span>
+<span class="mi">1</span> <span class="n">C</span> <span class="n">c3</span>
+<span class="mi">2</span> <span class="n">C</span> <span class="n">c3</span>
+<span class="mi">3</span> <span class="n">C</span> <span class="n">c3</span>
+<span class="o">...</span>
+<span class="mi">14</span> <span class="n">H</span> <span class="n">hc</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.translate_vector">
+<code class="sig-name descname">translate_vector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.translate_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.translate_vector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate the segment along the vector v.
+This function changes the coordinates of the segment</p>
+<a class="reference internal image-reference" href="../_images/translation.png"><img alt="../_images/translation.png" src="../_images/translation.png" style="width: 200pt;" /></a>
+<p>The vector p represents the coordinates of each atom.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> – (type: a list or (1,3)-ndarray): The atoms are translated along this vector</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.Segment.Segment.write_xyz">
+<code class="sig-name descname">write_xyz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filenamexyz</span><span class="o">=</span><span class="default_value">'segment.xyz'</span></em>, <em class="sig-param"><span class="n">atomlist</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/Segment.html#Segment.write_xyz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.Segment.Segment.write_xyz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the segment to a XYZ file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filenamexyz</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the file</p></li>
+<li><p><strong>atomlist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – Index of the atoms to be written in the cxyz file. If <code class="docutils literal notranslate"><span class="pre">None</span></code> all atoms are written</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="server.html" class="btn btn-neutral float-right" title="Server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="points_inside_pyramid.html" class="btn btn-neutral float-left" title="Points Inside Pyramid" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

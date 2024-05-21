@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chiripa.CubicBox &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/api-docs.html">Python API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>chiripa.CubicBox</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for chiripa.CubicBox</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">chiripa.Box</span> <span class="kn">import</span> <span class="n">Box</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<div class="viewcode-block" id="CubicBox"><a class="viewcode-back" href="../../source/cubicbox.html#chiripa.CubicBox.CubicBox">[docs]</a><span class="k">class</span> <span class="nc">CubicBox</span><span class="p">(</span><span class="n">Box</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cubic Box class</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="CubicBox.__init__"><a class="viewcode-back" href="../../source/cubicbox.html#chiripa.CubicBox.CubicBox.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xhigh</span><span class="p">,</span> <span class="n">yhigh</span><span class="p">,</span> <span class="n">zhigh</span><span class="p">,</span> <span class="n">xlow</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">ylow</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">zlow</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;real&quot;</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Builds a cubic box</span>
+
+<span class="sd">        The simulation box has its origin at (xlo, ylo, zlo) point. The lattice vectors are defined as:</span>
+
+<span class="sd">            * Orthogonal cubic box:</span>
+<span class="sd">                * **a** =(xhi-xlo,0,0)</span>
+<span class="sd">                * **b** =(0, yhi-ylo,0)</span>
+<span class="sd">                * **c** =(0, 0,zhi-zlo)</span>
+<span class="sd">                * Lx=Ly=Lz</span>
+<span class="sd">                * alpha=beta=gamma=90</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xhigh: (type float) --&gt; X Coordinate of the maximum vertex in distance units.</span>
+<span class="sd">            yhigh: (type float) --&gt; Y Coordinate of the maximum vertex in distance units.</span>
+<span class="sd">            zhigh: (type float) --&gt; Z Coordinate of the maximum vertex in distance units.</span>
+<span class="sd">            xlow: (type float, default=0.0) --&gt; X Coordinate of the box origin in distance units</span>
+<span class="sd">            ylow: (type float, default=0.0) --&gt; Y Coordinate of the box origin in distance units</span>
+<span class="sd">            zlow: (type float, default=0.0) --&gt; Z Coordinate of the box origin in distance units</span>
+<span class="sd">            units: (type string, default=&quot;real&quot;) --&gt; **real** or **reduced** units</span>
+
+<span class="sd">        .. image:: ../imgs/simulation_box.png</span>
+<span class="sd">            :height: 300px</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Box</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xhigh</span><span class="p">,</span> <span class="n">yhigh</span><span class="p">,</span> <span class="n">zhigh</span><span class="p">,</span> <span class="n">xlow</span><span class="o">=</span><span class="n">xlow</span><span class="p">,</span> <span class="n">ylow</span><span class="o">=</span><span class="n">ylow</span><span class="p">,</span> <span class="n">zlow</span><span class="o">=</span><span class="n">zlow</span><span class="p">,</span>
+                     <span class="n">alpha</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">xlow</span> <span class="o">&gt;=</span> <span class="n">xhigh</span> <span class="ow">or</span>\
+            <span class="n">ylow</span> <span class="o">&gt;=</span> <span class="n">yhigh</span> <span class="ow">or</span>\
+            <span class="n">zlow</span> <span class="o">&gt;=</span> <span class="n">zhigh</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__error</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Lx</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ly</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lz</span><span class="p">):</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__error</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">Lx</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ly</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lz</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">isorthonormal</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">typebox</span> <span class="o">=</span> <span class="s2">&quot;cubic&quot;</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="CubicBox.center_of_box"><a class="viewcode-back" href="../../source/cubicbox.html#chiripa.CubicBox.CubicBox.center_of_box">[docs]</a>    <span class="k">def</span> <span class="nf">center_of_box</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Calculate the geometrical center ot the simulation box</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            An (1,3)-array with the coordinates of the geometric center</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">xc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xlo</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xhi</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">xlo</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
+        <span class="n">yc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ylo</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">yhi</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">ylo</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
+        <span class="n">zc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">zlo</span><span class="o">+</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zhi</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">zlo</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xc</span><span class="p">,</span><span class="n">yc</span><span class="p">,</span><span class="n">zc</span><span class="p">])</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="CubicBox.linked_cell"><a class="viewcode-back" href="../../source/cubicbox.html#chiripa.CubicBox.CubicBox.linked_cell">[docs]</a>    <span class="k">def</span> <span class="nf">linked_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_rc</span><span class="p">,</span> <span class="n">skin</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;This method initializes the linked cell grid for the cubic box.</span>
+
+<span class="sd">        The simulation domain is divided into subcells with an edge length (rc+skin)</span>
+<span class="sd">        greater than or equal to the maximum cut-off radius (max_rc) of the interaction</span>
+<span class="sd">        to be computed.</span>
+
+<span class="sd">        It changes the value of self.cellGrid attribute.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            rc: (float) --&gt; maximum cut-off radius.</span>
+<span class="sd">            skin: (float) --&gt; extra distance to create the subcells</span>
+<span class="sd">            logger: (logger) --&gt; A logger object to write</span>
+
+<span class="sd">        .. image:: ../imgs/cutoff_linkedcell.png</span>
+<span class="sd">            :height: 200px</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">max_rc</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">m1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lx</span>
+            <span class="n">m2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ly</span>
+            <span class="n">m3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lz</span>
+            <span class="n">max_rc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">m3</span><span class="p">])</span>
+
+        <span class="n">nx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Lx</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_rc</span> <span class="o">+</span> <span class="n">skin</span><span class="p">))</span>
+        <span class="n">ny</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Ly</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_rc</span> <span class="o">+</span> <span class="n">skin</span><span class="p">))</span>
+        <span class="n">nz</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Lz</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_rc</span> <span class="o">+</span> <span class="n">skin</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">nx</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">ny</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__error</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;nx&#39;</span><span class="p">:</span><span class="n">nx</span><span class="p">,</span> <span class="s1">&#39;ny&#39;</span><span class="p">:</span><span class="n">ny</span><span class="p">,</span> <span class="s1">&#39;nz&#39;</span><span class="p">:</span><span class="n">nz</span><span class="p">,</span> <span class="s1">&#39;rc&#39;</span><span class="p">:</span><span class="n">max_rc</span><span class="p">,</span> <span class="s1">&#39;skin&#39;</span><span class="p">:</span><span class="n">skin</span><span class="p">})</span>
+
+        <span class="n">rix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lx</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span>
+        <span class="n">riy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ly</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">ny</span><span class="p">)</span>
+        <span class="n">riz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lz</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">nz</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span>
+
+        <span class="n">m</span> <span class="o">=</span>  <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">--------------------LINKED CELL INFO--------------------</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">m</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Box Length             : [</span><span class="si">{0:.3f}</span><span class="s2">, </span><span class="si">{1:.3f}</span><span class="s2">, </span><span class="si">{2:.3f}</span><span class="s2">] </span><span class="si">{3:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Lx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ly</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nameunits</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Maximum cutoff distance: </span><span class="si">{0:.3f}</span><span class="s2"> </span><span class="si">{1:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_rc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nameunits</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Skin distance          : </span><span class="si">{0:.3f}</span><span class="s2"> </span><span class="si">{1:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">skin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nameunits</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Number of subcells     : [</span><span class="si">{0:d}</span><span class="s2">,</span><span class="si">{1:d}</span><span class="s2">,</span><span class="si">{2:d}</span><span class="s2">] cells</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Subcell Lenghts        : [</span><span class="si">{0:.3f}</span><span class="s2">,</span><span class="si">{1:.3f}</span><span class="s2">,</span><span class="si">{2:.3f}</span><span class="s2">] </span><span class="si">{3:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rix</span><span class="p">,</span> <span class="n">riy</span><span class="p">,</span> <span class="n">riz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nameunits</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">--------------------------------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">if</span> <span class="n">logger</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_define_regions</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+<div class="viewcode-block" id="CubicBox._define_regions"><a class="viewcode-back" href="../../source/cubicbox.html#chiripa.CubicBox.CubicBox._define_regions">[docs]</a>    <span class="k">def</span> <span class="nf">_define_regions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Setups the neighbours array (self.nearby) with periodic boundary conditions (PBC)</span>
+
+<span class="sd">        The grid of cells starts in 0 and finnish in</span>
+<span class="sd">        (self.cellGrid[0]*self.cellGrid[1]*self.cellGrid[2])-1</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            self.nearby[:,10] = All neighbors of the cell number 10</span>
+
+<span class="sd">        .. image:: ../imgs/cell_grid_6x6x6.png</span>
+<span class="sd">            :height: 200px</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">maxCell3</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nearby</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">27</span><span class="p">,</span> <span class="n">maxCell3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+
+        <span class="c1"># Find the set of cells that contain sites( = mers) that</span>
+        <span class="c1"># interact with sites in cell icell.</span>
+        <span class="k">for</span> <span class="n">iz</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">iy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">for</span> <span class="n">ix</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                    <span class="c1"># Define the x,y,z address of central cell</span>
+                    <span class="n">icellx</span> <span class="o">=</span> <span class="n">ix</span>
+                    <span class="n">icelly</span> <span class="o">=</span> <span class="n">iy</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">icellz</span> <span class="o">=</span> <span class="n">iz</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+                    <span class="c1"># Combine to get the index of the central cell</span>
+                    <span class="n">icell</span> <span class="o">=</span> <span class="n">icellx</span> <span class="o">+</span> <span class="n">icelly</span> <span class="o">+</span> <span class="n">icellz</span>
+
+                    <span class="c1"># Find the 27 nearest neighbor cells of icell</span>
+                    <span class="n">ith</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="k">for</span> <span class="n">jz</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+                        <span class="k">for</span> <span class="n">jy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+                            <span class="k">for</span> <span class="n">jx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+                                <span class="c1"># Define the x, y, z address of the jcell found by shifting</span>
+                                <span class="c1"># the icell&#39;s x address by +/-1 or 0, its y address by</span>
+                                <span class="c1"># + / -ncells or 0, and its z address by + / -ncells * ncells or 0</span>
+                                <span class="n">jcellx</span> <span class="o">=</span> <span class="n">icellx</span> <span class="o">+</span> <span class="n">jx</span>
+                                <span class="n">jcelly</span> <span class="o">=</span> <span class="n">icelly</span> <span class="o">+</span> <span class="n">jy</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                                <span class="n">jcellz</span> <span class="o">=</span> <span class="n">icellz</span> <span class="o">+</span> <span class="n">jz</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+                                <span class="c1">#  Get all the minimum image cells</span>
+                                <span class="k">if</span> <span class="p">(</span><span class="n">jcellx</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                                    <span class="n">jcellx</span> <span class="o">=</span> <span class="mi">1</span>
+                                <span class="k">elif</span> <span class="n">jcellx</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                                    <span class="n">jcellx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span>
+
+                                <span class="k">if</span> <span class="n">jcelly</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                                    <span class="n">jcelly</span> <span class="o">=</span> <span class="mi">0</span>
+                                <span class="k">elif</span> <span class="n">jcelly</span> <span class="o">==</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                                    <span class="n">jcelly</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+                                <span class="k">if</span> <span class="p">(</span><span class="n">jcellz</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+                                    <span class="n">jcellz</span> <span class="o">=</span> <span class="mi">0</span>
+                                <span class="k">elif</span> <span class="n">jcellz</span> <span class="o">==</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                                    <span class="n">jcellz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cellGrid</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+                                <span class="c1">#  Combine to get the index of the interacting cell</span>
+                                <span class="c1"># Number of elements in each of the 27 neighbour cells</span>
+                                <span class="c1">#   --- nearby(0: 26, 0:maxcell3-1) ---</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">nearby</span><span class="p">[</span><span class="n">ith</span><span class="p">,</span> <span class="n">icell</span><span class="p">]</span> <span class="o">=</span> <span class="n">jcellx</span> <span class="o">+</span> <span class="n">jcelly</span> <span class="o">+</span> <span class="n">jcellz</span>
+                                <span class="n">ith</span> <span class="o">=</span> <span class="n">ith</span> <span class="o">+</span> <span class="mi">1</span></div>
+
+    <span class="c1"># ***********************************************************************************</span>
+    <span class="k">def</span> <span class="nf">__error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_error</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Raises exceptions for the Cubic Box</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            id_error: (int) --&gt; Id of the error</span>
+<span class="sd">            parameters: (dict, optional) --&gt; Parameters to print on the screen</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">id_error</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;====== ERROR =====&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Bad setup for CUBIC BOX&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Lo coordinates cannot be greater than Hi coordinates.&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;The simulation box cannot be created. The program STOPS.&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;self.xlo: </span><span class="si">{0:.3f}</span><span class="s2">, self.xhi: </span><span class="si">{1:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xlo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xhi</span><span class="p">))</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;self.ylo: </span><span class="si">{0:.3f}</span><span class="s2">, self.yhi: </span><span class="si">{1:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ylo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yhi</span><span class="p">))</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;self.zlo: </span><span class="si">{0:.3f}</span><span class="s2">, self.zhi: </span><span class="si">{1:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zlo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">zhi</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Lo coordinates cannot be greater than Hi coordinates.&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">id_error</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;====== ERROR =====&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Bad setup for CUBIC BOX&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;The simulation box cannot be created. The program STOPS.&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;self.Lx: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Lx</span><span class="p">))</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;self.Ly: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Ly</span><span class="p">))</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;self.Lz: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Lz</span><span class="p">))</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;self.alpha: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">))</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;self.beta: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">))</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;self.gamma: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;All lengths, Lx, Ly and Lz must be equals. Lx=</span><span class="si">{0:.2f}</span><span class="s2">, Ly=</span><span class="si">{1:.2f}</span><span class="s2">, Lz=</span><span class="si">{2:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Lx</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Ly</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Lz</span><span class="p">))</span>
+
+        <span class="k">elif</span> <span class="n">id_error</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;====== ERROR =====&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Bad setup for CUBIC BOX&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;The cut-off + skin cannot be greater than the length of the cell.&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Cell length: &quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Lx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ly</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lz</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;The cut-off + skin cannot be greater than the length of the cell.&quot;</span><span class="p">)</span>
+
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;====== ERROR =====&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Bad setup for CUBIC BOX&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Unknown error.&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;The simulation box cannot be created. The program STOPS.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;The simulation box cannot be created. The program STOPS.&quot;</span><span class="p">)</span></div>
+
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

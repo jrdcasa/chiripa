@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DBJobs &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DFTBPLUS INTERFACE" href="dftbplus_interface.html" />
+    <link rel="prev" title="Cubic Box" href="cubicbox.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generalintro.html">General introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setupstructures.html">Setup structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Chiripa keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usermanual.html">USER MANUAL</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="chiripa.html">Chiripa package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="atomic_data.html">Atomic_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chi_universe.html">Chi_Universe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cubicbox.html">Cubic Box</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">DBJobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview"><strong>Overview</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example"><strong>Example</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#methods"><strong>Methods</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api"><strong>API</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus_interface.html">DFTBPLUS INTERFACE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian_interface.html">Gaussian Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate_pair_conformations.html">Generate Pair Conformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internal_coordinates.html">Internal Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metropolisMC.html">Metropolis MC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moleculargraph.html">Molecular Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nwchem_interface.html">NwChem Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="points_inside_pyramid.html">Points Inside Pyramid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="segment.html">Segment Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverlocal.html">Server Local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverslurm.html">Server Slurm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup_logger.html">Setup Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulator.html">Simulator Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">Utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">Python API Reference</a> &raquo;</li>
+        
+          <li><a href="chiripa.html">Chiripa package</a> &raquo;</li>
+        
+      <li>DBJobs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/dbjobs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dbjobs">
+<h1>DBJobs<a class="headerlink" href="#dbjobs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This class is used to create a SQLite3 database. This database keeps track of all
+QM jobs.</p>
+<a class="reference internal image-reference" href="../_images/database.png"><img alt="../_images/database.png" class="align-center" src="../_images/database.png" style="width: 600px;" /></a>
+</div>
+<div class="section" id="example">
+<h2><strong>Example</strong><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a database if it does not exist</span>
+<span class="n">db1</span> <span class="o">=</span> <span class="n">chi</span><span class="o">.</span><span class="n">DBjobs</span><span class="p">(</span><span class="s2">&quot;out/test_02.db&quot;</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">)</span>
+<span class="c1"># Create a table named qmjobs</span>
+<span class="n">success</span> <span class="o">=</span> <span class="n">db1</span><span class="o">.</span><span class="n">create_table_qmjobs</span><span class="p">()</span>
+<span class="c1"># Insert some data in the table</span>
+<span class="n">sql_insert</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO qm_jobs (&#39;id_job&#39;, &#39;name_job&#39;, &#39;cog&#39;) VALUES (</span><span class="si">{0:d}</span><span class="s2">, &#39;</span><span class="si">{1:s}</span><span class="s2">&#39;, &#39;</span><span class="si">{2:s}</span><span class="s2">&#39;)&quot;</span><span class="o">.</span> \
+        <span class="nb">format</span><span class="p">(</span><span class="n">db_index</span><span class="p">,</span> <span class="n">inputname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">cog_list</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">db1</span><span class="o">.</span><span class="n">insert_data</span><span class="p">(</span><span class="n">sql_insert</span><span class="p">)</span>
+<span class="c1"># Close connection</span>
+<span class="n">db1</span><span class="o">.</span><span class="n">close_connection</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="methods">
+<h2><strong>Methods</strong><a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.DBJobs.DBjobs.check_for_table" title="chiripa.DBJobs.DBjobs.check_for_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.DBJobs.DBjobs.check_for_table</span></code></a></p></td>
+<td><p>Checks if table <code class="docutils literal notranslate"><span class="pre">tablename</span></code> exists</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.DBJobs.DBjobs.close_connection" title="chiripa.DBJobs.DBjobs.close_connection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.DBJobs.DBjobs.close_connection</span></code></a></p></td>
+<td><p>Close the database connection</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.DBJobs.DBjobs.commit_db" title="chiripa.DBJobs.DBjobs.commit_db"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.DBJobs.DBjobs.commit_db</span></code></a></p></td>
+<td><p>Commits the database</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.DBJobs.DBjobs.create_table_qmjobs" title="chiripa.DBJobs.DBjobs.create_table_qmjobs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.DBJobs.DBjobs.create_table_qmjobs</span></code></a></p></td>
+<td><p>Create table <code class="docutils literal notranslate"><span class="pre">qmjobs</span></code> if it does not exist in the database</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.DBJobs.DBjobs.insert_data" title="chiripa.DBJobs.DBjobs.insert_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.DBJobs.DBjobs.insert_data</span></code></a></p></td>
+<td><p>Insert data in the datababase using a valid SQL sentence</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.DBJobs.DBjobs.number_of_rows" title="chiripa.DBJobs.DBjobs.number_of_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.DBJobs.DBjobs.number_of_rows</span></code></a></p></td>
+<td><p>Returns the number of rows of the table</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.DBJobs.DBjobs.remove_row" title="chiripa.DBJobs.DBjobs.remove_row"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.DBJobs.DBjobs.remove_row</span></code></a></p></td>
+<td><p>Remove a row</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.DBJobs.DBjobs.remove_table" title="chiripa.DBJobs.DBjobs.remove_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.DBJobs.DBjobs.remove_table</span></code></a></p></td>
+<td><p>Remove table in the database</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.DBJobs.DBjobs.sort_by_column" title="chiripa.DBJobs.DBjobs.sort_by_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.DBJobs.DBjobs.sort_by_column</span></code></a></p></td>
+<td><p>Sort columns</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.DBJobs.DBjobs.update_allcolumns_tosamevalue" title="chiripa.DBJobs.DBjobs.update_allcolumns_tosamevalue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.DBJobs.DBjobs.update_allcolumns_tosamevalue</span></code></a></p></td>
+<td><p>Update all rows of a certain column in the dictionary</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.DBJobs.DBjobs.update_data_row" title="chiripa.DBJobs.DBjobs.update_data_row"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.DBJobs.DBjobs.update_data_row</span></code></a></p></td>
+<td><p>Update date by row using where</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="api">
+<h2><strong>API</strong><a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="chiripa.DBJobs.DBjobs">
+<em class="property">class </em><code class="sig-prename descclassname">chiripa.DBJobs.</code><code class="sig-name descname">DBjobs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dbname</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class to represent the database of jobs</p>
+<p>This class is used to keep track the QM jobs in the server.
+The database has a table called <code class="docutils literal notranslate"><span class="pre">qm_jobs</span></code> with the following columns:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id_job</span></code> (integer): Primary key of the table</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name_job</span></code> (string): Name of the input file in the QM package.        The pattern is <strong>&lt;name_of_the_qm_package&gt;_&lt;identification&gt;_&lt;0,1,2&gt;_&lt;1,2&gt;</strong>        Example: nwchem_00024_0_1 (for segment 1) or gauss_00374_2_1 (for pair 2,1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status_job</span></code> (string): Status of the job in the server</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pid_slurm</span></code> (integer): Job PID from slurm queue management</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">energy</span></code> (float): Electronic energy from the output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cog</span></code> (list[3]): Center of geometry</p></li>
+</ul>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<dl class="py attribute">
+<dt id="chiripa.DBJobs.DBjobs._con">
+<code class="sig-name descname">_con</code><a class="headerlink" href="#chiripa.DBJobs.DBjobs._con" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connecting to the SQLite database (sqlite3.Connection)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Connection</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="chiripa.DBJobs.DBjobs._cursor">
+<code class="sig-name descname">_cursor</code><a class="headerlink" href="#chiripa.DBJobs.DBjobs._cursor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connection object to execute SQLite queries from Python. (sqlite3.Cursor)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Cursor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="chiripa.DBJobs.DBjobs._dbname">
+<code class="sig-name descname">_dbname</code><a class="headerlink" href="#chiripa.DBJobs.DBjobs._dbname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to the database file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="chiripa.DBJobs.DBjobs._logger">
+<code class="sig-name descname">_logger</code><a class="headerlink" href="#chiripa.DBJobs.DBjobs._logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logger to send messages</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Logger</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Methods</strong></p>
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dbname</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor of a DBjobs object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dbname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to the database</p></li>
+<li><p><strong>logger</strong> (<em>logger</em>) – Logger to send messages</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.account_qm">
+<code class="sig-name descname">account_qm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tablename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.account_qm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.account_qm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Account for the total number of QM and the completed QM jobs in the database
+The format of the lists are:</p>
+<p>total_qm_pairs    = [2,2,2,2]
+complete_qm_pairs = [1,1,1,1] –&gt; [segment_1_1, segment_1_2, segment_2_1, segment_2_2]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tablename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the table to find</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple of two lists. The total_qm_pairs and complete_qm_pairs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.check_for_table">
+<code class="sig-name descname">check_for_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tablename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.check_for_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.check_for_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if table <code class="docutils literal notranslate"><span class="pre">tablename</span></code> exists</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tablename</strong> (<em>string</em>) – Name of the table in the database</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the tablename exists otherwise <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.close_connection">
+<code class="sig-name descname">close_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.close_connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.close_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the database connection</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.commit_db">
+<code class="sig-name descname">commit_db</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.commit_db"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.commit_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Commits the database</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.create_table_qmjobs">
+<code class="sig-name descname">create_table_qmjobs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.create_table_qmjobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.create_table_qmjobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create table <code class="docutils literal notranslate"><span class="pre">qmjobs</span></code> if it does not exist in the database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the table is created otherwise <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.insert_data">
+<code class="sig-name descname">insert_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sql</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.insert_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.insert_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert data in the datababase using a valid SQL sentence</p>
+<p>If data does not exist, then insert into the database otherwise not insertion is done</p>
+<p>Using a sql INSERT sentence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sql</strong> (<em>string</em>) – A valid sql sentence</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if data are inserted otherwise <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>sql_insert = “INSERT INTO qm_jobs VALUES ({0:d}, ‘{1:s}’, ‘CREATED’, ‘NULL’, ‘NULL’, ‘{2:s}’)”.            format(self._db_index, inputname, str(cog_list)[1:-1])
+db.insert_data(sql_insert):</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.number_of_rows">
+<code class="sig-name descname">number_of_rows</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tablename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.number_of_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.number_of_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of rows of the table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tablename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the table</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(int) Number of rows</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.remove_row">
+<code class="sig-name descname">remove_row</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tablename</span></em>, <em class="sig-param"><span class="n">fieldname</span></em>, <em class="sig-param"><span class="n">id_job</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.remove_row"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.remove_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a row</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tablename</strong> (<em>string</em>) – Name of hte table</p></li>
+<li><p><strong>fieldname</strong> (<em>string</em>) – Name of the column to delete</p></li>
+<li><p><strong>id_job</strong> (<em>any</em>) – Value for the fieldname</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the row is remove otherwise <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.remove_table">
+<code class="sig-name descname">remove_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tablename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.remove_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.remove_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove table in the database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tablename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.sort_by_column">
+<code class="sig-name descname">sort_by_column</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tablename</span></em>, <em class="sig-param"><span class="n">columnname</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.sort_by_column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.sort_by_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tablename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the table</p></li>
+<li><p><strong>columnname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Column name in the table</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(tuple), list with the ordered rows, maximum index</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.update_allcolumns_tosamevalue">
+<code class="sig-name descname">update_allcolumns_tosamevalue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table</span></em>, <em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.update_allcolumns_tosamevalue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.update_allcolumns_tosamevalue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update all rows of a certain column in the dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the table</p></li>
+<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – Dictionary {&lt;name_of_column&gt;: &lt;value for the whole column&gt;}</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the operation is success.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.DBJobs.DBjobs.update_data_row">
+<code class="sig-name descname">update_data_row</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table</span></em>, <em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">field_value</span></em>, <em class="sig-param"><span class="n">where_field</span></em>, <em class="sig-param"><span class="n">where_value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/DBJobs.html#DBjobs.update_data_row"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.DBJobs.DBjobs.update_data_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update date by row using where</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
+<li><p><strong>field_value</strong> (<em>any</em>) – </p></li>
+<li><p><strong>where_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
+<li><p><strong>where_value</strong> (<em>any</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dftbplus_interface.html" class="btn btn-neutral float-right" title="DFTBPLUS INTERFACE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cubicbox.html" class="btn btn-neutral float-left" title="Cubic Box" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

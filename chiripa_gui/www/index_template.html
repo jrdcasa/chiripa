@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./ngl/dist/ngl.js"></script>
+    <link rel="stylesheet" href="./css/default.css">
+
+</head>
+
+<body>
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var stage = new NGL.Stage("viewport1");
+      var stringC = "#FILE1STRING#";
+      var stringB = new Blob([stringC], {type: 'text/plain'})
+      stage.setParameters({ backgroundColor: "white" });
+      stage.loadFile(stringB , {ext: "#FILE1EXT#"}).then(function(o) {
+          o.addRepresentation("ball+stick")
+          o.addRepresentation("surface", {
+            opacity: 0.3,
+            side: "front",
+              color:'yellow'
+          })
+          o.autoView()
+      })
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var stage = new NGL.Stage("viewport2");
+      var stringC = "#FILE2STRING#";
+      var stringB = new Blob([stringC], {type: 'text/plain'})
+      stage.setParameters({ backgroundColor: "white" });
+      stage.loadFile(stringB , {ext: "#FILE2EXT#"}).then(function(o) {
+          o.addRepresentation("ball+stick")
+          o.addRepresentation("surface", {
+            opacity: 0.3,
+            side: "front"
+          })
+          o.autoView()
+      })
+    });
+
+  </script>
+  <div class="row">
+      <div class="column">
+        <h2>Segment 1</h2>
+        <div id="viewport1" style="width:600px; height:400px; margin: 0 auto;"></div>
+      </div>
+      <div class="column">
+        <h2>Segment 2</h2>
+        <div id="viewport2" style="width:600px; height:400px; margin: 0 auto;"></div>
+      </div>
+
+  </div>
+
+</body>
+</html>

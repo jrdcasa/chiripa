@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cubic Box &mdash; Chiripa -- CHI inteRactIon PArameter. 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DBJobs" href="dbjobs.html" />
+    <link rel="prev" title="Chi_Universe" href="chi_universe.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Chiripa -- CHI inteRactIon PArameter.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">API Python Packages</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">Python API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="chiripa.html">Chiripa package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="atomic_data.html">Atomic_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chi_universe.html">Chi_Universe</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Cubic Box</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview"><strong>Overview</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example"><strong>Example</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attributes"><strong>Attributes</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#methods"><strong>Methods</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api"><strong>API</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dbjobs.html">DBJobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus_interface.html">DFTBPLUS INTERFACE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian_interface.html">Gaussian Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate_pair_conformations.html">Generate Pair Conformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internal_coordinates.html">Internal Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metropolisMC.html">Metropolis MC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moleculargraph.html">Molecular Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nwchem_interface.html">NwChem Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="points_inside_pyramid.html">Points Inside Pyramid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="segment.html">Segment Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverlocal.html">Server Local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverslurm.html">Server Slurm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup_logger.html">Setup Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulator.html">Simulator Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">Utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chiripa -- CHI inteRactIon PArameter.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">Python API Reference</a> &raquo;</li>
+        
+          <li><a href="chiripa.html">Chiripa package</a> &raquo;</li>
+        
+      <li>Cubic Box</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/cubicbox.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cubic-box">
+<h1>Cubic Box<a class="headerlink" href="#cubic-box" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>A generalization of the class <code class="docutils literal notranslate"><span class="pre">Box</span></code> for cubic boxes.
+The dimensions of a cubic box must be equal ( <span class="math notranslate nohighlight">\(L_x=L_y=L_z\)</span>), thus the user has to be
+consistent when the object be created.</p>
+</div>
+<div class="section" id="example">
+<h2><strong>Example</strong><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">chiripa</span> <span class="k">as</span> <span class="nn">chi</span>
+
+<span class="c1"># Creating a simple CubicBox of lenth 10 angstroms</span>
+<span class="n">box</span><span class="o">=</span><span class="n">chi</span><span class="o">.</span><span class="n">CubicBox</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;real&quot;</span><span class="p">)</span>
+<span class="n">box</span><span class="o">=</span><span class="n">chi</span><span class="o">.</span><span class="n">CubicBox</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Creating a simple CubicBox of lenth 10 sigma (in reduced units)</span>
+<span class="n">box</span><span class="o">=</span><span class="n">chi</span><span class="o">.</span><span class="n">CubicBox</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;reduced&quot;</span><span class="p">)</span>
+
+<span class="c1"># Raising an exception</span>
+<span class="n">box2</span> <span class="o">=</span> <span class="n">chi</span><span class="o">.</span><span class="n">CubicBox</span><span class="p">(</span><span class="mf">20.</span><span class="p">,</span> <span class="mf">20.</span><span class="p">,</span> <span class="mf">20.</span><span class="p">,</span> <span class="n">xlow</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">ylow</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">zlow</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Lx = 15, Ly = 15, Lz = 10</span>
+
+<span class="c1"># Creating a box and the subcells for linked link method</span>
+<span class="n">chi</span><span class="o">.</span><span class="n">init_logger</span><span class="p">(</span><span class="s2">&quot;Output&quot;</span><span class="p">,</span> <span class="n">fileoutput</span><span class="o">=</span><span class="s2">&quot;out/test_box.log&quot;</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inscreen</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">box_simple</span> <span class="o">=</span> <span class="n">chi</span><span class="o">.</span><span class="n">CubicBox</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">box_simple</span><span class="o">.</span><span class="n">linked_cell</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="n">log</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="attributes">
+<h2><strong>Attributes</strong><a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">units</span></code> (string) : Allowed values are “real” or “reduced”. Indicate the class of units to be used in the box definition.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nameunits</span></code> (string) : For “real” –&gt; “angstroms”. For “reduced” –&gt; “sigma”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code>  (ndarray(3)): Unit cell vector a</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">b</span></code>  (ndarray(3)): Unit cell vector b</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>  (ndarray(3)): Unit cell vector c</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code> (float): Axial angle <span class="math notranslate nohighlight">\(\alpha\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beta</span></code>  (float): Axial angle <span class="math notranslate nohighlight">\(\beta\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gamma</span></code> (float): Axial angle <span class="math notranslate nohighlight">\(\gamma\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xlo</span></code> (float): X coordinates of the box origin in distance units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ylo</span></code> (float): Y coordinates of the box origin in distance units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zlo</span></code> (float): Z coordinates of the box origin in distance units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xhi</span></code> (float): X coordinates of the box origin in distance units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yhi</span></code> (float): Y coordinates of the box origin in distance units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zhi</span></code> (float): Z coordinates of the box origin in distance units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Lx</span></code> (float):  Length of the edge in the X-direction <span class="math notranslate nohighlight">\(x_{hi}-x_{lo}\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ly</span></code> (float):  Length of the edge in the Y-direction <span class="math notranslate nohighlight">\(y_{hi}-y_{lo}\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Lz</span></code> (float):  Length of the edge in the Z-direction <span class="math notranslate nohighlight">\(z_{hi}-z_{lo}\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">typebox</span></code> (string): “cubic”.Only “cubic” is implemented in this version</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isorthonormal</span></code> (boolean): Simulation box orthogonal or not. Always True for CubicBox</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cellGrid</span></code> (ndarray[3]): Number of subcells for each dimension, [nx, ny, nz]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nearby</span></code> (ndarray[27,nx*ny*nz]): Neigbours array</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="methods">
+<h2><strong>Methods</strong><a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.CubicBox.CubicBox._define_regions" title="chiripa.CubicBox.CubicBox._define_regions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.CubicBox.CubicBox._define_regions</span></code></a></p></td>
+<td><p>Setups the neighbours array (self.nearby) with periodic boundary conditions (PBC)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chiripa.CubicBox.CubicBox.center_of_box" title="chiripa.CubicBox.CubicBox.center_of_box"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.CubicBox.CubicBox.center_of_box</span></code></a></p></td>
+<td><p>Calculate the geometrical center ot the simulation box</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chiripa.CubicBox.CubicBox.linked_cell" title="chiripa.CubicBox.CubicBox.linked_cell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chiripa.CubicBox.CubicBox.linked_cell</span></code></a></p></td>
+<td><p>This method initializes the linked cell grid for the cubic box.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="api">
+<h2><strong>API</strong><a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="chiripa.CubicBox.CubicBox">
+<em class="property">class </em><code class="sig-prename descclassname">chiripa.CubicBox.</code><code class="sig-name descname">CubicBox</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xhigh</span></em>, <em class="sig-param"><span class="n">yhigh</span></em>, <em class="sig-param"><span class="n">zhigh</span></em>, <em class="sig-param"><span class="n">xlow</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">ylow</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">zlow</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">units</span><span class="o">=</span><span class="default_value">'real'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/CubicBox.html#CubicBox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.CubicBox.CubicBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="box.html#chiripa.Box.Box" title="chiripa.Box.Box"><code class="xref py py-class docutils literal notranslate"><span class="pre">chiripa.Box.Box</span></code></a></p>
+<p>Cubic Box class</p>
+<dl class="py method">
+<dt id="chiripa.CubicBox.CubicBox.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xhigh</span></em>, <em class="sig-param"><span class="n">yhigh</span></em>, <em class="sig-param"><span class="n">zhigh</span></em>, <em class="sig-param"><span class="n">xlow</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">ylow</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">zlow</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">units</span><span class="o">=</span><span class="default_value">'real'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/CubicBox.html#CubicBox.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.CubicBox.CubicBox.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds a cubic box</p>
+<p>The simulation box has its origin at (xlo, ylo, zlo) point. The lattice vectors are defined as:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Orthogonal cubic box:</dt><dd><ul>
+<li><p><strong>a</strong> =(xhi-xlo,0,0)</p></li>
+<li><p><strong>b</strong> =(0, yhi-ylo,0)</p></li>
+<li><p><strong>c</strong> =(0, 0,zhi-zlo)</p></li>
+<li><p>Lx=Ly=Lz</p></li>
+<li><p>alpha=beta=gamma=90</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xhigh</strong> – (type float) –&gt; X Coordinate of the maximum vertex in distance units.</p></li>
+<li><p><strong>yhigh</strong> – (type float) –&gt; Y Coordinate of the maximum vertex in distance units.</p></li>
+<li><p><strong>zhigh</strong> – (type float) –&gt; Z Coordinate of the maximum vertex in distance units.</p></li>
+<li><p><strong>xlow</strong> – (type float, default=0.0) –&gt; X Coordinate of the box origin in distance units</p></li>
+<li><p><strong>ylow</strong> – (type float, default=0.0) –&gt; Y Coordinate of the box origin in distance units</p></li>
+<li><p><strong>zlow</strong> – (type float, default=0.0) –&gt; Z Coordinate of the box origin in distance units</p></li>
+<li><p><strong>units</strong> – (type string, default=”real”) –&gt; <strong>real</strong> or <strong>reduced</strong> units</p></li>
+</ul>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="../_images/simulation_box.png"><img alt="../_images/simulation_box.png" src="../_images/simulation_box.png" style="height: 300px;" /></a>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.CubicBox.CubicBox._define_regions">
+<code class="sig-name descname">_define_regions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/CubicBox.html#CubicBox._define_regions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.CubicBox.CubicBox._define_regions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setups the neighbours array (self.nearby) with periodic boundary conditions (PBC)</p>
+<p>The grid of cells starts in 0 and finnish in
+(self.cellGrid[0]*self.cellGrid[1]*self.cellGrid[2])-1</p>
+<p class="rubric">Example</p>
+<p>self.nearby[:,10] = All neighbors of the cell number 10</p>
+<a class="reference internal image-reference" href="../_images/cell_grid_6x6x6.png"><img alt="../_images/cell_grid_6x6x6.png" src="../_images/cell_grid_6x6x6.png" style="height: 200px;" /></a>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.CubicBox.CubicBox.center_of_box">
+<code class="sig-name descname">center_of_box</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/CubicBox.html#CubicBox.center_of_box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.CubicBox.CubicBox.center_of_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the geometrical center ot the simulation box</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An (1,3)-array with the coordinates of the geometric center</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="chiripa.CubicBox.CubicBox.linked_cell">
+<code class="sig-name descname">linked_cell</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">max_rc</span></em>, <em class="sig-param"><span class="n">skin</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chiripa/CubicBox.html#CubicBox.linked_cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chiripa.CubicBox.CubicBox.linked_cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method initializes the linked cell grid for the cubic box.</p>
+<p>The simulation domain is divided into subcells with an edge length (rc+skin)
+greater than or equal to the maximum cut-off radius (max_rc) of the interaction
+to be computed.</p>
+<p>It changes the value of self.cellGrid attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rc</strong> – (float) –&gt; maximum cut-off radius.</p></li>
+<li><p><strong>skin</strong> – (float) –&gt; extra distance to create the subcells</p></li>
+<li><p><strong>logger</strong> – (logger) –&gt; A logger object to write</p></li>
+</ul>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="../_images/cutoff_linkedcell.png"><img alt="../_images/cutoff_linkedcell.png" src="../_images/cutoff_linkedcell.png" style="height: 200px;" /></a>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dbjobs.html" class="btn btn-neutral float-right" title="DBJobs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="chi_universe.html" class="btn btn-neutral float-left" title="Chi_Universe" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, J.Ramos
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
